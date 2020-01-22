@@ -1,0 +1,45 @@
+@import '~flatpickr/dist/flatpickr.css';
+
+.datetime__input {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: auto 4px;
+  border: thin solid #000;
+}
+
+.datetime__input__input {
+  flex: 1;
+  outline: none !important;
+  border: none !important;
+}
+
+.datetime__input__clear {
+  margin-left: 1px;
+  margin-top: 1px;
+  text-align: center;
+  outline: none;
+}
+
+.ag-theme-balham {
+  @import '~ag-grid-community/src/styles/ag-theme-balham/vars/ag-theme-balham-vars';
+  .datetime__input {
+    border-color: map-get($ag-params, 'input-border-color');
+  }
+}
+
+.ag-theme-balham-dark {
+  @import '~ag-grid-community/src/styles/ag-theme-balham-dark/vars/ag-theme-balham-dark-vars';
+  .datetime__input {
+    border-color: map-get($ag-params, 'input-border-color');
+  }
+}
+
+.ag-theme-material {
+  @import '~ag-grid-community/src/styles/ag-theme-material/vars/ag-theme-material-vars';
+
+  .datetime__input {
+    border-color: map-get($ag-params, 'input-border-color');
+    margin: auto 8px;
+  }
+}
