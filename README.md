@@ -12,7 +12,6 @@ _**Note :** To support IE11 browser include the_ [_date-time-format-timezone_](h
 
 ## Table of Contents
 
-- ☑️ [Included Components](#%EF%B8%8F--included-components)
 - 🚀 [Installation](#-how-to-install-)
 - 💻 [How to use](#-how-to-use-)
 - :bulb: [Components](#components)
@@ -24,17 +23,6 @@ _**Note :** To support IE11 browser include the_ [_date-time-format-timezone_](h
   - [TemplateRenderer](#templaterenderer)
   - [DateTimeFilter](#datetimefilter)
   - [DateTimeEditor](#datetimeeditor)
-
-### ☑️  Included Components 
-
-* BooleanRenderer
-* BooleanFilter
-* BooleanEditor
-* NumberEditor
-* DateTimeFilter
-* DateTimeEditor
-* ImageRenderer
-* TemplateRenderer
 
 ### 🚀 How To Install ?
 
