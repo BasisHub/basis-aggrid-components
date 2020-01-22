@@ -1,7 +1,7 @@
 # Basis AgGrid Components
 
 [![Build Status](https://travis-ci.org/BasisHub/basis-aggrid-components.svg?branch=master)](https://travis-ci.org/BasisHub/basis-aggrid-components)
-![GitHub](https://img.shields.io/github/license/BasisHub/basis-aggrid-components)
+![GitHub](https://img.shields.io/github/license/BasisHub/bbj-masks)
 ![GitHub file size in bytes](https://img.shields.io/github/size/BasisHub/basis-aggrid-components/dist/basis-aggrid-components.min.js)
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/BasisHub/basis-aggrid-components)
 ![David](https://img.shields.io/david/BasisHub/basis-aggrid-components)
