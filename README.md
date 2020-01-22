@@ -23,6 +23,7 @@ _**Note :** To support IE11 browser include the_ [_date-time-format-timezone_](h
   - [TemplateRenderer](#templaterenderer)
   - [DateTimeFilter](#datetimefilter)
   - [DateTimeEditor](#datetimeeditor)
+- [Value Formatting](#valueformatting)  
 
 ### 🚀 How To Install ?
 
@@ -434,6 +435,53 @@ const gridOptions = {
     DateTimeEditor: Basis.AgGridComponents.DateTimeEditor,
   },
 }
+```
+
+## Value Formatting 
+
+Basis AgGrid Components does not ship an value formatters by default , but you can use [bbj-masks](https://github.com/BasisHub/bbj-masks) for this puropse 
+
+> bbj-masks is a tiny JavaScript library to format Dates , Numbers & Strings using BBj supported masks.
+
+```js
+const gridOptions = {
+  rowData: [
+    { timestamps: '2018-02-15T14:01:06Z'},
+    { numbers: -5000.123456789 },
+    { strings: 'abcdefg' },
+  ],
+  columnDefs: [
+    {
+      field: 'timestamps',
+      valueFormatter: params => {
+        return BBj.Masks.Types.date(
+          params.value,
+          '%Y/%Mz/%Dz %Hz:%mz:%sz',
+          'en',
+          'Europe/Berlin'
+        ) 
+      }, // -> $ -5,000.123457
+    }, 
+    {
+      field: 'numbers',
+      valueFormatter: params => {
+        return BBj.Masks.Types.number(
+          params.value,
+          '$ -#,##0.######'
+        )
+      }, // -> 18 - 02 - 15
+    },
+    {
+      field: 'strings',
+      valueFormatter: params => {
+        return BBj.Masks.Types.string(
+          params.value,
+          'XX-XXX-XX'
+        ) 
+      }, // -> ab-cde-fg
+    },
+  ]
+}  
 ```
 
 ## 📝 License
