@@ -1,8 +1,9 @@
 # Table of contents
 
 * [Basis AgGrid Components](README.md)
-* [LICENSE](LICENSE.md)
-* [doc](doc/README.md)
-  * [index](doc/index.md)
-* [CHANGELOG](CHANGELOG.md)
+* [LICENSE](license.md)
+* [Documentation](documentation/README.md)
+  * [Options](documentation/options.md)
+  * [How to Install](documentation/how-to-install.md)
+* [CHANGELOG](changelog.md)
 
