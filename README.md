@@ -14,7 +14,7 @@ _**Note :** To support IE11 browser include the_ [_date-time-format-timezone_](h
 
 - 🚀 [Installation](#-how-to-install-)
 - 💻 [How to use](#-how-to-use-)
-- :bulb: [Components](#components)
+- :bulb: [Components](#bulb-components)
   - [Configure Options](#configure-options)
   - [BooleanRenderer](#booleanrenderer)
   - [BooleanFilter](#booleanfilter)
