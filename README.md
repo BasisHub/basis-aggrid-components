@@ -23,7 +23,7 @@ _**Note :** To support IE11 browser include the_ [_date-time-format-timezone_](h
   - [TemplateRenderer](#templaterenderer)
   - [DateTimeFilter](#datetimefilter)
   - [DateTimeEditor](#datetimeeditor)
-- [Value Formatting](#valueformatting)  
+- [Value Formatting](#value-formatting)  
 
 ### 🚀 How To Install ?
 
