@@ -1,8 +1,8 @@
 # Basis AgGrid Components
 
-Basis AgGrid Components are a set of [ag-grid](https://www.ag-grid.com/) components which can handle filtering , rendering & editing with focus on scalar types.
+A set of [ag-grid](https://www.ag-grid.com/) components which can handle filtering , rendering & editing with focus on scalar types.
 
-### Supported Browsers
+### Browser Support
 
 | [![IE / Edge](https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png)](http://godban.github.io/browsers-support-badges/) IE / Edge | [![Firefox](https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png)](http://godban.github.io/browsers-support-badges/) Firefox | [![Chrome](https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png)](http://godban.github.io/browsers-support-badges/) Chrome | [![Safari](https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png)](http://godban.github.io/browsers-support-badges/) Safari | [![Opera](https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png)](http://godban.github.io/browsers-support-badges/) Opera |
 | :---: | :---: | :---: | :---: | :---: |
@@ -10,10 +10,27 @@ Basis AgGrid Components are a set of [ag-grid](https://www.ag-grid.com/) compone
 
 _**Note :** To support IE11 browser include the_ [_date-time-format-timezone_](https://github.com/formatjs/date-time-format-timezone/) _polyfill_
 
+## Table of Contents
+
+- ☑️ [Included Components](#%EF%B8%8F--included-components)
+- 🚀 [Installation](#-how-to-install-)
+- 💻 [How to use](#-how-to-use-)
+- :bulb: [Components](#components)
+  - [Configure Options](#configure-options)
+  - [BooleanRenderer](#booleanrenderer)
+  - [BooleanFilter](#booleanfilter)
+  - [NumberEditor](#numbereditor)
+  - [ImageRenderer](#imagerenderer)
+  - [TemplateRenderer](#templaterenderer)
+  - [DateTimeFilter](#datetimefilter)
+  - [DateTimeEditor](#datetimeeditor)
+
 ### ☑️  Included Components 
 
 * BooleanRenderer
 * BooleanFilter
+* BooleanEditor
+* NumberEditor
 * DateTimeFilter
 * DateTimeEditor
 * ImageRenderer
@@ -60,9 +77,7 @@ const gridOptions = {
 }
 ```
 
-
-
-## **Components**
+## :bulb: **Components**
 
 ### Configure Options
 
@@ -433,3 +448,6 @@ const gridOptions = {
 }
 ```
 
+## 📝 License
+
+Licensed under the [MIT License](https://github.com/BasisHub/basis-aggrid-components/blob/master/LICENSE.md).
