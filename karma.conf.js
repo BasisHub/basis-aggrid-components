@@ -5,7 +5,7 @@ module.exports = function(config) {
     files: [
       'node_modules/ag-grid-community/dist/ag-grid-community.js',
       'node_modules/@babel/polyfill/dist/polyfill.js',
-      'dist/ag-grid-components.js',
+      'dist/basis-aggrid-components.js',
       'test/utils.js',
       'test/fixtures/**/*.js',
       'test/**/*.test.js',

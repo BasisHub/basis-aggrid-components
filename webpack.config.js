@@ -6,8 +6,8 @@ const path = require('path')
 
 module.exports = {
   entry: {
-    'ag-grid-components': './src/index.js',
-    'ag-grid-components.min': './src/index.js',
+    'basis-aggrid-components': './src/index.js',
+    'basis-aggrid-components.min': './src/index.js',
   },
   devtool: 'source-map',
   output: {

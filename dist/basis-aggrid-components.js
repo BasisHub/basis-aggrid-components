@@ -8788,9 +8788,9 @@ function (_Component2) {
  * | **dateTimeEnabledSeconds**   | false    | enable / disable seconds management
  * | **dateTimeEnableCalendar**   | false    | enable / disable Calendar.
  * | **dateTimeMask**   | false    | The mask used to format the selected date
- * | **dateTimeMax**   | false    |  Max allowed date
- * | **dateTimeMax**   | false    |  Min allowed date
- * | **dateTimeFormatter**   | false    |  A function or expression to format the date (@see supported param)
+ * | **dateTimeMax**   | undefined    |  Max allowed date
+ * | **dateTimeMin**   | undefined    |  Min allowed date
+ * | **dateTimeFormatter**   | undefined    |  A function or expression to format the date (@see supported param)
  * | **dateTimeLocale**   | System default    |  A locale to use for date formatting
  * | **dateTimeDefaultHour**   | 12    |  Initial value of the hour element.
  * | **dateTimeDefaultMinute**   | 0    |  Initial value of the minute element.
@@ -15981,8 +15981,8 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
  * | **dateTimeEnabledSeconds**   | false    | enable / disable seconds management
  * | **dateTimeEnableCalendar**   | false    | enable / disable Calendar.
  * | **dateTimeMask**   | false    | The mask used to format the selected date
- * | **dateTimeMax**   | false    |  Max allowed date
- * | **dateTimeMax**   | false    |  Min allowed date
+ * | **dateTimeMax**   | undefined    |  Max allowed date
+ * | **dateTimeMin**   | undefined    |  Min allowed date
  * | **dateTimeFormatter**   | false    |  A function or expression to format the date (@see supported param)
  * | **dateTimeLocale**   | System default    |  A locale to use for date formatting
  * | **dateTimeDefaultHour**   | 12    |  Initial value of the hour element.
@@ -16151,4 +16151,4 @@ exports["default"] = _default;
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=ag-grid-components.js.map
+//# sourceMappingURL=basis-aggrid-components.js.map
