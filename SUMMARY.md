@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Basis AgGrid](README.md)
+* [Basis AgGrid Components](README.md)
 * [LICENSE](LICENSE.md)
 * [doc](doc/README.md)
   * [index](doc/index.md)
