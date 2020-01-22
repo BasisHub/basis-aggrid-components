@@ -14,7 +14,7 @@ A set of [ag-grid](https://www.ag-grid.com/) components which can handle filteri
 | :---: | :---: | :---: | :---: | :---: |
 | IE11, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
-_**Note :** To support IE11 browser include the_ [_date-time-format-timezone_](https://github.com/formatjs/date-time-format-timezone/) _polyfill_
+**Note :** To support IE11 browser include the [_date-time-format-timezone_](https://github.com/formatjs/date-time-format-timezone/) polyfill
 
 ## Table of Contents
 
