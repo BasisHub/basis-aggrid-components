@@ -10,7 +10,7 @@ Basis AgGrid Components are a set of [ag-grid](https://www.ag-grid.com/) compone
 
 _**Note :** To support IE11 browser include the_ [_date-time-format-timezone_](https://github.com/formatjs/date-time-format-timezone/) _polyfill_
 
-### Included Components 
+### ☑️  Included Components 
 
 * BooleanRenderer
 * BooleanFilter
@@ -19,21 +19,16 @@ _**Note :** To support IE11 browser include the_ [_date-time-format-timezone_](h
 * ImageRenderer
 * TemplateRenderer
 
-### How To Install ?
+### 🚀 How To Install ?
 
-With npm
+Install it with npm or yarn 
 
 ```text
 npm install BasisHub/basis-aggrid-components 
-```
-
-With yarn
-
-```text
 yarn add BasisHub/basis-aggrid-components
 ```
 
-### How to use ?
+### 💻 How to use ?
 
 In your ag grid config object register the component then reference it from your columns definition
 
@@ -65,7 +60,11 @@ const gridOptions = {
 }
 ```
 
-### Components Options
+
+
+## **Components**
+
+### Configure Options
 
 Every component can search for its options in several places in the following order 
 
@@ -99,9 +98,7 @@ const gridOptions = {
 }
 ```
 
-### **Components**
-
-#### **BooleanRenderer**
+### **BooleanRenderer**
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
@@ -153,7 +150,7 @@ const gridOptions = {
 
 ```
 
-#### BooleanFilter
+### BooleanFilter
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
@@ -192,7 +189,7 @@ const gridOptions = {
 }
 ```
 
-#### BooleanEditor
+### BooleanEditor
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
@@ -231,7 +228,7 @@ const gridOptions = {
 }
 ```
 
-#### NumberEditor
+### NumberEditor
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
@@ -259,7 +256,7 @@ const gridOptions = {
 }
 ```
 
-#### ImageRenderer
+### ImageRenderer
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
@@ -293,7 +290,7 @@ const gridOptions = {
 }
 ```
 
-#### TemplateRenderer
+### TemplateRenderer
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
@@ -317,7 +314,7 @@ const gridOptions = {
 }
 ```
 
-#### DateTimeFilter
+### DateTimeFilter
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
