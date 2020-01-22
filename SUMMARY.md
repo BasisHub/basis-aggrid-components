@@ -1,9 +1,7 @@
 # Table of contents
 
 * [Basis AgGrid Components](README.md)
+* [Components Options](components-options.md)
 * [LICENSE](license.md)
-* [Documentation](documentation/README.md)
-  * [Options](documentation/options.md)
-  * [How to Install](documentation/how-to-install.md)
 * [CHANGELOG](changelog.md)
 
