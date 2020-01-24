@@ -177,7 +177,7 @@ var _Component = _interopRequireDefault(__webpack_require__(55));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -2351,7 +2351,7 @@ var _BooleanSwitch = _interopRequireDefault(__webpack_require__(56));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -2377,7 +2377,7 @@ var _TemplateRenderer = _interopRequireDefault(__webpack_require__(69));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -3833,7 +3833,7 @@ exports["default"] = void 0;
 var _EventsMixin = __webpack_require__(156);
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -3859,7 +3859,7 @@ var _DateTimeInput = _interopRequireDefault(__webpack_require__(157));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -3962,7 +3962,7 @@ var _BooleanEditor = _interopRequireDefault(__webpack_require__(54));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -4184,7 +4184,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -4886,7 +4886,7 @@ var _BooleanRenderer = _interopRequireDefault(__webpack_require__(62));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -5099,7 +5099,7 @@ var _BooleanFilter = _interopRequireDefault(__webpack_require__(64));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -5493,7 +5493,7 @@ var _NumberEditor = _interopRequireDefault(__webpack_require__(68));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -8180,7 +8180,7 @@ var _ImageRenderer = _interopRequireDefault(__webpack_require__(119));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -8306,7 +8306,7 @@ var _DateTimeFilter = _interopRequireDefault(__webpack_require__(121));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -12758,7 +12758,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
@@ -15910,7 +15910,7 @@ var _DateTimeEditor = _interopRequireDefault(__webpack_require__(163));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 /*
- * This file is part of ag-gird-components lib.
+ * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
  *
  * For the full copyright and license information, please view the LICENSE
