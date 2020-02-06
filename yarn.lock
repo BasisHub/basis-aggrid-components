@@ -1402,8 +1402,8 @@ base@^0.11.1:
     pascalcase "^0.1.1"
 
 bbj-masks@BasisHub/bbj-masks:
-  version "1.0.0"
-  resolved "https://codeload.github.com/BasisHub/bbj-masks/tar.gz/ccad3893897c73c23303da208e523a75217f2900"
+  version "1.1.0"
+  resolved "https://codeload.github.com/BasisHub/bbj-masks/tar.gz/3b783cb1702c38c685244a757d1a426f0463f6ef"
   dependencies:
     date-fns "^2.8.1"
     date-fns-tz "^1.0.8"
