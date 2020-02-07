@@ -13,11 +13,23 @@ describe('#NumberEditor ', function() {
     {
       field: 'number',
       cellEditor: 'NumberEditor',
+      cellEditorParams: {
+        numberMaxValue: 2000,
+      },
+    },
+    {
+      field: 'numberWithMask',
+      cellEditor: 'NumberEditor',
+      cellEditorParams: {
+        numberMask: '##,##0',
+        numberMaxValue: 2000,
+      },
     },
   ]
   const rowData = [
     {
       number: 5,
+      numberWithMask: 6,
     },
   ]
 
@@ -42,21 +54,87 @@ describe('#NumberEditor ', function() {
 
   it('Gird is initialized successfully', () => {
     expect(gridOptions.api.getDisplayedRowCount()).to.equal(1)
-    expect(gridOptions.columnApi.getAllColumns()).to.have.lengthOf(1)
+    expect(gridOptions.columnApi.getAllColumns()).to.have.lengthOf(2)
   })
 
-  it('can edit number and return number', () => {
-    const api = gridOptions.api
+  describe('HTML5 number input', () => {
+    it('can edit number and return number', () => {
+      const api = gridOptions.api
 
-    api.startEditingCell({
-      rowIndex: 0,
-      colKey: 'number',
-      charPress: 7,
+      api.startEditingCell({
+        rowIndex: 0,
+        colKey: 'number',
+        charPress: 7,
+      })
+      api.stopEditing()
+
+      const newValue = api.getValue('number', api.getDisplayedRowAtIndex(0))
+
+      expect(newValue).to.equal(7)
     })
-    api.stopEditing()
 
-    const newValue = api.getValue('number', api.getDisplayedRowAtIndex(0))
+    it('prevent invalid number Input', () => {
+      const api = gridOptions.api
+      const oldValue = api.getValue('number', api.getDisplayedRowAtIndex(0))
+      api.startEditingCell({
+        rowIndex: 0,
+        colKey: 'number',
+      })
 
-    expect(newValue).to.equal(7)
+      const editor = api.getCellEditorInstances()[0]
+      const input = editor.getGui().querySelector('input:not([type="hidden"])')
+      input.value = 500000
+
+      expect(editor._validateInput(input), 'input is invalid').to.be.false
+      api.stopEditing()
+
+      const newValue = api.getValue('number', api.getDisplayedRowAtIndex(0))
+      expect(newValue, 'old Value is restored').to.equal(oldValue)
+    })
+  })
+
+  describe('NumberInput component', () => {
+    it('can edit number and return number', () => {
+      const api = gridOptions.api
+
+      api.startEditingCell({
+        rowIndex: 0,
+        colKey: 'numberWithMask',
+        charPress: 1234,
+      })
+      api.stopEditing()
+
+      const newValue = api.getValue(
+        'numberWithMask',
+        api.getDisplayedRowAtIndex(0)
+      )
+
+      expect(newValue).to.equal(1234)
+    })
+
+    it('prevent invalid number Input', () => {
+      const api = gridOptions.api
+      const oldValue = api.getValue(
+        'numberWithMask',
+        api.getDisplayedRowAtIndex(0)
+      )
+      api.startEditingCell({
+        rowIndex: 0,
+        colKey: 'numberWithMask',
+      })
+
+      const editor = api.getCellEditorInstances()[0]
+      const input = editor.getGui().querySelector('input:not([type="hidden"])')
+      input.value = 500000
+
+      expect(editor._validateInput(input), 'input is invalid').to.be.false
+      api.stopEditing()
+
+      const newValue = api.getValue(
+        'numberWithMask',
+        api.getDisplayedRowAtIndex(0)
+      )
+      expect(newValue, 'old Value is restored').to.equal(oldValue)
+    })
   })
 })

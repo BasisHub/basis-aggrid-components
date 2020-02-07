@@ -7,6 +7,10 @@
  */
 
 import Component from '../Component'
+import NumberInput from 'basis-input-masking/src/NumberInput'
+import { autobind, override } from 'core-decorators'
+
+import './style.scss'
 
 /**
  * Numbers Editor
@@ -25,7 +29,13 @@ class NumberEditor extends Component {
   /**
    *  @inheritDoc
    */
+  @override
   init(params) {
+    const min = this.getOption('numberMinValue', params)
+    const max = this.getOption('numberMaxValue', params)
+    const step = this.getOption('numberStepValue', params)
+    const mask = this.getOption('numberMask', params)
+
     let startValue
 
     this._focusAfterAttached = params.cellStartedEdit
@@ -55,51 +65,89 @@ class NumberEditor extends Component {
     // input
     this._input = document.createElement('input')
     this._input.className = 'numberEditor__input ag-cell-edit-input'
-    this._input.type = 'number'
+    this._input.id = `el-${Math.random()
+      .toString(16)
+      .slice(2, 10)}` // generate random id
+    this._input.type = mask ? 'text' : 'number'
     this._input.value = startValue
     this._input.tabIndex = 0
 
     this._gui.appendChild(this._input)
 
-    const min = this.getOption('numberMinValue', params)
-    const max = this.getOption('numberMaxValue', params)
-    const step = this.getOption('numberStepValue', params)
-
-    if (min !== 'null') {
-      this._input.min = min
+    if (min !== null) {
+      mask ? (this._input.dataset.min = min) : (this._input.min = min)
     }
 
-    if (max !== 'null') {
-      this._input.max = max
+    if (max !== null) {
+      mask ? (this._input.dataset.max = max) : (this._input.max = max)
     }
 
-    if (step !== 'null') {
-      this._input.step = step
+    if (step !== null) {
+      mask ? (this._input.dataset.step = step) : (this._input.step = step)
     }
 
-    this._onKeyDown = this._onKeyDown.bind(this)
-    this._onChange = this._onChange.bind(this)
+    if (mask) {
+      const groupingSeparator = this.getOption(
+        'numberGroupingSeparator',
+        params,
+        this.getOption('numberGroupSep', params)
+      )
+      const decimalSeparator = this.getOption(
+        'numberDecimalSeparator',
+        params,
+        this.getOption('numberDecimalSep', params)
+      )
+      const forceTrailingZeros = this.getOption(
+        'numberForceTrailingZeros',
+        params
+      )
 
-    this._input.addEventListener('keydown', this._onKeyDown)
-    this._input.addEventListener('change', this._onChange)
+      if (groupingSeparator !== null) {
+        this._input.dataset.groupingSeparator = groupingSeparator
+      }
+
+      if (decimalSeparator !== null) {
+        this._input.dataset.decimalSeparator = decimalSeparator
+      }
+
+      if (forceTrailingZeros !== null) {
+        this._input.dataset.forceTrailingZeros = forceTrailingZeros
+      }
+
+      this._input.dataset.mask = mask
+      this._numberInput = new NumberInput({
+        elements: [this._input],
+        onUpdate: (_masked, unmasked) => {
+          this._currentValue = unmasked
+          this.focusIn()
+        },
+        onInvalid: (error, input) => {
+          if (typeof error === 'string') {
+            input.setCustomValidity(error)
+          }
+        },
+      })
+    } else {
+      this._input.addEventListener('keydown', this._onKeyUpDown)
+      this._input.addEventListener('change', this._onChange)
+    }
 
     // update `currentValue` the value which this component is managing
     this._currentValue = startValue
+    this.__isMasked__ = mask && mask.length
   }
 
   /**
    *  @inheritDoc
    */
-  getGui() {
-    return this._gui
-  }
-
-  /**
-   *  @inheritDoc
-   */
+  @override
   destroy() {
-    this._input.removeEventListener('keydown', this._onKeyDown)
-    this._input.removeEventListener('change', this._onChange)
+    if (!this.__isMasked__) {
+      this._input.removeEventListener('keydown', this._onKeyDown)
+      this._input.removeEventListener('change', this._onChange)
+    } else {
+      this._numberInput.destroy()
+    }
   }
 
   /**
@@ -108,6 +156,10 @@ class NumberEditor extends Component {
    * Make sure container is always focused to listen to key changes
    */
   afterGuiAttached() {
+    if (!this.__isMasked__) {
+      this._validateInput(this._input)
+    }
+
     if (this._highlightAllOnFocus) {
       this._input.select()
     } else {
@@ -146,26 +198,50 @@ class NumberEditor extends Component {
   /**
    * Update `currentValue` when the checkbox value is changed
    */
+  @autobind
   _onChange() {
-    this._currentValue = this._input.value
+    const isValid = this._validateInput(event.target)
+    if (isValid) {
+      this._currentValue = this._input.value
+    }
   }
 
   /**
-   * Monitor keys [top,bottom,enter] to change the input value
+   * Listen to key changes and validate the input
    *
    * @param {Event} event
    */
-  _onKeyDown(event) {
+  @autobind
+  _onKeyUpDown(event) {
     const key = event.which || event.keyCode
+
+    this._validateInput(event.target)
 
     if (key == 38 || key == 40) {
       // top | down
       this._currentValue = this._input.value
       event.stopPropagation()
-    } else if (key == 13) {
-      // enter
-      this._currentValue = this._input.value
     }
+  }
+
+  /**
+   * Validate the given input element
+   *
+   * @param {HTMLInputElement} input input element
+   *
+   * @return {Boolean} true when valid , false otherwise
+   */
+  _validateInput(input) {
+    const isValid = input.checkValidity()
+    if (!isValid) {
+      input.classList.add('bbj-mask-error')
+      input.classList.remove('bbj-mask-success')
+    } else {
+      input.classList.remove('bbj-mask-error')
+      input.classList.add('bbj-mask-success')
+    }
+
+    return isValid
   }
 }
 

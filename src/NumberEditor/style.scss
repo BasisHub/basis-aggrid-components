@@ -1,0 +1,14 @@
+.numberEditor {
+  .numberInputMask__wrap {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .bbj-mask-error {
+    box-shadow: 0 -2px 0 #e91e63 inset;
+  }
+  
+  .bbj-mask-success {
+    box-shadow: 0 -2px 0 #4caf50 inset;
+  }
+}
