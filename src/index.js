@@ -10,6 +10,7 @@ import BooleanEditor from './BooleanEditor'
 import BooleanRenderer from './BooleanRenderer'
 import BooleanFilter from './BooleanFilter'
 import NumberEditor from './NumberEditor'
+import TextEditor from './TextEditor'
 import TemplateRenderer from './TemplateRenderer'
 import ImageRenderer from './ImageRenderer'
 import DateTimeFilter from './DateTimeFilter'
@@ -20,6 +21,7 @@ export {
   BooleanRenderer,
   BooleanFilter,
   NumberEditor,
+  TextEditor,
   TemplateRenderer,
   ImageRenderer,
   DateTimeFilter,

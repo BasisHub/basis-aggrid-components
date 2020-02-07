@@ -7,34 +7,28 @@
  */
 
 import Component from '../Component'
-import NumberInput from 'basis-input-masking/src/NumberInput'
+import TextInput from 'basis-input-masking/src/TextInput'
 import { autobind, override } from 'core-decorators'
 
 import './style.scss'
 
 /**
- * Numbers Editor
+ * Text Editor
  *
- * Handle number values Editing
- *
- * | Name                  	| Default     	| Description                                                                                                                    	|
- * |-------------------------	|:-------------:|--------------------------------------------------------------------------------------------------------------------------------|
- * | **numberMinValue**   | undefined    | min allowed value
- * | **numberMaxValue**   | undefined    | max allowed value
- * | **numberStepValue**       | undefined  	| number of step by increment or decrement
+ * Handle text values Editing
  *
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
-class NumberEditor extends Component {
+class TextEditor extends Component {
   /**
    *  @inheritDoc
    */
   @override
   init(params) {
-    const min = this.getOption('numberMinValue', params)
-    const max = this.getOption('numberMaxValue', params)
-    const step = this.getOption('numberStepValue', params)
-    const mask = this.getOption('numberMask', params)
+    const pattern = this.getOption('textPattern', params)
+    const required = this.getOption('textRequired', params)
+    const mask = this.getOption('textMask', params)
+    const title = this.getOption('textTitle', params)
 
     let startValue
 
@@ -58,64 +52,43 @@ class NumberEditor extends Component {
       startValue = params.value
     }
 
+    this._params = params
+
     this._gui = document.createElement('label')
-    this._gui.className = 'numberEditor ag-input-wrapper'
+    this._gui.className = 'textEditor ag-input-wrapper'
     this._gui.tabIndex = '0'
 
     // input
     this._input = document.createElement('input')
-    this._input.className = 'numberEditor__input ag-cell-edit-input'
+    this._input.className = 'textEditor__input ag-cell-edit-input'
     this._input.id = `el-${Math.random()
       .toString(16)
       .slice(2, 10)}` // generate random id
-    this._input.type = mask ? 'text' : 'number'
+    this._input.type = 'text'
     this._input.value = startValue
     this._input.tabIndex = 0
 
     this._gui.appendChild(this._input)
 
-    if (min !== null) {
-      mask ? (this._input.dataset.min = min) : (this._input.min = min)
+    if (pattern !== null) {
+      this._input.setAttribute('pattern', pattern)
     }
 
-    if (max !== null) {
-      mask ? (this._input.dataset.max = max) : (this._input.max = max)
+    if (required === true) {
+      this._input.setAttribute('required', 'required')
     }
 
-    if (step !== null) {
-      mask ? (this._input.dataset.step = step) : (this._input.step = step)
+    if (title !== null) {
+      if (title !== 'default') {
+        this._input.title = title
+      }
+    } else if (mask) {
+      this._input.title = mask
     }
 
     if (mask) {
-      const groupingSeparator = this.getOption(
-        'numberGroupingSeparator',
-        params,
-        this.getOption('numberGroupSep', params)
-      )
-      const decimalSeparator = this.getOption(
-        'numberDecimalSeparator',
-        params,
-        this.getOption('numberDecimalSep', params)
-      )
-      const forceTrailingZeros = this.getOption(
-        'numberForceTrailingZeros',
-        params
-      )
-
-      if (groupingSeparator !== null) {
-        this._input.dataset.groupingSeparator = groupingSeparator
-      }
-
-      if (decimalSeparator !== null) {
-        this._input.dataset.decimalSeparator = decimalSeparator
-      }
-
-      if (forceTrailingZeros !== null) {
-        this._input.dataset.forceTrailingZeros = forceTrailingZeros
-      }
-
       this._input.dataset.mask = mask
-      this._numberInput = new NumberInput({
+      this._textInput = new TextInput({
         elements: [this._input],
         onUpdate: (_masked, unmasked) => {
           this._currentValue = unmasked
@@ -128,7 +101,8 @@ class NumberEditor extends Component {
         },
       })
     } else {
-      this._input.addEventListener('keydown', this._onKeyUpDown)
+      this._input.addEventListener('keydown', this._onChange)
+      this._input.addEventListener('input', this._onChange)
       this._input.addEventListener('change', this._onChange)
     }
 
@@ -143,10 +117,11 @@ class NumberEditor extends Component {
   @override
   destroy() {
     if (!this.__isMasked__) {
-      this._input.removeEventListener('keydown', this._onKeyDown)
+      this._input.removeEventListener('keydown', this._onChange)
+      this._input.removeEventListener('input', this._onChange)
       this._input.removeEventListener('change', this._onChange)
     } else {
-      this._numberInput.destroy()
+      this._textInput.destroy()
     }
   }
 
@@ -175,8 +150,7 @@ class NumberEditor extends Component {
    * @return {Number}
    */
   getValue() {
-    const casted = Number(this._currentValue)
-    return isNaN(casted) ? this._currentValue : casted
+    return this._currentValue
   }
 
   /**
@@ -196,31 +170,14 @@ class NumberEditor extends Component {
   }
 
   /**
-   * Update `currentValue` when the checkbox value is changed
+   * Update `currentValue` on the input value is changed and it is valid
    */
   @autobind
   _onChange(event) {
     const isValid = this._validateInput(event.target)
+    this._currentValue = this._params.value
     if (isValid) {
       this._currentValue = this._input.value
-    }
-  }
-
-  /**
-   * Listen to key changes and validate the input
-   *
-   * @param {Event} event
-   */
-  @autobind
-  _onKeyUpDown(event) {
-    const key = event.which || event.keyCode
-
-    this._validateInput(event.target)
-
-    if (key == 38 || key == 40) {
-      // top | down
-      this._currentValue = this._input.value
-      event.stopPropagation()
     }
   }
 
@@ -233,6 +190,7 @@ class NumberEditor extends Component {
    */
   _validateInput(input) {
     const isValid = input.checkValidity()
+
     if (!isValid) {
       input.classList.add('bbj-mask-error')
       input.classList.remove('bbj-mask-success')
@@ -245,4 +203,4 @@ class NumberEditor extends Component {
   }
 }
 
-export default NumberEditor
+export default TextEditor
