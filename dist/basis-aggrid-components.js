@@ -4433,13 +4433,17 @@ function (_Component) {
             _this.focusIn();
           },
           onInvalid: function onInvalid(error, input) {
+            _this.focusIn();
+
             if (typeof error === 'string') {
               input.setCustomValidity(error);
             }
           }
         });
       } else {
-        this._input.addEventListener('keydown', this._onKeyUpDown);
+        this._input.addEventListener('keydown', this._onKeyDownUp);
+
+        this._input.addEventListener('keyup', this._onKeyDownUp);
 
         this._input.addEventListener('change', this._onChange);
       } // update `currentValue` the value which this component is managing
@@ -4456,7 +4460,9 @@ function (_Component) {
     key: "destroy",
     value: function destroy() {
       if (!this.__isMasked__) {
-        this._input.removeEventListener('keydown', this._onKeyDown);
+        this._input.removeEventListener('keydown', this._onKeyDownUp);
+
+        this._input.removeEventListener('keyup', this._onKeyDownUp);
 
         this._input.removeEventListener('change', this._onChange);
       } else {
@@ -4493,6 +4499,7 @@ function (_Component) {
   }, {
     key: "getValue",
     value: function getValue() {
+      console.log('getValue', this._currentValue, this._input.value);
       var casted = Number(this._currentValue);
       return isNaN(casted) ? this._currentValue : casted;
     }
@@ -4536,16 +4543,23 @@ function (_Component) {
      */
 
   }, {
-    key: "_onKeyUpDown",
-    value: function _onKeyUpDown(event) {
-      var key = event.which || event.keyCode;
+    key: "_onKeyDownUp",
+    value: function _onKeyDownUp(event) {
+      var isValid = this._validateInput(event.target);
 
-      this._validateInput(event.target);
+      if (!isValid) {
+        return;
+      }
+
+      var key = event.which || event.keyCode;
 
       if (key == 38 || key == 40) {
         // top | down
         this._currentValue = this._input.value;
         event.stopPropagation();
+      } else if (key == 13 || key === 9) {
+        // enter
+        this._currentValue = this._input.value;
       }
     }
     /**
@@ -4574,7 +4588,7 @@ function (_Component) {
   }]);
 
   return NumberEditor;
-}(_Component2["default"]), (_applyDecoratedDescriptor(_class.prototype, "init", [_override["default"]], Object.getOwnPropertyDescriptor(_class.prototype, "init"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "destroy", [_override["default"]], Object.getOwnPropertyDescriptor(_class.prototype, "destroy"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onChange", [_autobind["default"]], Object.getOwnPropertyDescriptor(_class.prototype, "_onChange"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onKeyUpDown", [_autobind["default"]], Object.getOwnPropertyDescriptor(_class.prototype, "_onKeyUpDown"), _class.prototype)), _class);
+}(_Component2["default"]), (_applyDecoratedDescriptor(_class.prototype, "init", [_override["default"]], Object.getOwnPropertyDescriptor(_class.prototype, "init"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "destroy", [_override["default"]], Object.getOwnPropertyDescriptor(_class.prototype, "destroy"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onChange", [_autobind["default"]], Object.getOwnPropertyDescriptor(_class.prototype, "_onChange"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onKeyDownUp", [_autobind["default"]], Object.getOwnPropertyDescriptor(_class.prototype, "_onKeyDownUp"), _class.prototype)), _class);
 var _default = NumberEditor;
 exports["default"] = _default;
 
@@ -4906,8 +4920,6 @@ function () {
   }, {
     key: "_actualInputHandler",
     value: function _actualInputHandler(e) {
-      var _this = this;
-
       var actualInput = e.target,
           actualInputId = actualInput.id,
           unmaskedInput = this.options.doc.querySelector("#".concat(actualInputId, "-unmasked"));
@@ -4920,9 +4932,11 @@ function () {
 
       setTimeout(function () {
         unmaskedInput.focus();
-
-        _this._validateInput(unmaskedInput, actualInput);
-      });
+        var length = String(unmaskedInput.value).length;
+        unmaskedInput.type = 'text';
+        unmaskedInput.setSelectionRange(length, length);
+        unmaskedInput.type = 'number';
+      }, 0);
     }
     /**
      * Listen to the unmasked input keydown and focusout events and check
@@ -4961,20 +4975,8 @@ function () {
         this.__fireOnInvalid(e, actualInput);
       }
 
-      switch (type) {
-        case 'keydown':
-          restore = keyCode === 13 && maskedValue && isValid || keyCode === 27 || keyCode === 9;
-          apply = keyCode === 13 || keyCode === 9;
-          break;
-
-        case 'focusout':
-          restore = true;
-          apply = maskedValue && isValid;
-          break;
-
-        default:
-          break;
-      }
+      restore = [13, 27].indexOf(keyCode) > -1 || e.type === 'focusout';
+      apply = maskedValue && isValid;
 
       if (restore) {
         unmaskedInput.classList.remove(this.options.cssClassError);
@@ -4985,13 +4987,15 @@ function () {
         actualInput.setAttribute('type', 'text');
         actualInput.classList.add(this.options.cssClassSuccess);
 
-        if (apply && maskedValue && isValid) {
+        if (apply) {
           actualInput.value = maskedValue;
           actualInput.dataset.valueUnmasked = unmaskedInput.value;
 
           this.__fireOnUpdate(maskedValue, unmaskedInput.value, actualInput);
         } else {
           unmaskedInput.value = actualInput.dataset.valueUnmasked;
+
+          this.__applyCssClassState(unmaskedInput, actualInput, 'success');
         }
       }
     }

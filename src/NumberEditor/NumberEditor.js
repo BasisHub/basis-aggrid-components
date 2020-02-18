@@ -122,13 +122,15 @@ class NumberEditor extends Component {
           this.focusIn()
         },
         onInvalid: (error, input) => {
+          this.focusIn()
           if (typeof error === 'string') {
             input.setCustomValidity(error)
           }
         },
       })
     } else {
-      this._input.addEventListener('keydown', this._onKeyUpDown)
+      this._input.addEventListener('keydown', this._onKeyDownUp)
+      this._input.addEventListener('keyup', this._onKeyDownUp)
       this._input.addEventListener('change', this._onChange)
     }
 
@@ -143,7 +145,8 @@ class NumberEditor extends Component {
   @override
   destroy() {
     if (!this.__isMasked__) {
-      this._input.removeEventListener('keydown', this._onKeyDown)
+      this._input.removeEventListener('keydown', this._onKeyDownUp)
+      this._input.removeEventListener('keyup', this._onKeyDownUp)
       this._input.removeEventListener('change', this._onChange)
     } else {
       this._numberInput.destroy()
@@ -175,6 +178,7 @@ class NumberEditor extends Component {
    * @return {Number}
    */
   getValue() {
+    console.log('getValue', this._currentValue, this._input.value)
     const casted = Number(this._currentValue)
     return isNaN(casted) ? this._currentValue : casted
   }
@@ -212,15 +216,22 @@ class NumberEditor extends Component {
    * @param {Event} event
    */
   @autobind
-  _onKeyUpDown(event) {
-    const key = event.which || event.keyCode
+  _onKeyDownUp(event) {
+    const isValid = this._validateInput(event.target)
 
-    this._validateInput(event.target)
+    if (!isValid) {
+      return
+    }
+
+    const key = event.which || event.keyCode
 
     if (key == 38 || key == 40) {
       // top | down
       this._currentValue = this._input.value
       event.stopPropagation()
+    } else if (key == 13 || key === 9) {
+      // enter
+      this._currentValue = this._input.value
     }
   }
 
@@ -233,6 +244,7 @@ class NumberEditor extends Component {
    */
   _validateInput(input) {
     const isValid = input.checkValidity()
+
     if (!isValid) {
       input.classList.add('bbj-mask-error')
       input.classList.remove('bbj-mask-success')
