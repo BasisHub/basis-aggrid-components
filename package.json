@@ -58,7 +58,7 @@
   "dependencies": {
     "ag-grid-community": "^22.1.1",
     "ag-grid-enterprise": "^22.1.1",
-    "bbj-masks": "BasisHub/bbj-masks"
+    "basis-input-masking": "https://github.com/BasisHub/basis-input-masking"
   },
   "husky": {
     "hooks": {
