@@ -6,9 +6,7 @@
  * file that was distributed with this source code.
  */
 
-import flatpickr from 'flatpickr'
 import { autobind, override, readonly } from 'core-decorators'
-import DateMask, { getWeekStartByLocale } from 'bbj-masks/src/DateMask'
 import { withEventsMixin } from '../EventsMixin'
 import Component from '../Component'
 import './style.scss'
@@ -203,10 +201,10 @@ class DateTimeInput extends Component {
             'locale',
             'DateMask',
             expression
-          )(date, format, locale, DateMask)
+          )(date, format, locale, BBj.Masks.DateMask)
 
         case 'function':
-          return dateTimeFormatter(date, format, locale, DateMask)
+          return dateTimeFormatter(date, format, locale, BBj.Masks.DateMask)
         default:
           throw new Error(
             `Invalid dateTimeFormatter defined for column "${this._params.colDef.field}". The formatter should be an expression or plain function`
@@ -217,7 +215,7 @@ class DateTimeInput extends Component {
         return
       }
 
-      return DateMask.mask(date, format, locale)
+      return BBj.Masks.DateMask.mask(date, format, locale)
     }
   }
 
@@ -294,7 +292,7 @@ class DateTimeInput extends Component {
         longhand: monthsLong,
       },
       daysInMonth: [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31],
-      firstDayOfWeek: getWeekStartByLocale(locale),
+      firstDayOfWeek: BBj.Masks.Utils.Dates.getWeekStartByLocale(locale),
       // eslint-disable-next-line no-unused-vars
       ordinal: number => '',
       rangeSeparator: '  ',

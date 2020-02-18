@@ -8,12 +8,6 @@
 
 import { autobind, override, readonly } from 'core-decorators'
 import utcToZonedTime from 'date-fns-tz/utcToZonedTime'
-import DateMak, {
-  fixShortISO,
-  IS_TIME_REGEX,
-  IS_DATE_REGEX,
-  getTimezoneOrOffset,
-} from 'bbj-masks/src/DateMask'
 import { withEventsMixin } from '../EventsMixin'
 import DateTimeInput from '../DateTimeInput'
 import Component from '../Component'
@@ -668,11 +662,15 @@ class DateTimeFilter extends Component {
 
     ;[condition1, condition2].forEach(condition => {
       if (condition.filter) {
-        condition.filter = DateMak.mask(condition.filter, dateTimeMask, locale)
+        condition.filter = BBj.Masks.DateMask.mask(
+          condition.filter,
+          dateTimeMask,
+          locale
+        )
       }
 
       if (condition.filterTo) {
-        condition.filterTo = DateMak.mask(
+        condition.filterTo = BBj.Masks.DateMask.mask(
           condition.filterTo,
           dateTimeMask,
           locale
@@ -705,13 +703,13 @@ class DateTimeFilter extends Component {
     }
 
     const { filter, filterTo, type } = condition
-    const timezone = getTimezoneOrOffset()
+    const timezone = BBj.Masks.Utils.Dates.getTimezoneOrOffset()
     const inRangeInclusive = this._doesFilterPassOptions.inRangeInclusive
     const enableTime = this._doesFilterPassOptions.enableTime
     let passed = false
 
-    if (IS_TIME_REGEX.test(value)) {
-      value = value = fixShortISO(value)
+    if (BBj.Masks.Utils.Dates.IS_TIME_REGEX.test(value)) {
+      value = value = BBj.Masks.Utils.Dates.fixShortISO(value)
       ;[filter, filterTo].forEach(date => {
         if (date instanceof Date) {
           date.setFullYear(1970)
@@ -719,8 +717,8 @@ class DateTimeFilter extends Component {
           date.setDate(1)
         }
       })
-    } else if (IS_DATE_REGEX.test(value)) {
-      value = fixShortISO(value)
+    } else if (BBj.Masks.Utils.Dates.IS_DATE_REGEX.test(value)) {
+      value = BBj.Masks.Utils.Dates.fixShortISO(value)
     }
 
     // convert the datetime from utc to locale

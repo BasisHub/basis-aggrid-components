@@ -4,7 +4,10 @@ module.exports = function(config) {
     frameworks: ['mocha', 'chai'],
     files: [
       'node_modules/ag-grid-community/dist/ag-grid-community.js',
-      'node_modules/@babel/polyfill/dist/polyfill.js',
+      // 'node_modules/@babel/polyfill/dist/polyfill.js',
+      'node_modules/bbj-masks/dist/bbj-masks.min.js',
+      'node_modules/basis-input-masking/dist/basis-input-masking.min.js',
+      'node_modules/flatpickr/dist/flatpickr.min.js',
       'dist/basis-aggrid-components.js',
       'test/utils.js',
       'test/fixtures/**/*.js',

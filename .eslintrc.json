@@ -14,5 +14,10 @@
     "no-console": "off",
     "strict": ["error", "global"],
     "curly": "warn"
+  },
+  "globals": {
+    "BBj": true, 
+    "Basis": true,
+    "flatpickr": true
   }
 }

@@ -9,10 +9,6 @@
 import { autobind, override } from 'core-decorators'
 import utcToZonedTime from 'date-fns-tz/utcToZonedTime'
 import DateTimeInput from '../DateTimeInput'
-import {
-  fixShortISO as originalFixShortISO,
-  getTimezoneOrOffset,
-} from 'bbj-masks/src/DateMask'
 import Component from '../Component'
 
 /**
@@ -66,7 +62,7 @@ class DateTimeEditor extends Component {
    * @return {String} complete iso string
    */
   static fixShortISO(value) {
-    return originalFixShortISO(value)
+    return BBj.Masks.Utils.Dates.fixShortISO(value)
   }
 
   /**
@@ -100,7 +96,9 @@ class DateTimeEditor extends Component {
     this._input.on(DateTimeInput.ON_DATE_CHANGED, this._onDateChange)
 
     if (this._value) {
-      this._input.setDate(utcToZonedTime(this._value, getTimezoneOrOffset()))
+      this._input.setDate(
+        utcToZonedTime(this._value, BBj.Masks.Utils.Dates.getTimezoneOrOffset())
+      )
     }
 
     this._gui = this._input.getGui()

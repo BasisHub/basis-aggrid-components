@@ -7,7 +7,6 @@
  */
 
 import Component from '../Component'
-import TextInput from 'basis-input-masking/src/TextInput'
 import { autobind, override } from 'core-decorators'
 
 import './style.scss'
@@ -95,7 +94,7 @@ class TextEditor extends Component {
 
     if (mask) {
       this._input.dataset.mask = mask
-      this._textInput = new TextInput({
+      this._textInput = new Basis.InputMasking.TextInput({
         elements: [this._input],
         onUpdate: (_masked, unmasked) => {
           this._currentValue = unmasked

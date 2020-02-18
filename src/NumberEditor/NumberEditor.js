@@ -7,7 +7,6 @@
  */
 
 import Component from '../Component'
-import NumberInput from 'basis-input-masking/src/NumberInput'
 import { autobind, override } from 'core-decorators'
 
 import './style.scss'
@@ -119,7 +118,7 @@ class NumberEditor extends Component {
       }
 
       this._input.dataset.mask = mask
-      this._numberInput = new NumberInput({
+      this._numberInput = new Basis.InputMasking.NumberInput({
         elements: [this._input],
         onUpdate: (_masked, unmasked) => {
           this._currentValue = unmasked

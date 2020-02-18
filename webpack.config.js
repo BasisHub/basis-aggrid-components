@@ -8,6 +8,8 @@ module.exports = {
   entry: {
     'basis-aggrid-components': './src/index.js',
     'basis-aggrid-components.min': './src/index.js',
+    'basis-aggrid-components.bundle': './src/bundle.js',
+    'basis-aggrid-components.bundle.min': './src/bundle.js',
   },
   devtool: 'source-map',
   output: {
@@ -22,11 +24,37 @@ module.exports = {
         test: /\.js|$/,
         loader: 'babel-loader',
         options: {
-          presets: ['@babel/preset-env' ],
+          presets: [
+            [
+              '@babel/preset-env',
+              {
+                modules: false,
+                debug: false,
+              },
+            ],
+          ],
           plugins: [
-            ['@babel/plugin-proposal-decorators', { legacy: true }],
-            ['@babel/plugin-proposal-class-properties', { loose: true }],
+            [
+              '@babel/plugin-proposal-decorators',
+              {
+                legacy: true,
+              },
+            ],
+            [
+              '@babel/plugin-proposal-class-properties',
+              {
+                loose: true,
+              },
+            ],
             '@babel/plugin-proposal-object-rest-spread',
+            [
+              'transform-imports',
+              {
+                'core-decorators': {
+                  transform: 'core-decorators/src/${member}',
+                },
+              },
+            ],
           ],
         },
       },
@@ -75,8 +103,8 @@ module.exports = {
     }),
     new BundleAnalyzerPlugin({
       analyzerMode: 'static',
-      openAnalyzer: false
-    })
+      openAnalyzer: false,
+    }),
   ],
   watchOptions: {
     ignored: /node_modules/,
