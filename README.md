@@ -282,20 +282,20 @@ const gridOptions = {
 
 ```javascript
 const gridOptions = {
-  rowData: [{ numbers: 10 }],
+  rowData: [{ text: '01/2015' }],
   columnDefs: [
     {
-      field: 'numbers',
-      cellEditor: 'NumberEditor',
+      field: 'text',
+      cellEditor: 'TextEditor',
       cellEditorParams: {
-        numberMinValue: 10,
-        numberMaxValue: 100,
-        numberStepValue: 10,
+        textMask: '00/0000',
+        textRequired: true,
+        textPattern: '((0[1-9])|(1[0-2]))\/((2009)|(20[1-2][0-9]))'
       },
     },
   ],
   components: {
-    NumberEditor: Basis.AgGridComponents.NumberEditor,
+    TextEditor: Basis.AgGridComponents.TextEditor,
   },
 }
 ```
