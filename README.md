@@ -25,6 +25,7 @@ A set of [ag-grid](https://www.ag-grid.com/) components which can handle filteri
   - [BooleanRenderer](#booleanrenderer)
   - [BooleanFilter](#booleanfilter)
   - [NumberEditor](#numbereditor)
+  - [TextEditor](#texteditor)
   - [ImageRenderer](#imagerenderer)
   - [TemplateRenderer](#templaterenderer)
   - [DateTimeFilter](#datetimefilter)
@@ -242,9 +243,42 @@ const gridOptions = {
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
-| numberMinValue | undefined | min allowed value |
-| numberMaxValue | undefined | max allowed value |
-| numberStepValue | undefined | number of step by increment or decrement |
+| **numberMinValue**   | undefined    | min allowed value
+| **numberMaxValue**   | undefined    | max allowed value
+| **numberStepValue**       | undefined  	| number of step by increment or decrement
+| **numberMask**       | undefined  	| a bbj number mask to validate the number against
+|**numberGroupingSeparator** | , | a char which will be used as a grouping separator. The options is used only when **numberMask** is defined |
+|**numberDecimalSeparator** | . | a char which will be used as a decimal separator. The options is used only when **numberMask** is defined  |
+|**numberForceTrailingZeros** | false | Affects the output by switching the way a mask with "#" characters in the trailing positions is filled. for example, the function NumberMask.mask(.10:"#.##") returns .10 instead of .1 . The options is used only when **numberMask** is defined|
+
+```javascript
+const gridOptions = {
+  rowData: [{ numbers: 10 }],
+  columnDefs: [
+    {
+      field: 'numbers',
+      cellEditor: 'NumberEditor',
+      cellEditorParams: {
+        numberMinValue: 10,
+        numberMaxValue: 100,
+        numberStepValue: 10,
+      },
+    },
+  ],
+  components: {
+    NumberEditor: Basis.AgGridComponents.NumberEditor,
+  },
+}
+```
+
+### TextEditor
+
+ | Name                  	| Default     	| Description                                                                                                                    	|
+ |-------------------------	|:-------------:|--------------------------------------------------------------------------------------------------------------------------------|
+ | **textPattern**   | undefined    | A regular expression that the input's value must match in order for the value to pass constraint validation
+ | **textRequired**   | undefined    | Boolean. A value is required to consider the input valid
+ | **textMask**   | undefined    | A bbj string mask to validate the value 
+ | **textTitle**   | null    | The input title , when null and the **textMask** options is defined , then we use the mask as title , when set to `default` we the browser's default title , other wise the value defined in this option
 
 ```javascript
 const gridOptions = {

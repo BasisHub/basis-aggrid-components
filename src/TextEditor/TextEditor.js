@@ -17,6 +17,13 @@ import './style.scss'
  *
  * Handle text values Editing
  *
+ * | Name                  	| Default     	| Description                                                                                                                    	|
+ * |-------------------------	|:-------------:|--------------------------------------------------------------------------------------------------------------------------------|
+ * | **textPattern**   | undefined    | A regular expression that the input's value must match in order for the value to pass constraint validation
+ * | **textRequired**   | undefined    | Boolean. A value is required to consider the input valid
+ * | **textMask**   | undefined    | A bbj string mask to validate the value
+ * | **textTitle**   | null    | The input title , when null and the **textMask** options is defined , then we use the mask as title , when set to `default` we the browser's default title , otherwise the value defined in this option
+ *
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
 class TextEditor extends Component {

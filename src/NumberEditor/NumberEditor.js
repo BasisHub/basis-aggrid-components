@@ -22,6 +22,10 @@ import './style.scss'
  * | **numberMinValue**   | undefined    | min allowed value
  * | **numberMaxValue**   | undefined    | max allowed value
  * | **numberStepValue**       | undefined  	| number of step by increment or decrement
+ * | **numberMask**       | undefined  	| a bbj number mask to validate the number against
+ * |**numberGroupingSeparator** | , | a char which will be used as a grouping separator. The options is used only when **numberMask** is defined |
+ * |**numberDecimalSeparator** | . | a char which will be used as a decimal separator. The options is used only when **numberMask** is defined  |
+ * |**numberForceTrailingZeros** | false | Affects the output by switching the way a mask with "#" characters in the trailing positions is filled. for example, the function NumberMask.mask(.10:"#.##") returns .10 instead of .1 . The options is used only when **numberMask** is defined|
  *
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
