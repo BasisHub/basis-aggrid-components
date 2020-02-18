@@ -4499,7 +4499,6 @@ function (_Component) {
   }, {
     key: "getValue",
     value: function getValue() {
-      console.log('getValue', this._currentValue, this._input.value);
       var casted = Number(this._currentValue);
       return isNaN(casted) ? this._currentValue : casted;
     }

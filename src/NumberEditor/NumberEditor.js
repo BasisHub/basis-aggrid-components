@@ -178,7 +178,6 @@ class NumberEditor extends Component {
    * @return {Number}
    */
   getValue() {
-    console.log('getValue', this._currentValue, this._input.value)
     const casted = Number(this._currentValue)
     return isNaN(casted) ? this._currentValue : casted
   }
