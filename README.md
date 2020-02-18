@@ -36,14 +36,37 @@ A set of [ag-grid](https://www.ag-grid.com/) components which can handle filteri
 
 Install it with npm or yarn 
 
-```text
-npm install BasisHub/basis-aggrid-components 
+
+```bash
+# with npm
+$ npm install BasisHub/basis-aggrid-components 
+
+# with yarn
 yarn add BasisHub/basis-aggrid-components
 ```
 
 ### 💻 How to use ?
 
-In your ag grid config object register the component then reference it from your columns definition
+Include the bundled version
+
+```html
+<!-- The full bundled version with all required deps-->
+<script src="dist/basis-aggrid-components.bundle.min.js"></script>
+```
+
+Or the unbundled version
+
+```html
+<link rel="stylesheet" href="flatpickr/dist/themes/dark.css">
+
+<script src="flatpickr/dist/flatpickr.js"></script>
+<script src="bbj-masks/dist/bbj-masks.js"></script>
+<script src="basis-input-masking/dist/basis-input-masking.js"></script>
+<script src="dist/basis-aggrid-components.bundle.js"></script>
+```
+
+
+Then in your ag grid config object register the component then reference it from your columns definition
 
 ```javascript
 const gridOptions = {
