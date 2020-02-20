@@ -502,7 +502,7 @@ const gridOptions = {
 
 ## Value Formatting 
 
-Basis AgGrid Components does not ship an value formatters by default , but you can use [bbj-masks](https://github.com/BasisHub/bbj-masks) for this puropse 
+Basis AgGrid Components depends on [bbj-masks](https://github.com/BasisHub/bbj-masks) to do the internal formatting
 
 > bbj-masks is a tiny JavaScript library to format Dates , Numbers & Strings using BBj supported masks.
 
