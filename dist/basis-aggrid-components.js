@@ -3301,7 +3301,7 @@ function (_Component) {
     value: function refresh(params, isInit) {
       var value = params.valueFormatted ? params.valueFormatted : params.value;
 
-      if (value === null || _typeof(value) === undefined) {
+      if (value === null || typeof value === 'undefined') {
         this._gui.innerHTML = '';
       } else {
         value = String(value);

@@ -75,7 +75,7 @@ class BooleanRenderer extends Component {
   refresh(params, isInit) {
     let value = params.valueFormatted ? params.valueFormatted : params.value
 
-    if (value === null || typeof value === undefined) {
+    if (value === null || typeof value === 'undefined') {
       this._gui.innerHTML = ''
     } else {
       value = String(value)
