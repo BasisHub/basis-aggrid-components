@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-describe('#ImageRenderer ', function() {
+describe.only('#ImageRenderer ', function() {
   let gridOptions = null
   const columnDefs = [
     {
@@ -29,6 +29,9 @@ describe('#ImageRenderer ', function() {
     },
     {
       logo: 'ag-grid',
+    },
+    {
+      logo: 'not_in_the-_list',
     },
   ]
 
@@ -52,7 +55,7 @@ describe('#ImageRenderer ', function() {
   })
 
   it('Gird is initialized successfully', () => {
-    expect(gridOptions.api.getDisplayedRowCount()).to.equal(2)
+    expect(gridOptions.api.getDisplayedRowCount()).to.equal(3)
     expect(gridOptions.columnApi.getAllColumns()).to.have.lengthOf(1)
   })
 
@@ -69,21 +72,33 @@ describe('#ImageRenderer ', function() {
       const getUrl = window.location
       const baseUrl = getUrl.protocol + '//' + getUrl.host + '/'
 
-      it(`of row[${index}][logo] is "${cellContent}"`, done => {
-        this.retries(5)
+      it(`of row[${index}][logo] is "${
+        typeof cellContent === 'undefined' ? row[column.field] : cellContent
+      }"`, done => {
         setTimeout(() => {
-          const cellInDOM = document
-            .querySelector(`[row-id="${index}"] [col-id="logo"]`)
-            .querySelector('img')
+          if (typeof cellContent !== 'undefined') {
+            const cellInDOM = document
+              .querySelector(`[row-id="${index}"] [col-id="logo"]`)
+              .querySelector('img')
 
-          expect(cellInDOM, 'it is image element').to.be.instanceOf(
-            HTMLImageElement
-          )
-          expect(cellInDOM.src, `src is ${cellContent}`).to.equal(
-            `${baseUrl}${cellContent}`
-          )
-          expect(cellInDOM.width, `width is ${imgWidth}`).to.equal(imgWidth)
-          expect(cellInDOM.width, `height is ${imgHeight}`).to.equal(imgHeight)
+            expect(cellInDOM, 'it is image element').to.be.instanceOf(
+              HTMLImageElement
+            )
+            expect(cellInDOM.src, `src is ${cellContent}`).to.equal(
+              `${baseUrl}${cellContent}`
+            )
+            expect(cellInDOM.width, `width is ${imgWidth}`).to.equal(imgWidth)
+            expect(cellInDOM.width, `height is ${imgHeight}`).to.equal(
+              imgHeight
+            )
+          } else {
+            const cellInDOM = document.querySelector(
+              `[row-id="${index}"] [col-id="logo"]`
+            )
+
+            expect(cellInDOM.innerText).to.equal(row[column.field])
+          }
+
           done()
         }, 50)
       })

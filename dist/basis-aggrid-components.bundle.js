@@ -6607,6 +6607,8 @@ function (_TemplateRenderer) {
         params.renderTemplate =
         /*html*/
         "\n        <img \n          src=\"".concat(imageList[params.value], "\" \n          width=\"").concat(imageWidth, "\"\n          height=\"").concat(imageHeight, "\"  \n        />\n      ");
+      } else {
+        params.renderTemplate = value;
       }
 
       return _get(_getPrototypeOf(ImageRenderer.prototype), "refresh", this).call(this, params, isInit);

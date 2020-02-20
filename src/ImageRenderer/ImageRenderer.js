@@ -48,6 +48,8 @@ class ImageRenderer extends TemplateRenderer {
           height="${imageHeight}"  
         />
       `
+    } else {
+      params.renderTemplate = value
     }
 
     return super.refresh(params, isInit)
