@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-describe.only('#ImageRenderer ', function() {
+describe('#ImageRenderer ', function() {
   let gridOptions = null
   const columnDefs = [
     {
