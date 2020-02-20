@@ -73,29 +73,31 @@ class BooleanRenderer extends Component {
    * @return {Boolean} true if the refresh succeeded, otherwise return false.
    */
   refresh(params, isInit) {
-    const value = params.valueFormatted ? params.valueFormatted : params.value
+    let value = params.valueFormatted ? params.valueFormatted : params.value
 
-    if (!params.hasOwnProperty('value')) {
+    if (value === null || typeof value === undefined) {
       this._gui.innerHTML = ''
     } else {
-      const booleanTrueRenderValue = this.getOption(
-        'booleanTrueRenderValue',
-        params
+      value = String(value)
+      const booleanTrueRenderValue = String(
+        this.getOption('booleanTrueRenderValue', params)
       )
-      const booleanFalseRenderValue = this.getOption(
-        'booleanFalseRenderValue',
-        params
+      const booleanFalseRenderValue = String(
+        this.getOption('booleanFalseRenderValue', params)
       )
-      const booleanTrueValue = [].concat(
-        this.getOption('booleanTrueValue', params, [true])
-      )
-      const booleanFalseValue = [].concat(
-        this.getOption('booleanFalseValue', params, [false])
-      )
+      const booleanTrueValue = []
+        .concat(this.getOption('booleanTrueValue', params, [true]))
+        .map(x => String(x))
+      const booleanFalseValue = []
+        .concat(this.getOption('booleanFalseValue', params, [false]))
+        .map(x => String(x))
 
       // handle true values
       if (booleanTrueValue.indexOf(value) > -1) {
-        if (!booleanTrueRenderValue || booleanTrueRenderValue === 'switch') {
+        if (
+          !booleanTrueRenderValue.length ||
+          booleanTrueRenderValue === 'switch'
+        ) {
           const switcher = this._getSwitcher(params)
           switcher.setChecked(true)
           if (isInit) {
@@ -107,7 +109,10 @@ class BooleanRenderer extends Component {
       }
       // handle false values
       else if (booleanFalseValue.indexOf(value) > -1) {
-        if (!booleanFalseRenderValue || booleanFalseRenderValue === 'switch') {
+        if (
+          !booleanFalseRenderValue.length ||
+          booleanFalseRenderValue === 'switch'
+        ) {
           const switcher = this._getSwitcher(params)
           switcher.setChecked(false)
           if (isInit) {

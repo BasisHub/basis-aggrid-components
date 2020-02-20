@@ -58,7 +58,7 @@ class BooleanSwitch extends Component {
 
     // input
     this._input = doc.createElement('input')
-    this._input.id = Math.random()
+    this._input.id = `el-${Math.random()}`
     this._input.name = 'checkbox'
     this._input.className = 'boolSwitch__checkbox'
     this._input.type = 'checkbox'

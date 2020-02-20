@@ -72,7 +72,6 @@ describe('#BooleanRenderer ', function() {
             : column.cellRendererParams.booleanFalseRenderValue
 
         it(`of row[${index}][${field}] is "${cellContent}"`, done => {
-          this.retries(5)
           setTimeout(() => {
             const cellInDOM = document.querySelector(
               `[row-id="${index}"] [col-id="${field}"]`

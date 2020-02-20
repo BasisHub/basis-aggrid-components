@@ -2367,6 +2367,12 @@ function (_Component) {
       this._falseValue = [].concat(this.getOption('booleanFalseValue', params, [false]));
       this._returnTrueValue = this.getOption('booleanUsedTrueValue', params, this._trueValue[0]);
       this._returnFalseValue = this.getOption('booleanUsedFalseValue', params, this._falseValue[0]);
+      this._trueValue = this._trueValue.map(function (x) {
+        return String(x);
+      });
+      this._falseValue = this._falseValue.map(function (x) {
+        return String(x);
+      });
       this.focusAfterAttached = params.cellStartedEdit;
 
       if (this.focusAfterAttached) {
@@ -2469,7 +2475,8 @@ function (_Component) {
   }, {
     key: "_convertValue",
     value: function _convertValue(value, trueValue, falseValue) {
-      return trueValue.indexOf(value) > -1 ? true : falseValue.indexOf(value) > -1 ? false : value;
+      var valueAsString = String(value);
+      return trueValue.indexOf(valueAsString) > -1 ? true : falseValue.indexOf(valueAsString) > -1 ? false : value;
     }
   }]);
 
@@ -2759,7 +2766,7 @@ function (_Component) {
       boolSwitch.className = 'boolSwitch'; // input
 
       this._input = doc.createElement('input');
-      this._input.id = Math.random();
+      this._input.id = "el-".concat(Math.random());
       this._input.name = 'checkbox';
       this._input.className = 'boolSwitch__checkbox';
       this._input.type = 'checkbox';
@@ -3294,16 +3301,21 @@ function (_Component) {
     value: function refresh(params, isInit) {
       var value = params.valueFormatted ? params.valueFormatted : params.value;
 
-      if (!params.hasOwnProperty('value')) {
+      if (value === null || _typeof(value) === undefined) {
         this._gui.innerHTML = '';
       } else {
-        var booleanTrueRenderValue = this.getOption('booleanTrueRenderValue', params);
-        var booleanFalseRenderValue = this.getOption('booleanFalseRenderValue', params);
-        var booleanTrueValue = [].concat(this.getOption('booleanTrueValue', params, [true]));
-        var booleanFalseValue = [].concat(this.getOption('booleanFalseValue', params, [false])); // handle true values
+        value = String(value);
+        var booleanTrueRenderValue = String(this.getOption('booleanTrueRenderValue', params));
+        var booleanFalseRenderValue = String(this.getOption('booleanFalseRenderValue', params));
+        var booleanTrueValue = [].concat(this.getOption('booleanTrueValue', params, [true])).map(function (x) {
+          return String(x);
+        });
+        var booleanFalseValue = [].concat(this.getOption('booleanFalseValue', params, [false])).map(function (x) {
+          return String(x);
+        }); // handle true values
 
         if (booleanTrueValue.indexOf(value) > -1) {
-          if (!booleanTrueRenderValue || booleanTrueRenderValue === 'switch') {
+          if (!booleanTrueRenderValue.length || booleanTrueRenderValue === 'switch') {
             var switcher = this._getSwitcher(params);
 
             switcher.setChecked(true);
@@ -3316,7 +3328,7 @@ function (_Component) {
           }
         } // handle false values
         else if (booleanFalseValue.indexOf(value) > -1) {
-            if (!booleanFalseRenderValue || booleanFalseRenderValue === 'switch') {
+            if (!booleanFalseRenderValue.length || booleanFalseRenderValue === 'switch') {
               var _switcher = this._getSwitcher(params);
 
               _switcher.setChecked(false);
@@ -3483,10 +3495,14 @@ function (_Component) {
       var isClearFilter = this.getOption('clearButton', params, false);
       var isResetButton = this.getOption('resetButton', params, false);
       var isApplyButton = this.getOption('applyButton', params, false);
-      this._trueValue = [].concat(this.getOption('booleanTrueValue', params, [true]));
-      this._falseValue = [].concat(this.getOption('booleanFalseValue', params, [false]));
-      this._usedTrueValue = this.getOption('booleanUsedTrueValue', params, this._trueValue[0]);
-      this._usedFalseValue = this.getOption('booleanUsedFalseValue', params, this._falseValue[0]);
+      this._trueValue = [].concat(this.getOption('booleanTrueValue', params, [true])).map(function (x) {
+        return String(x);
+      });
+      this._falseValue = [].concat(this.getOption('booleanFalseValue', params, [false])).map(function (x) {
+        return String(x);
+      });
+      this._usedTrueValue = String(this.getOption('booleanUsedTrueValue', params, this._trueValue[0]));
+      this._usedFalseValue = String(this.getOption('booleanUsedFalseValue', params, this._falseValue[0]));
       this._booleanFilterTranslation = this.getOption('booleanFilterTranslation', params, {
         "true": translate('booleanTrue', toTitleCase(String(this._usedTrueValue))),
         "false": translate('booleanFalse', toTitleCase(String(this._usedFalseValue))),
@@ -3546,7 +3562,8 @@ function (_Component) {
     key: "doesFilterPass",
     value: function doesFilterPass(params) {
       // eslint-disable-next-line no-prototype-builtins
-      var value = this._params.hasOwnProperty('filterValueGetter') ? this._params.filterValueGetter(params) : this._params.valueGetter(params);
+      var value = String( // eslint-disable-next-line no-prototype-builtins
+      this._params.hasOwnProperty('filterValueGetter') ? this._params.filterValueGetter(params) : this._params.valueGetter(params));
       return this._filterText === 'true' ? this._trueValue.indexOf(value) > -1 : this._falseValue.indexOf(value) > -1;
     }
     /**

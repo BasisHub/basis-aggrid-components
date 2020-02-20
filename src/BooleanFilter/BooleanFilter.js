@@ -62,24 +62,20 @@ class BooleanFilter extends Component {
     const isResetButton = this.getOption('resetButton', params, false)
     const isApplyButton = this.getOption('applyButton', params, false)
 
-    this._trueValue = [].concat(
-      this.getOption('booleanTrueValue', params, [true])
+    this._trueValue = []
+      .concat(this.getOption('booleanTrueValue', params, [true]))
+      .map(x => String(x))
+
+    this._falseValue = []
+      .concat(this.getOption('booleanFalseValue', params, [false]))
+      .map(x => String(x))
+
+    this._usedTrueValue = String(
+      this.getOption('booleanUsedTrueValue', params, this._trueValue[0])
     )
 
-    this._falseValue = [].concat(
-      this.getOption('booleanFalseValue', params, [false])
-    )
-
-    this._usedTrueValue = this.getOption(
-      'booleanUsedTrueValue',
-      params,
-      this._trueValue[0]
-    )
-
-    this._usedFalseValue = this.getOption(
-      'booleanUsedFalseValue',
-      params,
-      this._falseValue[0]
+    this._usedFalseValue = String(
+      this.getOption('booleanUsedFalseValue', params, this._falseValue[0])
     )
 
     this._booleanFilterTranslation = this.getOption(
@@ -195,9 +191,12 @@ class BooleanFilter extends Component {
    */
   doesFilterPass(params) {
     // eslint-disable-next-line no-prototype-builtins
-    const value = this._params.hasOwnProperty('filterValueGetter')
-      ? this._params.filterValueGetter(params)
-      : this._params.valueGetter(params)
+    const value = String(
+      // eslint-disable-next-line no-prototype-builtins
+      this._params.hasOwnProperty('filterValueGetter')
+        ? this._params.filterValueGetter(params)
+        : this._params.valueGetter(params)
+    )
 
     return this._filterText === 'true'
       ? this._trueValue.indexOf(value) > -1

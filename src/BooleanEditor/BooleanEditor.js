@@ -39,6 +39,7 @@ class BooleanEditor extends Component {
     this._trueValue = [].concat(
       this.getOption('booleanTrueValue', params, [true])
     )
+
     this._falseValue = [].concat(
       this.getOption('booleanFalseValue', params, [false])
     )
@@ -53,6 +54,9 @@ class BooleanEditor extends Component {
       params,
       this._falseValue[0]
     )
+
+    this._trueValue = this._trueValue.map(x => String(x))
+    this._falseValue = this._falseValue.map(x => String(x))
 
     this.focusAfterAttached = params.cellStartedEdit
     if (this.focusAfterAttached) {
@@ -150,9 +154,11 @@ class BooleanEditor extends Component {
    * @param {String|Number} falseValue false value alias
    */
   _convertValue(value, trueValue, falseValue) {
-    return trueValue.indexOf(value) > -1
+    const valueAsString = String(value)
+
+    return trueValue.indexOf(valueAsString) > -1
       ? true
-      : falseValue.indexOf(value) > -1
+      : falseValue.indexOf(valueAsString) > -1
       ? false
       : value
   }
