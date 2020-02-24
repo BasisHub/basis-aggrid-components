@@ -3288,13 +3288,14 @@ function (_Component) {
       }
     }
     /**
-     * Refresh the cell l
+     * Refresh the cell
      *
      * @param {Object} params cell renderer params
      * @param {Boolean} isInit true when this method is being called in `init` phase , false otherwise
      *
      * @return {Boolean} true if the refresh succeeded, otherwise return false.
      */
+    // eslint-disable-next-line no-unused-vars
 
   }, {
     key: "refresh",
@@ -3305,8 +3306,8 @@ function (_Component) {
         this._gui.innerHTML = '';
       } else {
         value = String(value);
-        var booleanTrueRenderValue = String(this.getOption('booleanTrueRenderValue', params));
-        var booleanFalseRenderValue = String(this.getOption('booleanFalseRenderValue', params));
+        var booleanTrueRenderValue = String(this.getOption('booleanTrueRenderValue', params, 'switch'));
+        var booleanFalseRenderValue = String(this.getOption('booleanFalseRenderValue', params, 'switch'));
         var booleanTrueValue = [].concat(this.getOption('booleanTrueValue', params, [true])).map(function (x) {
           return String(x);
         });
@@ -3319,10 +3320,9 @@ function (_Component) {
             var switcher = this._getSwitcher(params);
 
             switcher.setChecked(true);
+            this._gui.innerHTML = '';
 
-            if (isInit) {
-              this._gui.appendChild(switcher.getGui());
-            }
+            this._gui.appendChild(switcher.getGui());
           } else {
             this._gui.innerHTML = booleanTrueRenderValue;
           }
@@ -3333,9 +3333,9 @@ function (_Component) {
 
               _switcher.setChecked(false);
 
-              if (isInit) {
-                this._gui.appendChild(_switcher.getGui());
-              }
+              this._gui.innerHTML = '';
+
+              this._gui.appendChild(_switcher.getGui());
             } else {
               this._gui.innerHTML = booleanFalseRenderValue;
             }

@@ -65,13 +65,14 @@ class BooleanRenderer extends Component {
   }
 
   /**
-   * Refresh the cell l
+   * Refresh the cell
    *
    * @param {Object} params cell renderer params
    * @param {Boolean} isInit true when this method is being called in `init` phase , false otherwise
    *
    * @return {Boolean} true if the refresh succeeded, otherwise return false.
    */
+  // eslint-disable-next-line no-unused-vars
   refresh(params, isInit) {
     let value = params.valueFormatted ? params.valueFormatted : params.value
 
@@ -80,10 +81,10 @@ class BooleanRenderer extends Component {
     } else {
       value = String(value)
       const booleanTrueRenderValue = String(
-        this.getOption('booleanTrueRenderValue', params)
+        this.getOption('booleanTrueRenderValue', params, 'switch')
       )
       const booleanFalseRenderValue = String(
-        this.getOption('booleanFalseRenderValue', params)
+        this.getOption('booleanFalseRenderValue', params, 'switch')
       )
       const booleanTrueValue = []
         .concat(this.getOption('booleanTrueValue', params, [true]))
@@ -100,9 +101,8 @@ class BooleanRenderer extends Component {
         ) {
           const switcher = this._getSwitcher(params)
           switcher.setChecked(true)
-          if (isInit) {
-            this._gui.appendChild(switcher.getGui())
-          }
+          this._gui.innerHTML = ''
+          this._gui.appendChild(switcher.getGui())
         } else {
           this._gui.innerHTML = booleanTrueRenderValue
         }
@@ -115,9 +115,8 @@ class BooleanRenderer extends Component {
         ) {
           const switcher = this._getSwitcher(params)
           switcher.setChecked(false)
-          if (isInit) {
-            this._gui.appendChild(switcher.getGui())
-          }
+          this._gui.innerHTML = ''
+          this._gui.appendChild(switcher.getGui())
         } else {
           this._gui.innerHTML = booleanFalseRenderValue
         }

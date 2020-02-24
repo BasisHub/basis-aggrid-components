@@ -26,15 +26,35 @@ describe('#BooleanRenderer ', function() {
         booleanFalseRenderValue: 'NO',
       },
     },
+    {
+      field: 'booleansSwitchMixedParams',
+      cellRenderer: 'BooleansRenderer',
+      cellRendererParams: {
+        booleanTrueRenderValue: 'switch',
+        booleanFalseRenderValue: 'no',
+      },
+    },
+    {
+      field: 'booleansSwitchMixedParams2',
+      cellRenderer: 'BooleansRenderer',
+      cellRendererParams: {
+        booleanTrueRenderValue: 'yes',
+        booleanFalseRenderValue: 'switch',
+      },
+    },
   ]
   const rowData = [
     {
       booleansSwitch: true,
       booleansHTML: true,
+      booleansSwitchMixedParams: true,
+      booleansSwitchMixedParams2: true,
     },
     {
       booleansSwitch: false,
       booleansHTML: false,
+      booleansSwitchMixedParams: false,
+      booleansSwitchMixedParams2: false,
     },
   ]
 
@@ -59,10 +79,10 @@ describe('#BooleanRenderer ', function() {
 
   it('Gird is initialized successfully', () => {
     expect(gridOptions.api.getDisplayedRowCount()).to.equal(2)
-    expect(gridOptions.columnApi.getAllColumns()).to.have.lengthOf(2)
+    expect(gridOptions.columnApi.getAllColumns()).to.have.lengthOf(4)
   })
 
-  describe('Cell rendering result', () => {
+  describe('Cell rendering', () => {
     rowData.forEach((row, index) => {
       for (const field in row) {
         const column = columnDefs.filter(x => x.field === field)[0]
@@ -71,16 +91,15 @@ describe('#BooleanRenderer ', function() {
             ? column.cellRendererParams.booleanTrueRenderValue
             : column.cellRendererParams.booleanFalseRenderValue
 
-        it(`of row[${index}][${field}] is "${cellContent}"`, done => {
+        it(`Of row[${index}][${field}] = ${row[field]} rendered as "${cellContent}"`, done => {
           setTimeout(() => {
             const cellInDOM = document.querySelector(
               `[row-id="${index}"] [col-id="${field}"]`
             )
 
             if (cellContent == 'switch') {
-              expect(cellInDOM.querySelector('.boolSwitch')).to.be.instanceOf(
-                HTMLElement
-              )
+              const input = cellInDOM.querySelector('input[type="checkbox"]')
+              expect(input.checked).to.equal(row[field])
             } else {
               expect(cellInDOM.innerText).to.equal(cellContent)
             }
