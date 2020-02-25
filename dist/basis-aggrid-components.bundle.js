@@ -3928,6 +3928,7 @@ function (_Component) {
         this._input.dataset.mask = mask;
         this._numberInput = new Basis.InputMasking.NumberInput({
           elements: [this._input],
+          doc: this.getDoc(params),
           onUpdate: function onUpdate(_masked, unmasked) {
             _this._currentValue = unmasked;
 
@@ -4312,6 +4313,7 @@ function (_Component) {
         this._input.dataset.mask = mask;
         this._textInput = new Basis.InputMasking.TextInput({
           elements: [this._input],
+          doc: this.getDoc(params),
           onUpdate: function onUpdate(_masked, unmasked) {
             _this._currentValue = unmasked;
 

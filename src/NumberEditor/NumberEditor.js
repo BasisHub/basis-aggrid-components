@@ -120,6 +120,7 @@ class NumberEditor extends Component {
       this._input.dataset.mask = mask
       this._numberInput = new Basis.InputMasking.NumberInput({
         elements: [this._input],
+        doc: this.getDoc(params),
         onUpdate: (_masked, unmasked) => {
           this._currentValue = unmasked
           this.focusIn()

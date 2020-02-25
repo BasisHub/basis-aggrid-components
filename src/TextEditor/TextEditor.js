@@ -96,6 +96,7 @@ class TextEditor extends Component {
       this._input.dataset.mask = mask
       this._textInput = new Basis.InputMasking.TextInput({
         elements: [this._input],
+        doc: this.getDoc(params),
         onUpdate: (_masked, unmasked) => {
           this._currentValue = unmasked
           this.focusIn()
