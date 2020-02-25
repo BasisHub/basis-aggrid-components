@@ -385,7 +385,7 @@ const gridOptions = {
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
-| dateTimeEnabledTime | false | Enable / disable time |
+| dateTimeEnableTime | false | Enable / disable time |
 | dateTimeEnable24HR | false | Enable / disable time 24 format |
 | dateTimeEnableSeconds | false | Enable / disable seconds management |
 | dateTimeEnableCalendar | false | Enable / disable Calendar. |
@@ -427,7 +427,7 @@ const gridOptions = {
       field: 'dates',
       filter: 'DateTimeFilter',
       filterParams: {
-        dateTimeEnabledTime: false,
+        dateTimeEnableTime: false,
       },
     },
     {
@@ -449,7 +449,7 @@ const gridOptions = {
 
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
-| dateTimeEnabledTime | false | Enable / disable time |
+| dateTimeEnableTime | false | Enable / disable time |
 | dateTimeEnable24HR | false | Enable / disable time 24 format |
 | dateTimeEnableSeconds | false | Enable / disable seconds management |
 | dateTimeEnableCalendar | false | Enable / disable Calendar. |
@@ -482,7 +482,7 @@ const gridOptions = {
       field: 'dates',
       cellEditor: 'DateTimeEditor',
       cellEditorParams: {
-        dateTimeEnabledTime: false,
+        dateTimeEnableTime: false,
       },
     },
     {
