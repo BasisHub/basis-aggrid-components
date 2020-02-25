@@ -431,9 +431,9 @@ class JoinConditionPanel extends Component {
  *
  * | Name                  	| Default     	| Description                                                                                                                    	|
  * |-------------------------	|:-------------:|--------------------------------------------------------------------------------------------------------------------------------|
- * | **dateTimeEnabledTime**   | false    | enable / disable time
- * | **dateTimeEnabled24HR**   | false    | enable / disable time 24 format
- * | **dateTimeEnabledSeconds**   | false    | enable / disable seconds management
+ * | **dateTimeEnableTime**   | false    | enable / disable time
+ * | **dateTimeEnable24HR**   | false    | enable / disable time 24 format
+ * | **dateTimeEnableSeconds**   | false    | enable / disable seconds management
  * | **dateTimeEnableCalendar**   | false    | enable / disable Calendar.
  * | **dateTimeMask**   | false    | The mask used to format the selected date
  * | **dateTimeMax**   | undefined    |  Max allowed date
@@ -535,7 +535,7 @@ class DateTimeFilter extends Component {
     this._params = params
 
     this._doesFilterPassOptions = {
-      enableTime: this.getOption('dateTimeEnabledTime', this._params, true),
+      enableTime: this.getOption('dateTimeEnableTime', this._params, true),
       inRangeInclusive: this.getOption('inRangeInclusive', this._params, false),
       // eslint-disable-next-line no-prototype-builtins
       valueGetter: this._params.hasOwnProperty('filterValueGetter')

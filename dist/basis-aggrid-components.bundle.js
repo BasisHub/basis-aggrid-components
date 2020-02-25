@@ -7098,9 +7098,9 @@ function (_Component2) {
  *
  * | Name                  	| Default     	| Description                                                                                                                    	|
  * |-------------------------	|:-------------:|--------------------------------------------------------------------------------------------------------------------------------|
- * | **dateTimeEnabledTime**   | false    | enable / disable time
- * | **dateTimeEnabled24HR**   | false    | enable / disable time 24 format
- * | **dateTimeEnabledSeconds**   | false    | enable / disable seconds management
+ * | **dateTimeEnableTime**   | false    | enable / disable time
+ * | **dateTimeEnable24HR**   | false    | enable / disable time 24 format
+ * | **dateTimeEnableSeconds**   | false    | enable / disable seconds management
  * | **dateTimeEnableCalendar**   | false    | enable / disable Calendar.
  * | **dateTimeMask**   | false    | The mask used to format the selected date
  * | **dateTimeMax**   | undefined    |  Max allowed date
@@ -7186,7 +7186,7 @@ function (_Component3) {
       this._state = this._JoinConditionPanel.state;
       this._params = params;
       this._doesFilterPassOptions = {
-        enableTime: this.getOption('dateTimeEnabledTime', this._params, true),
+        enableTime: this.getOption('dateTimeEnableTime', this._params, true),
         inRangeInclusive: this.getOption('inRangeInclusive', this._params, false),
         // eslint-disable-next-line no-prototype-builtins
         valueGetter: this._params.hasOwnProperty('filterValueGetter') ? this._params.filterValueGetter : this._params.valueGetter
@@ -8419,9 +8419,9 @@ function (_Component) {
     key: "init",
     value: function init(params) {
       this._params = params;
-      var enableTime = this.getOption('dateTimeEnabledTime', params, true);
-      var time_24hr = this.getOption('dateTimeEnabled24HR', params, true);
-      var enableSeconds = this.getOption('dateTimeEnabledSeconds', params, false);
+      var enableTime = this.getOption('dateTimeEnableTime', params, true);
+      var time_24hr = this.getOption('dateTimeEnable24HR', params, true);
+      var enableSeconds = this.getOption('dateTimeEnableSeconds', params, false);
       var noCalendar = !this.getOption('dateTimeEnableCalendar', params, true);
       var dateFormat = this.getOption('dateTimeMask', params); // try to generate a default date format based on the options
 
@@ -8782,9 +8782,9 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
  *
  * | Name                  	| Default     	| Description                                                                                                                    	|
  * |-------------------------	|:-------------:|--------------------------------------------------------------------------------------------------------------------------------|
- * | **dateTimeEnabledTime**   | false    | enable / disable time
- * | **dateTimeEnabled24HR**   | false    | enable / disable time 24 format
- * | **dateTimeEnabledSeconds**   | false    | enable / disable seconds management
+ * | **dateTimeEnableTime**   | false    | enable / disable time
+ * | **dateTimeEnable24HR**   | false    | enable / disable time 24 format
+ * | **dateTimeEnableSeconds**   | false    | enable / disable seconds management
  * | **dateTimeEnableCalendar**   | false    | enable / disable Calendar.
  * | **dateTimeMask**   | false    | The mask used to format the selected date
  * | **dateTimeMax**   | undefined    |  Max allowed date

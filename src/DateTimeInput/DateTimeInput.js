@@ -75,13 +75,9 @@ class DateTimeInput extends Component {
   // eslint-disable-next-line no-unused-vars
   init(params) {
     this._params = params
-    const enableTime = this.getOption('dateTimeEnabledTime', params, true)
-    const time_24hr = this.getOption('dateTimeEnabled24HR', params, true)
-    const enableSeconds = this.getOption(
-      'dateTimeEnabledSeconds',
-      params,
-      false
-    )
+    const enableTime = this.getOption('dateTimeEnableTime', params, true)
+    const time_24hr = this.getOption('dateTimeEnable24HR', params, true)
+    const enableSeconds = this.getOption('dateTimeEnableSeconds', params, false)
     const noCalendar = !this.getOption('dateTimeEnableCalendar', params, true)
 
     let dateFormat = this.getOption('dateTimeMask', params)

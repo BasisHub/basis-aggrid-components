@@ -386,8 +386,8 @@ const gridOptions = {
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
 | dateTimeEnabledTime | false | Enable / disable time |
-| dateTimeEnabled24HR | false | Enable / disable time 24 format |
-| dateTimeEnabledSeconds | false | Enable / disable seconds management |
+| dateTimeEnable24HR | false | Enable / disable time 24 format |
+| dateTimeEnableSeconds | false | Enable / disable seconds management |
 | dateTimeEnableCalendar | false | Enable / disable Calendar. |
 | dateTimeMask | false | The mask used to format the selected date \([BBj Mask](https://github.com/BasisHub/bbj-masks#date-masks)\) |
 | dateTimeMax | undefined | Max allowed date |
@@ -435,7 +435,7 @@ const gridOptions = {
       filter: 'DateTimeFilter',
       filterParams: {
         dateTimeEnableCalendar: false,
-        dateTimeEnabled24HR: true,
+        dateTimeEnable24HR: true,
       },
     },
   ],
@@ -450,8 +450,8 @@ const gridOptions = {
 | **Option** | Description | Default |
 | :--- | :--- | :--- |
 | dateTimeEnabledTime | false | Enable / disable time |
-| dateTimeEnabled24HR | false | Enable / disable time 24 format |
-| dateTimeEnabledSeconds | false | Enable / disable seconds management |
+| dateTimeEnable24HR | false | Enable / disable time 24 format |
+| dateTimeEnableSeconds | false | Enable / disable seconds management |
 | dateTimeEnableCalendar | false | Enable / disable Calendar. |
 | dateTimeMask | false | The mask used to format the selected date \([BBj Mask](https://github.com/BasisHub/bbj-masks#date-masks)\) |
 | dateTimeMax | undefined | Max allowed date |
@@ -490,7 +490,7 @@ const gridOptions = {
       cellEditor: 'DateTimeEditor',
       cellEditorParams: {
         dateTimeEnableCalendar: false,
-        dateTimeEnabled24HR: true,
+        dateTimeEnable24HR: true,
       },
     },
   ],
