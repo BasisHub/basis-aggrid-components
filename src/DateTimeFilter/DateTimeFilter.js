@@ -448,6 +448,9 @@ class JoinConditionPanel extends Component {
  * | **defaultOption**   | Equals    |  The default Filter Options to be selected.
  * | **suppressAndOrCondition**   | false    |  If true, the filter will only offer Condition 1.
  * | **inRangeInclusive**   | false    |  If true then doing 'inRange' filter option will include values equal to the start and end of the range.
+ * | **clearButton**   | false    |  Set to true to have the filter use a Clear button. The Clear button will clear the (form) details of the filter without removing any active filters on the column.
+ * | **applyButton**   | false    |  Set to true to have the filter use an Apply button. If the Apply button is present, then the filter is only applied after the user hits the Apply button.
+ * | **resetButton**   | false    |  Set to true to have the filter use a Reset button. The Reset button will clear the details of the filter and any active filters on that column.
  *
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
