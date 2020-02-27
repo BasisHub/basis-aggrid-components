@@ -18,6 +18,12 @@ const toTitleCase = phrase => {
     .join(' ')
 }
 
+const stripHTML = html => {
+  const tmp = document.createElement('DIV')
+  tmp.innerHTML = html
+  return tmp.textContent || tmp.innerText || ''
+}
+
 /**
  * Booleans Filter
  *
@@ -265,9 +271,11 @@ class BooleanFilter extends Component {
       return ''
     }
 
-    return model.value === 'true'
-      ? this._booleanFilterTranslation.true
-      : this._booleanFilterTranslation.false
+    return stripHTML(
+      model.value === 'true'
+        ? this._booleanFilterTranslation.true
+        : this._booleanFilterTranslation.false
+    )
   }
 
   /**

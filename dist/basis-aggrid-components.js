@@ -3439,6 +3439,12 @@ var toTitleCase = function toTitleCase(phrase) {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }).join(' ');
 };
+
+var stripHTML = function stripHTML(html) {
+  var tmp = document.createElement('DIV');
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || '';
+};
 /**
  * Booleans Filter
  *
@@ -3452,6 +3458,9 @@ var toTitleCase = function toTitleCase(phrase) {
  * | **booleanUsedFalseValue**   | undefined    | the value to use when the filter displays the false state. in case it is undefined then we use the first item in **booleanFalseValue[]**
  * | **booleanTrueValue[]**       | true(bool)  	| The options describes what is considered `true`                                                                                	|
  * | **booleanFalseValue[]**      | false(bool) 	| The options describes what is considered `false`
+ * | **clearButton**   | false    |  Set to true to have the filter use a Clear button. The Clear button will clear the (form) details of the filter without removing any active filters on the column.
+ * | **applyButton**   | false    |  Set to true to have the filter use an Apply button. If the Apply button is present, then the filter is only applied after the user hits the Apply button.
+ * | **resetButton**   | false    |  Set to true to have the filter use a Reset button. The Reset button will clear the details of the filter and any active filters on that column.
  *
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
@@ -3633,7 +3642,7 @@ function (_Component) {
         return '';
       }
 
-      return model.value === 'true' ? this._booleanFilterTranslation["true"] : this._booleanFilterTranslation["false"];
+      return stripHTML(model.value === 'true' ? this._booleanFilterTranslation["true"] : this._booleanFilterTranslation["false"]);
     }
     /**
      * Reset the filter state
@@ -7115,6 +7124,9 @@ function (_Component2) {
  * | **defaultOption**   | Equals    |  The default Filter Options to be selected.
  * | **suppressAndOrCondition**   | false    |  If true, the filter will only offer Condition 1.
  * | **inRangeInclusive**   | false    |  If true then doing 'inRange' filter option will include values equal to the start and end of the range.
+ * | **clearButton**   | false    |  Set to true to have the filter use a Clear button. The Clear button will clear the (form) details of the filter without removing any active filters on the column.
+ * | **applyButton**   | false    |  Set to true to have the filter use an Apply button. If the Apply button is present, then the filter is only applied after the user hits the Apply button.
+ * | **resetButton**   | false    |  Set to true to have the filter use a Reset button. The Reset button will clear the details of the filter and any active filters on that column.
  *
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
