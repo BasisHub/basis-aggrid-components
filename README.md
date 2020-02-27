@@ -409,9 +409,6 @@ const gridOptions = {
 | clearButton | false | Set to true to have the filter use a Clear button. The Clear button will clear the \(form\) details of the filter without removing any active filters on the column. |
 | resetButton | false |  Set to `true` to have the filter use a Reset button. The Reset button will clear the details of the filter and any active filters on that column. |
 | applyButton | false |  Set to `true` to have the filter use an Apply button. If the Apply button is present, then the filter is only applied after the user hits the Apply button. |
-| clearButton   | false    |  Set to true to have the filter use a Clear button. The Clear button will clear the (form) details of the filter without removing any active filters on the column.
-| applyButton   | false    |  Set to true to have the filter use an Apply button. If the Apply button is present, then the filter is only applied after the user hits the Apply button.
-| resetButton   | false    |  Set to true to have the filter use a Reset button. The Reset button will clear the details of the filter and any active filters on that column.
 
 ```javascript
 const gridOptions = {
