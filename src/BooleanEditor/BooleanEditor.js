@@ -80,30 +80,28 @@ class BooleanEditor extends Component {
       this._falseValue
     )
 
-    this.switcher = new BooleanSwitch(this._value, switcher => {
+    this._switcher = new BooleanSwitch(this._value, switcher => {
       this._value = this._convertValue(
         switcher.isChecked(),
         this._trueValue,
         this._falseValue
       )
     })
-    this.switcher.init(params)
-
-    this.focusIn()
+    this._switcher.init(params)
   }
 
   /**
    *  @inheritDoc
    */
   getGui() {
-    return this.switcher.getGui()
+    return this._switcher.getGui()
   }
 
   /**
    *  @inheritDoc
    */
   destroy() {
-    this.switcher.destroy()
+    this._switcher.destroy()
   }
 
   /**
@@ -136,16 +134,23 @@ class BooleanEditor extends Component {
 
   /**
    * If doing full row edit, then gets called when tabbing into the cell.
+   *
+   * @return {Boolean}
    */
   focusIn() {
-    this.switcher.focus()
+    this._switcher.setDisabled(false)
+    this._switcher.focus()
+    return true
   }
 
   /**
    * If doing full row edit, then gets called when tabbing out of the cell.
+   *
+   * @return {Boolean}
    */
   focusOut() {
-    this.switcher.setDisabled(true)
+    this._switcher.setDisabled(true)
+    return true
   }
 
   /**

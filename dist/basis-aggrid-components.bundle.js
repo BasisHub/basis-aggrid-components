@@ -2390,11 +2390,11 @@ function (_Component) {
       }
 
       this._value = this._convertValue(this._value, this._trueValue, this._falseValue);
-      this.switcher = new __WEBPACK_IMPORTED_MODULE_1__BooleanSwitch__["a" /* default */](this._value, function (switcher) {
+      this._switcher = new __WEBPACK_IMPORTED_MODULE_1__BooleanSwitch__["a" /* default */](this._value, function (switcher) {
         _this._value = _this._convertValue(switcher.isChecked(), _this._trueValue, _this._falseValue);
       });
-      this.switcher.init(params);
-      this.focusIn();
+
+      this._switcher.init(params);
     }
     /**
      *  @inheritDoc
@@ -2403,7 +2403,7 @@ function (_Component) {
   }, {
     key: "getGui",
     value: function getGui() {
-      return this.switcher.getGui();
+      return this._switcher.getGui();
     }
     /**
      *  @inheritDoc
@@ -2412,7 +2412,7 @@ function (_Component) {
   }, {
     key: "destroy",
     value: function destroy() {
-      this.switcher.destroy();
+      this._switcher.destroy();
     }
     /**
      * Gets called once after GUI is attached to DOM.
@@ -2450,21 +2450,31 @@ function (_Component) {
     }
     /**
      * If doing full row edit, then gets called when tabbing into the cell.
+     *
+     * @return {Boolean}
      */
 
   }, {
     key: "focusIn",
     value: function focusIn() {
-      this.switcher.focus();
+      this._switcher.setDisabled(false);
+
+      this._switcher.focus();
+
+      return true;
     }
     /**
      * If doing full row edit, then gets called when tabbing out of the cell.
+     *
+     * @return {Boolean}
      */
 
   }, {
     key: "focusOut",
     value: function focusOut() {
-      this.switcher.setDisabled(true);
+      this._switcher.setDisabled(true);
+
+      return true;
     }
     /**
      * @param {Boolean} value the current cell value
@@ -2810,6 +2820,8 @@ function (_Component) {
     key: "focus",
     value: function focus() {
       this._gui.focus();
+
+      this._input.focus();
     }
     /**
      * Set a listener to be called when the switch state is changed

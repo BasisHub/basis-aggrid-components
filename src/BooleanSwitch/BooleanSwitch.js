@@ -100,6 +100,7 @@ class BooleanSwitch extends Component {
    */
   focus() {
     this._gui.focus()
+    this._input.focus()
   }
 
   /**
