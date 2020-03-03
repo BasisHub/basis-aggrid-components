@@ -8515,6 +8515,8 @@ function (_Component) {
     key: "open",
     value: function open() {
       this.picker.open();
+
+      this._gui.querySelector('input').focus();
     }
     /**
      * Close picker

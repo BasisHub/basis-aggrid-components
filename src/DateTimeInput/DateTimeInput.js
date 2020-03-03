@@ -145,6 +145,7 @@ class DateTimeInput extends Component {
    */
   open() {
     this.picker.open()
+    this._gui.querySelector('input').focus()
   }
 
   /**
