@@ -7304,6 +7304,14 @@ function (_Component3) {
   }, {
     key: "setModel",
     value: function setModel(model) {
+      if (model && // eslint-disable-next-line no-prototype-builtins
+      !model.hasOwnProperty('condition1') && // eslint-disable-next-line no-prototype-builtins
+      !model.hasOwnProperty('condition2')) {
+        model = {
+          condition1: model
+        };
+      }
+
       this.__disableStateChangeListener = true;
 
       this._JoinConditionPanel.setState(model);

@@ -621,6 +621,17 @@ class DateTimeFilter extends Component {
    * @param {Object | null} model
    */
   setModel(model) {
+    if (
+      model &&
+      // eslint-disable-next-line no-prototype-builtins
+      !model.hasOwnProperty('condition1') &&
+      // eslint-disable-next-line no-prototype-builtins
+      !model.hasOwnProperty('condition2')
+    ) {
+      model = {
+        condition1: model,
+      }
+    }
     this.__disableStateChangeListener = true
     this._JoinConditionPanel.setState(model)
     this.__disableStateChangeListener = false
