@@ -7368,7 +7368,7 @@ function (_Component3) {
   }, {
     key: "_doesPassCondition",
     value: function _doesPassCondition(condition, value) {
-      if (!condition.filter) {
+      if (!condition.filter || !value) {
         return false;
       }
 

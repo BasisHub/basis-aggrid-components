@@ -701,7 +701,7 @@ class DateTimeFilter extends Component {
    * @return {Boolean} true when pass, false otherwise
    */
   _doesPassCondition(condition, value) {
-    if (!condition.filter) {
+    if (!condition.filter || !value) {
       return false
     }
 
