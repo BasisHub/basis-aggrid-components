@@ -236,7 +236,7 @@ class BooleanFilter extends Component {
       return null
     }
 
-    const model = { value: this._filterText }
+    const model = { value: this._filterText, filterType: 'boolean' }
     return model
   }
 

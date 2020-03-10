@@ -49,6 +49,56 @@ describe('#DateTimeFilter', function() {
     expect(gridOptions.columnApi.getAllColumns()).to.have.lengthOf(1)
   })
 
+  describe('#getModel', () => {
+    afterEach(() => {
+      gridOptions.api.deselectAll()
+      gridOptions.api.setFilterModel(null)
+      gridOptions.api.onFilterChanged()
+    })
+
+    it('supports single condition', () => {
+      const instance = gridOptions.api.getFilterInstance('timestamps')
+      const model = {
+        type: 'equals',
+        filter: '2020-01-01T12:00:00.000Z',
+        filterTo: null,
+      }
+
+      instance.setModel({
+        condition1: model,
+      })
+
+      gridOptions.api.onFilterChanged()
+      expect(JSON.stringify(instance.getModel())).to.equal(
+        JSON.stringify({ ...model, ...{ filterType: 'datetime' } })
+      )
+    })
+
+    it('supports two condition (combined model)', () => {
+      const instance = gridOptions.api.getFilterInstance('timestamps')
+      const model = {
+        condition1: {
+          type: 'equals',
+          filter: '2020-01-01T12:00:00.000Z',
+          filterTo: null,
+        },
+        condition2: {
+          type: 'equals',
+          filter: '2020-01-01T12:00:00.000Z',
+          filterTo: null,
+        },
+        operator: 'OR',
+      }
+
+      instance.setModel(model)
+
+      gridOptions.api.onFilterChanged()
+      expect(JSON.stringify(instance.getModel())).to.equal(
+        JSON.stringify({ ...model, ...{ filterType: 'datetime' } })
+      )
+    })
+  })
+
   __datetime_filter_models__.forEach(model => {
     describe(`#setModel for ${model.for}`, () => {
       beforeEach(() => {

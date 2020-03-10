@@ -3613,7 +3613,8 @@ function (_Component) {
       }
 
       var model = {
-        value: this._filterText
+        value: this._filterText,
+        filterType: 'boolean'
       };
       return model;
     }
@@ -6673,6 +6674,10 @@ function (_TemplateRenderer) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Component__ = __webpack_require__(0);
 var _class, _class2, _init, _descriptor, _class3, _temp, _class4, _class5, _init2, _descriptor2, _class6, _temp2, _class7, _temp3;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -7291,8 +7296,14 @@ function (_Component3) {
         if (condition.filterTo) {
           condition.filterTo = _this7._state["condition".concat(i + 1)].filterTo.toISOString();
         }
+      }); // eslint-disable-next-line no-prototype-builtins
+
+      return clone.hasOwnProperty('condition2') && // eslint-disable-next-line no-prototype-builtins
+      clone.condition2.hasOwnProperty('filter') && clone.condition2.filter ? _objectSpread({}, clone, {}, {
+        filterType: 'datetime'
+      }) : _objectSpread({}, clone.condition1, {}, {
+        filterType: 'datetime'
       });
-      return clone;
     }
     /**
      * Restores the filter state. Called by the grid after gridApi.setFilterModel(model) is called.

@@ -611,7 +611,13 @@ class DateTimeFilter extends Component {
       }
     })
 
-    return clone
+    // eslint-disable-next-line no-prototype-builtins
+    return clone.hasOwnProperty('condition2') &&
+      // eslint-disable-next-line no-prototype-builtins
+      clone.condition2.hasOwnProperty('filter') &&
+      clone.condition2.filter
+      ? { ...clone, ...{ filterType: 'datetime' } }
+      : { ...clone.condition1, ...{ filterType: 'datetime' } }
   }
 
   /**
