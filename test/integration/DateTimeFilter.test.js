@@ -81,11 +81,13 @@ describe('#DateTimeFilter', function() {
           type: 'equals',
           filter: '2020-01-01T12:00:00.000Z',
           filterTo: null,
+          filterType: 'datetime',
         },
         condition2: {
           type: 'equals',
           filter: '2020-01-01T12:00:00.000Z',
           filterTo: null,
+          filterType: 'datetime',
         },
         operator: 'OR',
       }
