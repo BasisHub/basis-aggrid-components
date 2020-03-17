@@ -118,19 +118,15 @@ describe('#NumberEditor ', function() {
         'numberWithMask',
         api.getDisplayedRowAtIndex(0)
       )
+
       api.startEditingCell({
         rowIndex: 0,
         colKey: 'numberWithMask',
+        charPress: '3000',
       })
-
-      const editor = api.getCellEditorInstances()[0]
-      const input = editor.getGui().querySelector('input:not([type="hidden"])')
-      input.value = 500000
-
-      expect(editor._validateInput(input), 'input is invalid').to.be.false
       api.stopEditing()
 
-      const newValue = api.getValue(
+      let newValue = api.getValue(
         'numberWithMask',
         api.getDisplayedRowAtIndex(0)
       )

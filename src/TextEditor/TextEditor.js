@@ -92,21 +92,17 @@ class TextEditor extends Component {
       this._input.title = mask
     }
 
+    // If there is a mask then we use the `Basis.InputMasking.TextInput`
     if (mask) {
       this._input.dataset.mask = mask
       this._textInput = new Basis.InputMasking.TextInput({
         elements: [this._input],
         doc: this.getDoc(params),
-        onUpdate: (_masked, unmasked) => {
-          this._currentValue = unmasked
-          this.focusIn()
-        },
-        onInvalid: (error, input) => {
-          if (typeof error === 'string') {
-            input.setCustomValidity(error)
-          }
-        },
+        onUpdate: this._onTextInputUpdate,
+        onInvalid: this._onTextInputInvalid,
       })
+
+      this._gui.addEventListener('keydown', this._onComponentKeyDown)
     } else {
       this._input.addEventListener('keydown', this._onChange)
       this._input.addEventListener('input', this._onChange)
@@ -129,6 +125,7 @@ class TextEditor extends Component {
       this._input.removeEventListener('change', this._onChange)
     } else {
       this._textInput.destroy()
+      this._gui.removeEventListener('keydown', this._onComponentKeyDown)
     }
   }
 
@@ -157,7 +154,7 @@ class TextEditor extends Component {
    * @return {Number}
    */
   getValue() {
-    return this._currentValue
+    return this._params.parseValue(this._currentValue)
   }
 
   /**
@@ -177,15 +174,80 @@ class TextEditor extends Component {
   }
 
   /**
+   * Update the current value when the TextInput component fires the update
+   * event.
+   *
+   * @param {String} _masked  the masked value
+   * @param {String} unmasked  the unmasked value
+   */
+  @autobind
+  _onTextInputUpdate(_masked, unmasked, input) {
+    console.log('valid', _masked, unmasked)
+    this._currentValue = unmasked
+    input.setCustomValidity('')
+    this.focusIn()
+    // we pass the last captured event back to the grid to handle it internally
+    if (this.__lastComponentKeyboardPress__) {
+      this._params.onKeyDown(this.__lastComponentKeyboardPress__)
+      this.__lastComponentKeyboardPress__ = null
+    }
+  }
+  /**
+   * On invalid inputs , update the input with a custom validity message
+   *
+   * @param {String|Object} error the error message reported by TextInput
+   * @param {HTMLElement} input The input element used instance
+   */
+  @autobind
+  _onTextInputInvalid(error, input) {
+    console.log('invalid', error)
+    this.focusIn()
+    // restore the original value of the cell
+    this._currentValue = this._params.value
+    if (typeof error === 'string') {
+      input.setCustomValidity(error)
+    }
+  }
+
+  /**
+   * Capture all keyboard events to allow value processing by the NumberInput component
+   *
+   * @param {KeyboardEvent} e
+   */
+  @autobind
+  _onComponentKeyDown(e) {
+    const key = event.which || event.keyCode
+
+    const isNavigationKey =
+      key === 37 || // left
+      key === 38 || // up
+      key === 39 || // right
+      key === 40 || // down
+      key === 33 || // page up
+      key === 34 || // page down
+      key === 35 || // page home
+      key === 36 || // page end
+      key === 13 // enter
+
+    if (isNavigationKey) {
+      event.stopPropagation()
+      // save the last capture key so NumberInput can pass it again to the grid.
+      this.__lastComponentKeyboardPress__ = e
+    }
+  }
+
+  /**
    * Update `currentValue` on the input value is changed and it is valid
    */
   @autobind
   _onChange(event) {
     const isValid = this._validateInput(event.target)
-    this._currentValue = this._params.value
-    if (isValid) {
-      this._currentValue = this._input.value
+
+    if (!isValid) {
+      return
     }
+
+    this._currentValue = this._input.value
   }
 
   /**
@@ -201,6 +263,8 @@ class TextEditor extends Component {
     if (!isValid) {
       input.classList.add('bbj-mask-error')
       input.classList.remove('bbj-mask-success')
+      // restore the original value
+      this._currentValue = this._params.value
     } else {
       input.classList.remove('bbj-mask-error')
       input.classList.add('bbj-mask-success')

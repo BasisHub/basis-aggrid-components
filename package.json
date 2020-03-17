@@ -57,8 +57,7 @@
   "dependencies": {
     "ag-grid-community": "^22.1.1",
     "ag-grid-enterprise": "^22.1.1",
-    "flatpickr": "^4.3.2",
-    "basis-input-masking": "https://github.com/BasisHub/basis-input-masking"
+    "flatpickr": "^4.3.2"
   },
   "husky": {
     "hooks": {

@@ -61,20 +61,26 @@ class NumberEditor extends Component {
       startValue = params.value
     }
 
+    // make params it accessible from tall methods
+    this._params = params
+
+    // create the input wrapper
     this._gui = document.createElement('label')
     this._gui.className = 'numberEditor ag-input-wrapper'
     this._gui.tabIndex = '0'
 
-    // input
+    // create the input
+    this._inputGeneratedId = Math.random()
+      .toString(16)
+      .slice(2, 10) // generate random id
     this._input = document.createElement('input')
     this._input.className = 'numberEditor__input ag-cell-edit-input'
-    this._input.id = `el-${Math.random()
-      .toString(16)
-      .slice(2, 10)}` // generate random id
+    this._input.id = `el-${this._inputGeneratedId}`
     this._input.type = mask ? 'text' : 'number'
     this._input.value = startValue
     this._input.tabIndex = 0
 
+    // place the input inside the wrapper
     this._gui.appendChild(this._input)
 
     if (min !== null) {
@@ -89,6 +95,7 @@ class NumberEditor extends Component {
       mask ? (this._input.dataset.step = step) : (this._input.step = step)
     }
 
+    // If there is a mask then we use the `Basis.InputMasking.NumberInput`
     if (mask) {
       const groupingSeparator = this.getOption(
         'numberGroupingSeparator',
@@ -120,23 +127,17 @@ class NumberEditor extends Component {
       this._input.dataset.mask = mask
       this._numberInput = new Basis.InputMasking.NumberInput({
         elements: [this._input],
-        doc: this.getDoc(params),
-        onUpdate: (_masked, unmasked) => {
-          this._currentValue = unmasked
-          this.focusIn()
-        },
-        onInvalid: (error, input) => {
-          this.focusIn()
-          if (typeof error === 'string') {
-            input.setCustomValidity(error)
-          }
-        },
+        // doc: this.getDoc(params),
+        onUpdate: this._onNumberInputUpdate,
+        onInvalid: this._onNumberInputInvalid,
       })
     } else {
-      this._input.addEventListener('keydown', this._onKeyDownUp)
-      this._input.addEventListener('keyup', this._onKeyDownUp)
+      this._input.addEventListener('keydown', this._onInputKeyDownUp)
+      this._input.addEventListener('keyup', this._onInputKeyDownUp)
       this._input.addEventListener('change', this._onChange)
     }
+
+    this._gui.addEventListener('keydown', this._onComponentKeyDown)
 
     // update `currentValue` the value which this component is managing
     this._currentValue = startValue
@@ -149,12 +150,14 @@ class NumberEditor extends Component {
   @override
   destroy() {
     if (!this.__isMasked__) {
-      this._input.removeEventListener('keydown', this._onKeyDownUp)
-      this._input.removeEventListener('keyup', this._onKeyDownUp)
+      this._input.removeEventListener('keydown', this._onInputKeyDownUp)
+      this._input.removeEventListener('keyup', this._onInputKeyDownUp)
       this._input.removeEventListener('change', this._onChange)
     } else {
       this._numberInput.destroy()
     }
+
+    this._gui.removeEventListener('keydown', this._onComponentKeyDown)
   }
 
   /**
@@ -183,14 +186,19 @@ class NumberEditor extends Component {
    */
   getValue() {
     const casted = Number(this._currentValue)
-    return isNaN(casted) ? this._currentValue : casted
+    const retValue = isNaN(casted) ? this._currentValue : casted
+    return this.__isMasked__ ? retValue : this._params.parseValue(retValue)
   }
 
   /**
    * If doing full row edit, then gets called when tabbing into the cell.
    */
   focusIn() {
-    this._input.focus()
+    if (!this.__isMasked__) {
+      this._input.focus()
+    } else {
+      this._input.click()
+    }
   }
 
   /**
@@ -214,12 +222,77 @@ class NumberEditor extends Component {
   }
 
   /**
+   * Update the current value when the NumberInput components fire the update
+   * event.
+   *
+   * @param {String} _masked  the masked value
+   * @param {Number} unmasked  the unmasked value
+   */
+  @autobind
+  _onNumberInputUpdate(_masked, unmasked) {
+    console.log('update', { _masked, unmasked })
+    this._currentValue = unmasked
+    this.focusIn()
+    // we pass the last captured event back to the grid to handle it internally
+    if (this.__lastComponentKeyboardPress__) {
+      this._params.onKeyDown(this.__lastComponentKeyboardPress__)
+      this.__lastComponentKeyboardPress__ = null
+    }
+  }
+  /**
+   * On invalid inputs , update the input with a custom validity message
+   *
+   * @param {String|Object} error the error message reported by NumberInput
+   * @param {HTMLElement} input The input element used instance
+   */
+  @autobind
+  _onNumberInputInvalid(error, input) {
+    this.focusIn()
+    // console.log("invalid" , input)
+    // restore the original value of the cell
+    this._currentValue = this._params.value
+    console.log(input)
+    if (typeof error === 'string') {
+      input.setCustomValidity(error)
+    } else {
+      input.setCustomValidity(error.message)
+    }
+  }
+
+  /**
+   * Capture all keyboard events to allow value processing by the NumberInput component
+   *
+   * @param {KeyboardEvent} e
+   */
+  @autobind
+  _onComponentKeyDown(e) {
+    const key = event.which || event.keyCode
+
+    const isNavigationKey =
+      key === 37 || // left
+      key === 38 || // up
+      key === 39 || // right
+      key === 40 || // down
+      key === 33 || // page up
+      key === 34 || // page down
+      key === 35 || // page home
+      key === 36 || // page end
+      key === 13 // enter
+
+    if (isNavigationKey) {
+      event.stopPropagation()
+      // save the last capture key so NumberInput can pass it again to the grid.
+      this.__lastComponentKeyboardPress__ = e
+    }
+  }
+
+  /**
    * Listen to key changes and validate the input
    *
    * @param {Event} event
    */
   @autobind
-  _onKeyDownUp(event) {
+  _onInputKeyDownUp(event) {
     const isValid = this._validateInput(event.target)
 
     if (!isValid) {
@@ -236,6 +309,12 @@ class NumberEditor extends Component {
       // enter
       this._currentValue = this._input.value
     }
+
+    // we pass the last captured event back to the grid to handle it internally
+    if (this.__lastComponentKeyboardPress__) {
+      this._params.onKeyDown(this.__lastComponentKeyboardPress__)
+      this.__lastComponentKeyboardPress__ = null
+    }
   }
 
   /**
@@ -251,6 +330,8 @@ class NumberEditor extends Component {
     if (!isValid) {
       input.classList.add('bbj-mask-error')
       input.classList.remove('bbj-mask-success')
+      // restore the original value
+      this._currentValue = this._params.value
     } else {
       input.classList.remove('bbj-mask-error')
       input.classList.add('bbj-mask-success')

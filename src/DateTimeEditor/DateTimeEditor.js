@@ -128,7 +128,7 @@ class DateTimeEditor extends Component {
    * @return {Boolean}
    */
   getValue() {
-    return this._value
+    return this._params.parseValue(this._value)
   }
 
   /**
