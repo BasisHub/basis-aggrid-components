@@ -1223,9 +1223,9 @@ base@^0.11.1:
     mixin-deep "^1.2.0"
     pascalcase "^0.1.1"
 
-"basis-input-masking@https://github.com/BasisHub/basis-input-masking":
-  version "1.0.0"
-  resolved "https://github.com/BasisHub/basis-input-masking#db0c2439c676d106b9221b9432efcde2106cf6c0"
+basis-input-masking@BasisHub/basis-input-masking:
+  version "1.0.1"
+  resolved "https://codeload.github.com/BasisHub/basis-input-masking/tar.gz/89a68dfcf990aff68961842b6fb6aebcaf514e2e"
   dependencies:
     bbj-masks "https://github.com/BasisHub/bbj-masks#1.1.1"
 

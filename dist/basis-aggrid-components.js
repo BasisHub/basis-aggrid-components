@@ -3876,8 +3876,6 @@ function (_Component) {
      *  @inheritDoc
      */
     value: function init(params) {
-      var _this = this;
-
       var min = this.getOption('numberMinValue', params);
       var max = this.getOption('numberMaxValue', params);
       var step = this.getOption('numberStepValue', params);
@@ -3902,19 +3900,23 @@ function (_Component) {
         }
       } else {
         startValue = params.value;
-      }
+      } // make params it accessible from tall methods
+
+
+      this._params = params; // create the input wrapper
 
       this._gui = document.createElement('label');
       this._gui.className = 'numberEditor ag-input-wrapper';
-      this._gui.tabIndex = '0'; // input
+      this._gui.tabIndex = '0'; // create the input
+
+      this._inputGeneratedId = Math.random().toString(16).slice(2, 10); // generate random id
 
       this._input = document.createElement('input');
       this._input.className = 'numberEditor__input ag-cell-edit-input';
-      this._input.id = "el-".concat(Math.random().toString(16).slice(2, 10)); // generate random id
-
+      this._input.id = "el-".concat(this._inputGeneratedId);
       this._input.type = mask ? 'text' : 'number';
       this._input.value = startValue;
-      this._input.tabIndex = 0;
+      this._input.tabIndex = 0; // place the input inside the wrapper
 
       this._gui.appendChild(this._input);
 
@@ -3928,7 +3930,8 @@ function (_Component) {
 
       if (step !== null) {
         mask ? this._input.dataset.step = step : this._input.step = step;
-      }
+      } // If there is a mask then we use the `Basis.InputMasking.NumberInput`
+
 
       if (mask) {
         var groupingSeparator = this.getOption('numberGroupingSeparator', params, this.getOption('numberGroupSep', params));
@@ -3950,27 +3953,19 @@ function (_Component) {
         this._input.dataset.mask = mask;
         this._numberInput = new Basis.InputMasking.NumberInput({
           elements: [this._input],
-          doc: this.getDoc(params),
-          onUpdate: function onUpdate(_masked, unmasked) {
-            _this._currentValue = unmasked;
-
-            _this.focusIn();
-          },
-          onInvalid: function onInvalid(error, input) {
-            _this.focusIn();
-
-            if (typeof error === 'string') {
-              input.setCustomValidity(error);
-            }
-          }
+          // doc: this.getDoc(params),
+          onUpdate: this._onNumberInputUpdate,
+          onInvalid: this._onNumberInputInvalid
         });
       } else {
-        this._input.addEventListener('keydown', this._onKeyDownUp);
+        this._input.addEventListener('keydown', this._onInputKeyDownUp);
 
-        this._input.addEventListener('keyup', this._onKeyDownUp);
+        this._input.addEventListener('keyup', this._onInputKeyDownUp);
 
         this._input.addEventListener('change', this._onChange);
-      } // update `currentValue` the value which this component is managing
+      }
+
+      this._gui.addEventListener('keydown', this._onComponentKeyDown); // update `currentValue` the value which this component is managing
 
 
       this._currentValue = startValue;
@@ -3984,14 +3979,16 @@ function (_Component) {
     key: "destroy",
     value: function destroy() {
       if (!this.__isMasked__) {
-        this._input.removeEventListener('keydown', this._onKeyDownUp);
+        this._input.removeEventListener('keydown', this._onInputKeyDownUp);
 
-        this._input.removeEventListener('keyup', this._onKeyDownUp);
+        this._input.removeEventListener('keyup', this._onInputKeyDownUp);
 
         this._input.removeEventListener('change', this._onChange);
       } else {
         this._numberInput.destroy();
       }
+
+      this._gui.removeEventListener('keydown', this._onComponentKeyDown);
     }
     /**
      * Gets called once after GUI is attached to DOM.
@@ -4024,7 +4021,8 @@ function (_Component) {
     key: "getValue",
     value: function getValue() {
       var casted = Number(this._currentValue);
-      return isNaN(casted) ? this._currentValue : casted;
+      var retValue = isNaN(casted) ? this._currentValue : casted;
+      return this.__isMasked__ ? retValue : this._params.parseValue(retValue);
     }
     /**
      * If doing full row edit, then gets called when tabbing into the cell.
@@ -4033,7 +4031,11 @@ function (_Component) {
   }, {
     key: "focusIn",
     value: function focusIn() {
-      this._input.focus();
+      if (!this.__isMasked__) {
+        this._input.focus();
+      } else {
+        this._input.click();
+      }
     }
     /**
      * Gets called once after initialized and returns false so the editor appears in the cell
@@ -4060,14 +4062,86 @@ function (_Component) {
       }
     }
     /**
+     * Update the current value when the NumberInput components fire the update
+     * event.
+     *
+     * @param {String} _masked  the masked value
+     * @param {Number} unmasked  the unmasked value
+     */
+
+  }, {
+    key: "_onNumberInputUpdate",
+    value: function _onNumberInputUpdate(_masked, unmasked) {
+      console.log('update', {
+        _masked: _masked,
+        unmasked: unmasked
+      });
+      this._currentValue = unmasked;
+      this.focusIn(); // we pass the last captured event back to the grid to handle it internally
+
+      if (this.__lastComponentKeyboardPress__) {
+        this._params.onKeyDown(this.__lastComponentKeyboardPress__);
+
+        this.__lastComponentKeyboardPress__ = null;
+      }
+    }
+    /**
+     * On invalid inputs , update the input with a custom validity message
+     *
+     * @param {String|Object} error the error message reported by NumberInput
+     * @param {HTMLElement} input The input element used instance
+     */
+
+  }, {
+    key: "_onNumberInputInvalid",
+    value: function _onNumberInputInvalid(error, input) {
+      this.focusIn(); // console.log("invalid" , input)
+      // restore the original value of the cell
+
+      this._currentValue = this._params.value;
+      console.log(input);
+
+      if (typeof error === 'string') {
+        input.setCustomValidity(error);
+      } else {
+        input.setCustomValidity(error.message);
+      }
+    }
+    /**
+     * Capture all keyboard events to allow value processing by the NumberInput component
+     *
+     * @param {KeyboardEvent} e
+     */
+
+  }, {
+    key: "_onComponentKeyDown",
+    value: function _onComponentKeyDown(e) {
+      var key = event.which || event.keyCode;
+      var isNavigationKey = key === 37 || // left
+      key === 38 || // up
+      key === 39 || // right
+      key === 40 || // down
+      key === 33 || // page up
+      key === 34 || // page down
+      key === 35 || // page home
+      key === 36 || // page end
+      key === 13; // enter
+
+      if (isNavigationKey) {
+        event.stopPropagation(); // save the last capture key so NumberInput can pass it again to the grid.
+
+        this.__lastComponentKeyboardPress__ = e;
+      }
+    }
+    /**
      * Listen to key changes and validate the input
      *
      * @param {Event} event
      */
 
   }, {
-    key: "_onKeyDownUp",
-    value: function _onKeyDownUp(event) {
+    key: "_onInputKeyDownUp",
+    value: function _onInputKeyDownUp(event) {
       var isValid = this._validateInput(event.target);
 
       if (!isValid) {
@@ -4083,6 +4157,13 @@ function (_Component) {
       } else if (key == 13 || key === 9) {
         // enter
         this._currentValue = this._input.value;
+      } // we pass the last captured event back to the grid to handle it internally
+
+
+      if (this.__lastComponentKeyboardPress__) {
+        this._params.onKeyDown(this.__lastComponentKeyboardPress__);
+
+        this.__lastComponentKeyboardPress__ = null;
       }
     }
     /**
@@ -4100,7 +4181,9 @@ function (_Component) {
 
       if (!isValid) {
         input.classList.add('bbj-mask-error');
-        input.classList.remove('bbj-mask-success');
+        input.classList.remove('bbj-mask-success'); // restore the original value
+
+        this._currentValue = this._params.value;
       } else {
         input.classList.remove('bbj-mask-error');
         input.classList.add('bbj-mask-success');
@@ -4111,7 +4194,7 @@ function (_Component) {
   }]);
 
   return NumberEditor;
-}(__WEBPACK_IMPORTED_MODULE_0__Component__["a" /* default */]), (_applyDecoratedDescriptor(_class.prototype, "init", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "init"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "destroy", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "destroy"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onChange", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onChange"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onKeyDownUp", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onKeyDownUp"), _class.prototype)), _class);
+}(__WEBPACK_IMPORTED_MODULE_0__Component__["a" /* default */]), (_applyDecoratedDescriptor(_class.prototype, "init", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "init"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "destroy", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "destroy"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onChange", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onChange"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onNumberInputUpdate", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onNumberInputUpdate"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onNumberInputInvalid", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onNumberInputInvalid"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onComponentKeyDown", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onComponentKeyDown"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onInputKeyDownUp", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onInputKeyDownUp"), _class.prototype)), _class);
 /* harmony default export */ __webpack_exports__["a"] = (NumberEditor);
 
 /***/ }),
@@ -4272,8 +4355,6 @@ function (_Component) {
      *  @inheritDoc
      */
     value: function init(params) {
-      var _this = this;
-
       var pattern = this.getOption('textPattern', params);
       var required = this.getOption('textRequired', params);
       var mask = this.getOption('textMask', params);
@@ -4329,24 +4410,19 @@ function (_Component) {
         }
       } else if (mask) {
         this._input.title = mask;
-      }
+      } // If there is a mask then we use the `Basis.InputMasking.TextInput`
+
 
       if (mask) {
         this._input.dataset.mask = mask;
         this._textInput = new Basis.InputMasking.TextInput({
           elements: [this._input],
           doc: this.getDoc(params),
-          onUpdate: function onUpdate(_masked, unmasked) {
-            _this._currentValue = unmasked;
-
-            _this.focusIn();
-          },
-          onInvalid: function onInvalid(error, input) {
-            if (typeof error === 'string') {
-              input.setCustomValidity(error);
-            }
-          }
+          onUpdate: this._onTextInputUpdate,
+          onInvalid: this._onTextInputInvalid
         });
+
+        this._gui.addEventListener('keydown', this._onComponentKeyDown);
       } else {
         this._input.addEventListener('keydown', this._onChange);
 
@@ -4374,6 +4450,8 @@ function (_Component) {
         this._input.removeEventListener('change', this._onChange);
       } else {
         this._textInput.destroy();
+
+        this._gui.removeEventListener('keydown', this._onComponentKeyDown);
       }
     }
     /**
@@ -4406,7 +4484,7 @@ function (_Component) {
   }, {
     key: "getValue",
     value: function getValue() {
-      return this._currentValue;
+      return this._params.parseValue(this._currentValue);
     }
     /**
      * If doing full row edit, then gets called when tabbing into the cell.
@@ -4429,6 +4507,73 @@ function (_Component) {
       return false;
     }
     /**
+     * Update the current value when the TextInput component fires the update
+     * event.
+     *
+     * @param {String} _masked  the masked value
+     * @param {String} unmasked  the unmasked value
+     */
+
+  }, {
+    key: "_onTextInputUpdate",
+    value: function _onTextInputUpdate(_masked, unmasked, input) {
+      console.log('valid', _masked, unmasked);
+      this._currentValue = unmasked;
+      input.setCustomValidity('');
+      this.focusIn(); // we pass the last captured event back to the grid to handle it internally
+
+      if (this.__lastComponentKeyboardPress__) {
+        this._params.onKeyDown(this.__lastComponentKeyboardPress__);
+
+        this.__lastComponentKeyboardPress__ = null;
+      }
+    }
+    /**
+     * On invalid inputs , update the input with a custom validity message
+     *
+     * @param {String|Object} error the error message reported by TextInput
+     * @param {HTMLElement} input The input element used instance
+     */
+
+  }, {
+    key: "_onTextInputInvalid",
+    value: function _onTextInputInvalid(error, input) {
+      console.log('invalid', error);
+      this.focusIn(); // restore the original value of the cell
+
+      this._currentValue = this._params.value;
+
+      if (typeof error === 'string') {
+        input.setCustomValidity(error);
+      }
+    }
+    /**
+     * Capture all keyboard events to allow value processing by the NumberInput component
+     *
+     * @param {KeyboardEvent} e
+     */
+
+  }, {
+    key: "_onComponentKeyDown",
+    value: function _onComponentKeyDown(e) {
+      var key = event.which || event.keyCode;
+      var isNavigationKey = key === 37 || // left
+      key === 38 || // up
+      key === 39 || // right
+      key === 40 || // down
+      key === 33 || // page up
+      key === 34 || // page down
+      key === 35 || // page home
+      key === 36 || // page end
+      key === 13; // enter
+
+      if (isNavigationKey) {
+        event.stopPropagation(); // save the last capture key so NumberInput can pass it again to the grid.
+
+        this.__lastComponentKeyboardPress__ = e;
+      }
+    }
+    /**
      * Update `currentValue` on the input value is changed and it is valid
      */
 
@@ -4437,11 +4582,11 @@ function (_Component) {
     value: function _onChange(event) {
       var isValid = this._validateInput(event.target);
 
-      this._currentValue = this._params.value;
-
-      if (isValid) {
-        this._currentValue = this._input.value;
+      if (!isValid) {
+        return;
       }
+
+      this._currentValue = this._input.value;
     }
     /**
      * Validate the given input element
@@ -4458,7 +4603,9 @@ function (_Component) {
 
       if (!isValid) {
         input.classList.add('bbj-mask-error');
-        input.classList.remove('bbj-mask-success');
+        input.classList.remove('bbj-mask-success'); // restore the original value
+
+        this._currentValue = this._params.value;
       } else {
         input.classList.remove('bbj-mask-error');
         input.classList.add('bbj-mask-success');
@@ -4469,7 +4616,7 @@ function (_Component) {
   }]);
 
   return TextEditor;
-}(__WEBPACK_IMPORTED_MODULE_0__Component__["a" /* default */]), (_applyDecoratedDescriptor(_class.prototype, "init", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "init"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "destroy", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "destroy"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onChange", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onChange"), _class.prototype)), _class);
+}(__WEBPACK_IMPORTED_MODULE_0__Component__["a" /* default */]), (_applyDecoratedDescriptor(_class.prototype, "init", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "init"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "destroy", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "destroy"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onTextInputUpdate", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onTextInputUpdate"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onTextInputInvalid", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onTextInputInvalid"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onComponentKeyDown", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onComponentKeyDown"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onChange", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onChange"), _class.prototype)), _class);
 /* harmony default export */ __webpack_exports__["a"] = (TextEditor);
 
 /***/ }),
@@ -8933,7 +9080,7 @@ function (_Component) {
   }, {
     key: "getValue",
     value: function getValue() {
-      return this._value;
+      return this._params.parseValue(this._value);
     }
     /**
      * Gets called once after initialized and returns false so the editor appears in the cell
