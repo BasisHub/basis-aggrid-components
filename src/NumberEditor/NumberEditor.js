@@ -230,7 +230,6 @@ class NumberEditor extends Component {
    */
   @autobind
   _onNumberInputUpdate(_masked, unmasked) {
-    console.log('update', { _masked, unmasked })
     this._currentValue = unmasked
     this.focusIn()
     // we pass the last captured event back to the grid to handle it internally
@@ -248,10 +247,8 @@ class NumberEditor extends Component {
   @autobind
   _onNumberInputInvalid(error, input) {
     this.focusIn()
-    // console.log("invalid" , input)
     // restore the original value of the cell
     this._currentValue = this._params.value
-    console.log(input)
     if (typeof error === 'string') {
       input.setCustomValidity(error)
     } else {

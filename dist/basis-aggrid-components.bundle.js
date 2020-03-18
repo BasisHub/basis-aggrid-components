@@ -4072,10 +4072,6 @@ function (_Component) {
   }, {
     key: "_onNumberInputUpdate",
     value: function _onNumberInputUpdate(_masked, unmasked) {
-      console.log('update', {
-        _masked: _masked,
-        unmasked: unmasked
-      });
       this._currentValue = unmasked;
       this.focusIn(); // we pass the last captured event back to the grid to handle it internally
 
@@ -4095,11 +4091,9 @@ function (_Component) {
   }, {
     key: "_onNumberInputInvalid",
     value: function _onNumberInputInvalid(error, input) {
-      this.focusIn(); // console.log("invalid" , input)
-      // restore the original value of the cell
+      this.focusIn(); // restore the original value of the cell
 
       this._currentValue = this._params.value;
-      console.log(input);
 
       if (typeof error === 'string') {
         input.setCustomValidity(error);
@@ -4421,15 +4415,17 @@ function (_Component) {
           onUpdate: this._onTextInputUpdate,
           onInvalid: this._onTextInputInvalid
         });
-
-        this._gui.addEventListener('keydown', this._onComponentKeyDown);
       } else {
-        this._input.addEventListener('keydown', this._onChange);
+        this._input.addEventListener('keydown', this._onInputKeyDownUp);
+
+        this._input.addEventListener('keyup', this._onInputKeyDownUp);
 
         this._input.addEventListener('input', this._onChange);
 
         this._input.addEventListener('change', this._onChange);
-      } // update `currentValue` the value which this component is managing
+      }
+
+      this._gui.addEventListener('keydown', this._onComponentKeyDown); // update `currentValue` the value which this component is managing
 
 
       this._currentValue = startValue;
@@ -4443,16 +4439,18 @@ function (_Component) {
     key: "destroy",
     value: function destroy() {
       if (!this.__isMasked__) {
-        this._input.removeEventListener('keydown', this._onChange);
+        this._input.removeEventListener('keydown', this._onInputKeyDownUp);
+
+        this._input.removeEventListener('keyup', this._onInputKeyDownUp);
 
         this._input.removeEventListener('input', this._onChange);
 
         this._input.removeEventListener('change', this._onChange);
       } else {
         this._textInput.destroy();
-
-        this._gui.removeEventListener('keydown', this._onComponentKeyDown);
       }
+
+      this._gui.removeEventListener('keydown', this._onComponentKeyDown);
     }
     /**
      * Gets called once after GUI is attached to DOM.
@@ -4517,7 +4515,6 @@ function (_Component) {
   }, {
     key: "_onTextInputUpdate",
     value: function _onTextInputUpdate(_masked, unmasked, input) {
-      console.log('valid', _masked, unmasked);
       this._currentValue = unmasked;
       input.setCustomValidity('');
       this.focusIn(); // we pass the last captured event back to the grid to handle it internally
@@ -4538,7 +4535,6 @@ function (_Component) {
   }, {
     key: "_onTextInputInvalid",
     value: function _onTextInputInvalid(error, input) {
-      console.log('invalid', error);
       this.focusIn(); // restore the original value of the cell
 
       this._currentValue = this._params.value;
@@ -4574,6 +4570,35 @@ function (_Component) {
       }
     }
     /**
+     * Listen to key changes and validate the input
+     *
+     * @param {Event} event
+     */
+
+  }, {
+    key: "_onInputKeyDownUp",
+    value: function _onInputKeyDownUp(event) {
+      var isValid = this._validateInput(event.target);
+
+      if (!isValid) {
+        return;
+      }
+
+      var key = event.which || event.keyCode;
+
+      if (key == 13 || key === 9) {
+        // enter
+        this._currentValue = this._input.value;
+      } // we pass the last captured event back to the grid to handle it internally
+
+
+      if (this.__lastComponentKeyboardPress__) {
+        this._params.onKeyDown(this.__lastComponentKeyboardPress__);
+
+        this.__lastComponentKeyboardPress__ = null;
+      }
+    }
+    /**
      * Update `currentValue` on the input value is changed and it is valid
      */
 
@@ -4582,11 +4607,9 @@ function (_Component) {
     value: function _onChange(event) {
       var isValid = this._validateInput(event.target);
 
-      if (!isValid) {
-        return;
+      if (isValid) {
+        this._currentValue = this._input.value;
       }
-
-      this._currentValue = this._input.value;
     }
     /**
      * Validate the given input element
@@ -4616,7 +4639,7 @@ function (_Component) {
   }]);
 
   return TextEditor;
-}(__WEBPACK_IMPORTED_MODULE_0__Component__["a" /* default */]), (_applyDecoratedDescriptor(_class.prototype, "init", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "init"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "destroy", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "destroy"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onTextInputUpdate", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onTextInputUpdate"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onTextInputInvalid", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onTextInputInvalid"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onComponentKeyDown", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onComponentKeyDown"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onChange", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onChange"), _class.prototype)), _class);
+}(__WEBPACK_IMPORTED_MODULE_0__Component__["a" /* default */]), (_applyDecoratedDescriptor(_class.prototype, "init", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "init"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "destroy", [__WEBPACK_IMPORTED_MODULE_2_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "destroy"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onTextInputUpdate", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onTextInputUpdate"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onTextInputInvalid", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onTextInputInvalid"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onComponentKeyDown", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onComponentKeyDown"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onInputKeyDownUp", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onInputKeyDownUp"), _class.prototype), _applyDecoratedDescriptor(_class.prototype, "_onChange", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class.prototype, "_onChange"), _class.prototype)), _class);
 /* harmony default export */ __webpack_exports__["a"] = (TextEditor);
 
 /***/ }),

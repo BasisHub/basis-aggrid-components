@@ -101,13 +101,14 @@ class TextEditor extends Component {
         onUpdate: this._onTextInputUpdate,
         onInvalid: this._onTextInputInvalid,
       })
-
-      this._gui.addEventListener('keydown', this._onComponentKeyDown)
     } else {
-      this._input.addEventListener('keydown', this._onChange)
+      this._input.addEventListener('keydown', this._onInputKeyDownUp)
+      this._input.addEventListener('keyup', this._onInputKeyDownUp)
       this._input.addEventListener('input', this._onChange)
       this._input.addEventListener('change', this._onChange)
     }
+
+    this._gui.addEventListener('keydown', this._onComponentKeyDown)
 
     // update `currentValue` the value which this component is managing
     this._currentValue = startValue
@@ -120,13 +121,15 @@ class TextEditor extends Component {
   @override
   destroy() {
     if (!this.__isMasked__) {
-      this._input.removeEventListener('keydown', this._onChange)
+      this._input.removeEventListener('keydown', this._onInputKeyDownUp)
+      this._input.removeEventListener('keyup', this._onInputKeyDownUp)
       this._input.removeEventListener('input', this._onChange)
       this._input.removeEventListener('change', this._onChange)
     } else {
       this._textInput.destroy()
-      this._gui.removeEventListener('keydown', this._onComponentKeyDown)
     }
+
+    this._gui.removeEventListener('keydown', this._onComponentKeyDown)
   }
 
   /**
@@ -182,7 +185,6 @@ class TextEditor extends Component {
    */
   @autobind
   _onTextInputUpdate(_masked, unmasked, input) {
-    console.log('valid', _masked, unmasked)
     this._currentValue = unmasked
     input.setCustomValidity('')
     this.focusIn()
@@ -200,7 +202,6 @@ class TextEditor extends Component {
    */
   @autobind
   _onTextInputInvalid(error, input) {
-    console.log('invalid', error)
     this.focusIn()
     // restore the original value of the cell
     this._currentValue = this._params.value
@@ -237,17 +238,41 @@ class TextEditor extends Component {
   }
 
   /**
-   * Update `currentValue` on the input value is changed and it is valid
+   * Listen to key changes and validate the input
+   *
+   * @param {Event} event
    */
   @autobind
-  _onChange(event) {
+  _onInputKeyDownUp(event) {
     const isValid = this._validateInput(event.target)
 
     if (!isValid) {
       return
     }
 
-    this._currentValue = this._input.value
+    const key = event.which || event.keyCode
+
+    if (key == 13 || key === 9) {
+      // enter
+      this._currentValue = this._input.value
+    }
+
+    // we pass the last captured event back to the grid to handle it internally
+    if (this.__lastComponentKeyboardPress__) {
+      this._params.onKeyDown(this.__lastComponentKeyboardPress__)
+      this.__lastComponentKeyboardPress__ = null
+    }
+  }
+
+  /**
+   * Update `currentValue` on the input value is changed and it is valid
+   */
+  @autobind
+  _onChange(event) {
+    const isValid = this._validateInput(event.target)
+    if (isValid) {
+      this._currentValue = this._input.value
+    }
   }
 
   /**
