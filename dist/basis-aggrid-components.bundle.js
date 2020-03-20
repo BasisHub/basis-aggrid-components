@@ -236,9 +236,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var GENERIC_FUNCTION_ERROR = '{child} does not properly override {parent}';
 var FUNCTION_REGEXP = /^function ([_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*)?(\([^\)]*\))[\s\S]+$/;
 
-var SyntaxErrorReporter =
-/*#__PURE__*/
-function () {
+var SyntaxErrorReporter = /*#__PURE__*/function () {
   _createClass(SyntaxErrorReporter, [{
     key: "_getTopic",
     value: function _getTopic(descriptor) {
@@ -2337,9 +2335,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
 
-var BooleanEditor =
-/*#__PURE__*/
-function (_Component) {
+var BooleanEditor = /*#__PURE__*/function (_Component) {
   _inherits(BooleanEditor, _Component);
 
   function BooleanEditor() {
@@ -2523,9 +2519,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  *
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
-var Component =
-/*#__PURE__*/
-function () {
+var Component = /*#__PURE__*/function () {
   function Component() {
     _classCallCheck(this, Component);
 
@@ -2719,9 +2713,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
 
-var BooleanSwitch = (_class =
-/*#__PURE__*/
-function (_Component) {
+var BooleanSwitch = (_class = /*#__PURE__*/function (_Component) {
   _inherits(BooleanSwitch, _Component);
 
   /**
@@ -3249,9 +3241,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
 
-var BooleanRenderer =
-/*#__PURE__*/
-function (_Component) {
+var BooleanRenderer = /*#__PURE__*/function (_Component) {
   _inherits(BooleanRenderer, _Component);
 
   /**
@@ -3478,9 +3468,7 @@ var stripHTML = function stripHTML(html) {
  */
 
 
-var BooleanFilter = (_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var BooleanFilter = (_class = (_temp = /*#__PURE__*/function (_Component) {
   _inherits(BooleanFilter, _Component);
 
   /**
@@ -3858,9 +3846,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
 
-var NumberEditor = (_class =
-/*#__PURE__*/
-function (_Component) {
+var NumberEditor = (_class = /*#__PURE__*/function (_Component) {
   _inherits(NumberEditor, _Component);
 
   function NumberEditor() {
@@ -4331,9 +4317,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
 
-var TextEditor = (_class =
-/*#__PURE__*/
-function (_Component) {
+var TextEditor = (_class = /*#__PURE__*/function (_Component) {
   _inherits(TextEditor, _Component);
 
   function TextEditor() {
@@ -4754,9 +4738,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
 
-var TemplateRenderer =
-/*#__PURE__*/
-function (_Component) {
+var TemplateRenderer = /*#__PURE__*/function (_Component) {
   _inherits(TemplateRenderer, _Component);
 
   /**
@@ -6766,9 +6748,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
  * @see https://lodash.com/docs/4.17.15#template
  */
 
-var ImageRenderer =
-/*#__PURE__*/
-function (_TemplateRenderer) {
+var ImageRenderer = /*#__PURE__*/function (_TemplateRenderer) {
   _inherits(ImageRenderer, _TemplateRenderer);
 
   function ImageRenderer() {
@@ -6894,9 +6874,7 @@ var TOKENS = {
   TOKEN_OR: 'OR'
 };
 
-var ConditionPanel = Object(__WEBPACK_IMPORTED_MODULE_4__EventsMixin__["a" /* withEventsMixin */])(_class = (_class2 = (_temp = _class3 =
-/*#__PURE__*/
-function (_Component) {
+var ConditionPanel = Object(__WEBPACK_IMPORTED_MODULE_4__EventsMixin__["a" /* withEventsMixin */])(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_Component) {
   _inherits(ConditionPanel, _Component);
 
   function ConditionPanel() {
@@ -7084,9 +7062,7 @@ function (_Component) {
   }
 }), _applyDecoratedDescriptor(_class2.prototype, "init", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class2.prototype, "init"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "destroy", [__WEBPACK_IMPORTED_MODULE_1_core_decorators_src_override__["a" /* default */]], Object.getOwnPropertyDescriptor(_class2.prototype, "destroy"), _class2.prototype), _applyDecoratedDescriptor(_class2.prototype, "_onTypeChange", [__WEBPACK_IMPORTED_MODULE_0_core_decorators_src_autobind__["a" /* default */]], Object.getOwnPropertyDescriptor(_class2.prototype, "_onTypeChange"), _class2.prototype)), _class2)) || _class;
 
-var JoinConditionPanel = Object(__WEBPACK_IMPORTED_MODULE_4__EventsMixin__["a" /* withEventsMixin */])(_class4 = (_class5 = (_temp2 = _class6 =
-/*#__PURE__*/
-function (_Component2) {
+var JoinConditionPanel = Object(__WEBPACK_IMPORTED_MODULE_4__EventsMixin__["a" /* withEventsMixin */])(_class4 = (_class5 = (_temp2 = _class6 = /*#__PURE__*/function (_Component2) {
   _inherits(JoinConditionPanel, _Component2);
 
   function JoinConditionPanel() {
@@ -7315,9 +7291,7 @@ function (_Component2) {
  */
 
 
-var DateTimeFilter = (_class7 = (_temp3 =
-/*#__PURE__*/
-function (_Component3) {
+var DateTimeFilter = (_class7 = (_temp3 = /*#__PURE__*/function (_Component3) {
   _inherits(DateTimeFilter, _Component3);
 
   function DateTimeFilter() {
@@ -7774,7 +7748,7 @@ function getDateTimeFormat(timeZone) {
  * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
  *
  * @param {Date|Number} date - the date to be changed
- * @param {Number} amount - the amount of milliseconds to be subtracted
+ * @param {Number} amount - the amount of milliseconds to be subtracted. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
  * @returns {Date} the new date with the milliseconds subtracted
  * @throws {TypeError} 2 arguments required
  *
@@ -7815,7 +7789,7 @@ function subMilliseconds(dirtyDate, dirtyAmount) {
  * - [Changes that are common for the whole library](https://github.com/date-fns/date-fns/blob/master/docs/upgradeGuide.md#Common-Changes).
  *
  * @param {Date|Number} date - the date to be changed
- * @param {Number} amount - the amount of milliseconds to be added
+ * @param {Number} amount - the amount of milliseconds to be added. Positive decimals will be rounded using `Math.floor`, decimals less than zero will be rounded using `Math.ceil`.
  * @returns {Date} the new date with the milliseconds added
  * @throws {TypeError} 2 arguments required
  *
@@ -8352,6 +8326,10 @@ function validateTime(hours, minutes, seconds) {
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = getTimezoneOffsetInMilliseconds;
 var MILLISECONDS_IN_MINUTE = 60000;
+
+function getDateMillisecondsPart(date) {
+  return date.getTime() % MILLISECONDS_IN_MINUTE;
+}
 /**
  * Google Chrome as of 67.0.3396.87 introduced timezones with offset that includes seconds.
  * They usually appear for dates that denote time before the timezones were introduced
@@ -8364,11 +8342,13 @@ var MILLISECONDS_IN_MINUTE = 60000;
  * This function returns the timezone offset in milliseconds that takes seconds in account.
  */
 
+
 function getTimezoneOffsetInMilliseconds(dirtyDate) {
   var date = new Date(dirtyDate.getTime());
   var baseTimezoneOffset = Math.ceil(date.getTimezoneOffset());
   date.setSeconds(0, 0);
-  var millisecondsPartOfTimezoneOffset = date.getTime() % MILLISECONDS_IN_MINUTE;
+  var hasNegativeUTCOffset = baseTimezoneOffset > 0;
+  var millisecondsPartOfTimezoneOffset = hasNegativeUTCOffset ? (MILLISECONDS_IN_MINUTE + getDateMillisecondsPart(date)) % MILLISECONDS_IN_MINUTE : getDateMillisecondsPart(date);
   return baseTimezoneOffset * MILLISECONDS_IN_MINUTE + millisecondsPartOfTimezoneOffset;
 }
 
@@ -8419,9 +8399,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 var EventsMixin = function EventsMixin(superClass) {
   var _temp;
 
-  return _temp =
-  /*#__PURE__*/
-  function (_superClass) {
+  return _temp = /*#__PURE__*/function (_superClass) {
     _inherits(_temp, _superClass);
 
     function _temp() {
@@ -8569,9 +8547,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
 
-var DateTimeInput = Object(__WEBPACK_IMPORTED_MODULE_3__EventsMixin__["a" /* withEventsMixin */])(_class = (_class2 = (_temp = _class3 =
-/*#__PURE__*/
-function (_Component) {
+var DateTimeInput = Object(__WEBPACK_IMPORTED_MODULE_3__EventsMixin__["a" /* withEventsMixin */])(_class = (_class2 = (_temp = _class3 = /*#__PURE__*/function (_Component) {
   _inherits(DateTimeInput, _Component);
 
   /**
@@ -9009,9 +8985,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
 
-var DateTimeEditor = (_class = (_temp =
-/*#__PURE__*/
-function (_Component) {
+var DateTimeEditor = (_class = (_temp = /*#__PURE__*/function (_Component) {
   _inherits(DateTimeEditor, _Component);
 
   function DateTimeEditor() {
@@ -9832,9 +9806,7 @@ module.exports = global["BBj"]["Masks"] = __webpack_require__(134);
        */
 
 
-      var NumberMask =
-      /*#__PURE__*/
-      function () {
+      var NumberMask = /*#__PURE__*/function () {
         function NumberMask() {
           _classCallCheck(this, NumberMask);
         }
@@ -10400,9 +10372,7 @@ module.exports = global["BBj"]["Masks"] = __webpack_require__(134);
        */
 
 
-      var DateMask =
-      /*#__PURE__*/
-      function () {
+      var DateMask = /*#__PURE__*/function () {
         function DateMask() {
           _classCallCheck(this, DateMask);
         }
@@ -11914,9 +11884,7 @@ module.exports = global["BBj"]["Masks"] = __webpack_require__(134);
        */
 
 
-      var StringMask =
-      /*#__PURE__*/
-      function () {
+      var StringMask = /*#__PURE__*/function () {
         function StringMask() {
           _classCallCheck(this, StringMask);
         }
@@ -12141,9 +12109,7 @@ module.exports = global["BBj"]["Masks"] = __webpack_require__(134);
        */
 
 
-      var Types =
-      /*#__PURE__*/
-      function () {
+      var Types = /*#__PURE__*/function () {
         function Types() {
           _classCallCheck(this, Types);
         }
@@ -12634,9 +12600,7 @@ module.exports = global["Basis"]["InputMasking"] = __webpack_require__(136);
        */
 
 
-      var TextInput =
-      /*#__PURE__*/
-      function () {
+      var TextInput = /*#__PURE__*/function () {
         /**
          * Construct new TextInput
          *
@@ -13463,9 +13427,7 @@ module.exports = global["Basis"]["InputMasking"] = __webpack_require__(136);
        */
 
 
-      var NumberInput =
-      /*#__PURE__*/
-      function () {
+      var NumberInput = /*#__PURE__*/function () {
         /**
          * Construct new NumberInput
          *
@@ -13943,9 +13905,7 @@ var passOrThrowError = function passOrThrowError(loose, ret, i, str) {
  */
 
 
-var StringMask =
-/*#__PURE__*/
-function () {
+var StringMask = /*#__PURE__*/function () {
   function StringMask() {
     _classCallCheck(this, StringMask);
   }
@@ -14114,9 +14074,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  *
  * @author Hyyan Abo Fakher <habofakher@basis.com>
  */
-var NumberMask =
-/*#__PURE__*/
-function () {
+var NumberMask = /*#__PURE__*/function () {
   function NumberMask() {
     _classCallCheck(this, NumberMask);
   }
