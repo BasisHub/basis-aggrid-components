@@ -4752,7 +4752,7 @@ var TemplateRenderer = /*#__PURE__*/function (_Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TemplateRenderer).call(this)); // will this affect BBj bui ?
 
     _this._gui = document.createElement('div');
-    _this._gui.className = 'templateRenderer';
+    _this._gui.className = 'templateRenderer ag-cell-wrapper';
     _this._gui.style.width = '100%';
     _this._gui.style.height = '100%';
     _this._gui.style.lineHeight = 'normal';

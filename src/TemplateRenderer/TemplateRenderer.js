@@ -29,7 +29,7 @@ class TemplateRenderer extends Component {
 
     // will this affect BBj bui ?
     this._gui = document.createElement('div')
-    this._gui.className = 'templateRenderer'
+    this._gui.className = 'templateRenderer ag-cell-wrapper'
     this._gui.style.width = '100%'
     this._gui.style.height = '100%'
     this._gui.style.lineHeight = 'normal'
