@@ -66,8 +66,14 @@ class NumberEditor extends Component {
 
     // create the input wrapper
     this._gui = document.createElement('label')
-    this._gui.className = 'numberEditor ag-input-wrapper'
+    this._gui.className = 'numberEditor ag-cell-edit-wrapper'
     this._gui.tabIndex = '0'
+    this._gui.innerHTML = /* html */ `
+    <div class="ag-cell-editor ag-labeled ag-label-align-left ag-text-field ag-input-field">
+      <div class="ag-wrapper ag-input-wrapper ag-text-field-input-wrapper">
+      </div>
+    </div>
+    `
 
     // create the input
     this._inputGeneratedId = Math.random()
@@ -81,7 +87,7 @@ class NumberEditor extends Component {
     this._input.tabIndex = 0
 
     // place the input inside the wrapper
-    this._gui.appendChild(this._input)
+    this._gui.querySelector('.ag-input-wrapper').appendChild(this._input)
 
     if (min !== null) {
       mask ? (this._input.dataset.min = min) : (this._input.min = min)

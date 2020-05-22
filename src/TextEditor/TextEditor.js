@@ -60,13 +60,20 @@ class TextEditor extends Component {
 
     this._params = params
 
-    this._gui = document.createElement('label')
-    this._gui.className = 'textEditor ag-input-wrapper'
+    this._gui = document.createElement('div')
+    this._gui.className = 'textEditor ag-cell-edit-wrapper'
     this._gui.tabIndex = '0'
+    this._gui.innerHTML = /* html */ `
+    <div class="ag-cell-editor ag-labeled ag-label-align-left ag-text-field ag-input-field">
+      <div class="ag-wrapper ag-input-wrapper ag-text-field-input-wrapper">
+      </div>
+    </div>
+    `
 
     // input
     this._input = document.createElement('input')
-    this._input.className = 'textEditor__input ag-cell-edit-input'
+    this._input.className =
+      'textEditor__input ag-cell-edit-input ag-input-field-input ag-text-field-input'
     this._input.id = `el-${Math.random()
       .toString(16)
       .slice(2, 10)}` // generate random id
@@ -74,7 +81,7 @@ class TextEditor extends Component {
     this._input.value = startValue
     this._input.tabIndex = 0
 
-    this._gui.appendChild(this._input)
+    this._gui.querySelector('.ag-input-wrapper').appendChild(this._input)
 
     if (pattern !== null) {
       this._input.setAttribute('pattern', pattern)

@@ -1,4 +1,15 @@
-.booleanFilter__body__labels label {
-  display: block;
-  padding: 3px 0;
+.booleanFilter__body__labels {
+  label {
+    display: block;
+    padding: 6px;
+  }
+
+  label {
+    display: block;
+    padding: 6px 0;
+
+    span {
+      padding-left: 6px;
+    }
+  }
 }

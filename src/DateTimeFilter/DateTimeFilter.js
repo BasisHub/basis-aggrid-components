@@ -11,6 +11,7 @@ import utcToZonedTime from 'date-fns-tz/utcToZonedTime'
 import { withEventsMixin } from '../EventsMixin'
 import DateTimeInput from '../DateTimeInput'
 import Component from '../Component'
+import './style.scss'
 
 const TOKENS = {
   TOKEN_EQUAL: 'equals',
@@ -101,9 +102,9 @@ class ConditionPanel extends Component {
     }
 
     this._gui = document.createElement('div')
-    this._gui.className = 'ag-filter-body-wrapper'
+    this._gui.className = 'dateTimeFilter ag-filter-body-wrapper'
     this._gui.innerHTML = /* html */ `
-      <select class="ag-filter-select"  ${
+      <select class="ag-filter-select dateTimeFilter__select"  ${
         this._filterOptions.length === 1 ? 'disabled' : ''
       }>
         ${this._filterOptions.map(
@@ -301,24 +302,37 @@ class JoinConditionPanel extends Component {
     this._secondConditionPanel.getGui().classList.add('ag-hidden')
 
     this._gui = document.createElement('div')
-    this._gui.className = 'ag-filter-body-wrapper'
+    this._gui.className = 'ag-filter-body-wrapper ag-simple-filter-body-wrapper'
     this._gui.appendChild(this._firstConditionPanel.getGui())
+
+    //prettier-ignore
+    const idOne = '_' + Math.random().toString(36).substr(2, 9),
+          idTwo = '_' + Math.random().toString(36).substr(2, 9)
 
     this._operatorPanel = document.createElement('div')
     this._operatorPanel.className = 'ag-filter-condition ag-hidden'
     this._operatorPanel.innerHTML = /* html */ `
-      <label>
-        <input class="AND" type="radio" name="orAndRadio" value="${
-          TOKENS.TOKEN_AND
-        }"/>
-        ${translate('andCondition', 'AND')}
-      </label> 
-      <label>
-        <input class="OR" type="radio" name="orAndRadio" value="${
-          TOKENS.TOKEN_OR
-        }" checked />
-        ${translate('orCondition', 'OR')}
-      </label>
+    <div class="ag-filter-condition-operator ag-filter-condition-operator-and ag-labeled ag-label-align-right ag-radio-button ag-input-field">
+        <label class="ag-input-field-label ag-label ag-radio-button-label" for="${idOne}">       
+          ${translate('andCondition', 'AND')}
+        </label>
+        <div class="ag-wrapper-and ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper ag-checked">
+          <input id="${idOne}" class="AND ag-input-field-input ag-radio-button-input" type="radio" name="orAndRadio" value="${
+      TOKENS.TOKEN_AND
+    }"/>              
+        </div> 
+    </div>   
+    
+    <div class="ag-filter-condition-operator ag-filter-condition-operator-and ag-labeled ag-label-align-right ag-radio-button ag-input-field">
+        <label class="ag-input-field-label ag-label ag-radio-button-label" for="${idTwo}">       
+          ${translate('orCondition', 'OR')}
+        </label>
+        <div class="ag-wrapper-or ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper">
+          <input id="${idTwo}" class="OR ag-input-field-input ag-radio-button-input" type="radio" name="orAndRadio" value="${
+      TOKENS.TOKEN_OR
+    }"/>              
+        </div>         
+    </div>   
     `
     this._gui.appendChild(this._operatorPanel)
     this._operatorPanel.addEventListener('change', this._onOperatorChanged)
@@ -378,7 +392,26 @@ class JoinConditionPanel extends Component {
    */
   @autobind
   _onOperatorChanged(e) {
-    this.state.operator = e.target.value
+    const target = e.target
+
+    this.state.operator = target.value
+
+    if (target.classList.contains('OR')) {
+      this._operatorPanel
+        .querySelector('.ag-wrapper-or')
+        .classList.add('ag-checked')
+      this._operatorPanel
+        .querySelector('.ag-wrapper-and')
+        .classList.remove('ag-checked')
+    } else {
+      this._operatorPanel
+        .querySelector('.ag-wrapper-or')
+        .classList.remove('ag-checked')
+      this._operatorPanel
+        .querySelector('.ag-wrapper-and')
+        .classList.add('ag-checked')
+    }
+
     this.notify(JoinConditionPanel.ON_JOIN_CONDITION_CHANGED, this.state)
   }
 
@@ -506,17 +539,17 @@ class DateTimeFilter extends Component {
     const applyFilterPanel = document.createElement('div')
     applyFilterPanel.className = `ag-filter-apply-panel ag-hidden`
     applyFilterPanel.innerHTML = /* html */ `
-      <button class="clear ${!isClearFilter &&
+      <button class="ag-standard-button ag-filter-apply-panel-button clear ${!isClearFilter &&
         'ag-hidden'}" type="button">${translate(
       'clearFilter',
       'Clear Filter'
     )}</button>
-      <button class="reset ${!isResetButton &&
+      <button class="ag-standard-button ag-filter-apply-panel-button reset ${!isResetButton &&
         'ag-hidden'}" type="button">${translate(
       'resetFilter',
       'Reset Filter'
     )}</button>
-      <button class="apply ${!isApplyButton &&
+      <button class="ag-standard-button ag-filter-apply-panel-button apply ${!isApplyButton &&
         'ag-hidden'}" type="button">${translate(
       'applyFilter',
       'Apply Filter'

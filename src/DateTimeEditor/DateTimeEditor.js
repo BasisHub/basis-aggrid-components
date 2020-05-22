@@ -40,7 +40,7 @@ class DateTimeEditor extends Component {
   /**
    * @type {DateTimeInput}
    */
-  _input = new DateTimeInput()
+  _input = new DateTimeInput(true)
 
   /**
    * @type {String}

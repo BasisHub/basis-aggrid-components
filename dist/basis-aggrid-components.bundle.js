@@ -70,7 +70,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 132);
+/******/ 	return __webpack_require__(__webpack_require__.s = 134);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -512,79 +512,6 @@ function override() {
 
 /***/ }),
 /* 3 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(72);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(73);
-
-
-
-/** `Object#toString` result references. */
-
-var nullTag = '[object Null]',
-    undefinedTag = '[object Undefined]';
-/** Built-in value references. */
-
-var symToStringTag = __WEBPACK_IMPORTED_MODULE_0__Symbol_js__["a" /* default */] ? __WEBPACK_IMPORTED_MODULE_0__Symbol_js__["a" /* default */].toStringTag : undefined;
-/**
- * The base implementation of `getTag` without fallbacks for buggy environments.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the `toStringTag`.
- */
-
-function baseGetTag(value) {
-  if (value == null) {
-    return value === undefined ? undefinedTag : nullTag;
-  }
-
-  return symToStringTag && symToStringTag in Object(value) ? Object(__WEBPACK_IMPORTED_MODULE_1__getRawTag_js__["a" /* default */])(value) : Object(__WEBPACK_IMPORTED_MODULE_2__objectToString_js__["a" /* default */])(value);
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (baseGetTag);
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-/**
- * Checks if `value` is object-like. A value is object-like if it's not `null`
- * and has a `typeof` result of "object".
- *
- * @static
- * @memberOf _
- * @since 4.0.0
- * @category Lang
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
- * @example
- *
- * _.isObjectLike({});
- * // => true
- *
- * _.isObjectLike([1, 2, 3]);
- * // => true
- *
- * _.isObjectLike(_.noop);
- * // => false
- *
- * _.isObjectLike(null);
- * // => false
- */
-function isObjectLike(value) {
-  return value != null && _typeof(value) == 'object';
-}
-
-/* harmony default export */ __webpack_exports__["a"] = (isObjectLike);
-
-/***/ }),
-/* 5 */
 /***/ (function(module, exports) {
 
 /*
@@ -666,7 +593,7 @@ function toComment(sourceMap) {
 }
 
 /***/ }),
-/* 6 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1046,6 +973,79 @@ function updateLink (link, options, obj) {
 	if(oldSrc) URL.revokeObjectURL(oldSrc);
 }
 
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Symbol_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getRawTag_js__ = __webpack_require__(72);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__objectToString_js__ = __webpack_require__(73);
+
+
+
+/** `Object#toString` result references. */
+
+var nullTag = '[object Null]',
+    undefinedTag = '[object Undefined]';
+/** Built-in value references. */
+
+var symToStringTag = __WEBPACK_IMPORTED_MODULE_0__Symbol_js__["a" /* default */] ? __WEBPACK_IMPORTED_MODULE_0__Symbol_js__["a" /* default */].toStringTag : undefined;
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the `toStringTag`.
+ */
+
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+
+  return symToStringTag && symToStringTag in Object(value) ? Object(__WEBPACK_IMPORTED_MODULE_1__getRawTag_js__["a" /* default */])(value) : Object(__WEBPACK_IMPORTED_MODULE_2__objectToString_js__["a" /* default */])(value);
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (baseGetTag);
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @static
+ * @memberOf _
+ * @since 4.0.0
+ * @category Lang
+ * @param {*} value The value to check.
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * _.isObjectLike({});
+ * // => true
+ *
+ * _.isObjectLike([1, 2, 3]);
+ * // => true
+ *
+ * _.isObjectLike(_.noop);
+ * // => false
+ *
+ * _.isObjectLike(null);
+ * // => false
+ */
+function isObjectLike(value) {
+  return value != null && _typeof(value) == 'object';
+}
+
+/* harmony default export */ __webpack_exports__["a"] = (isObjectLike);
 
 /***/ }),
 /* 7 */
@@ -1488,7 +1488,7 @@ var defineProperty = function () {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isObject_js__ = __webpack_require__(8);
 
 
@@ -1911,8 +1911,8 @@ function isPrototype(value) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isObjectLike_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isObjectLike_js__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isPlainObject_js__ = __webpack_require__(97);
 
 
@@ -2240,7 +2240,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__TemplateRenderer__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__ImageRenderer__ = __webpack_require__(113);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__DateTimeFilter__ = __webpack_require__(115);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__DateTimeEditor__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__DateTimeEditor__ = __webpack_require__(129);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BooleanEditor", function() { return __WEBPACK_IMPORTED_MODULE_0__BooleanEditor__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BooleanRenderer", function() { return __WEBPACK_IMPORTED_MODULE_1__BooleanRenderer__["a"]; });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BooleanFilter", function() { return __WEBPACK_IMPORTED_MODULE_2__BooleanFilter__["a"]; });
@@ -3035,7 +3035,7 @@ options.insertInto = function () {
   return window.parent.document.head;
 };
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(4)(content, options);
 
 if (content.locals) module.exports = content.locals;
 
@@ -3073,12 +3073,12 @@ if (false) {
 /* 49 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".ag-cell-inline-editing .boolSwitch__wrapper{margin:auto 11px}.boolSwitch__wrapper{display:flex;width:100%;height:100%;align-items:center;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.boolSwitch{position:relative;width:55px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.boolSwitch__checkbox{display:none}.boolSwitch__label{display:block;overflow:hidden;cursor:pointer;border:2px solid #999999;border-radius:20px}.boolSwitch__inner{display:block;width:200%;margin-left:-100%;transition:margin 0.3s ease-in 0s}.boolSwitch__inner:before,.boolSwitch__inner:after{display:block;float:left;width:50%;height:15px;padding:0;line-height:15px;font-size:14px;color:white;font-family:'Segoe UI Symbol', Trebuchet, Arial, sans-serif;font-weight:bold;box-sizing:border-box}.boolSwitch__inner:before{content:'\\2714';padding-left:10px;background-color:#34a7c1;color:#ffffff}.boolSwitch__inner:after{content:'\\2718';padding-right:10px;background-color:#eeeeee;color:#999999;text-align:right}.boolSwitch__switch{display:block;width:18px;margin:1px;background:#ffffff;position:absolute;top:0;bottom:0;right:35px;border:2px solid #999999;border-radius:20px;transition:all 0.3s ease-in 0s}.boolSwitch__checkbox:checked+.boolSwitch__label .boolSwitch__inner{margin-left:0}.boolSwitch__checkbox:checked+.boolSwitch__label .boolSwitch__switch{right:0px}.ag-theme-balham .boolSwitch__label{border-color:#BDC3C7}.ag-theme-balham .boolSwitch__inner:before,.ag-theme-balham .boolSwitch__inner:after{color:#fff}.ag-theme-balham .boolSwitch__inner:before{background-color:#0091EA;color:#fff}.ag-theme-balham .boolSwitch__inner:after{background-color:#f2f2f2;color:#BDC3C7}.ag-theme-balham .boolSwitch__switch{background:#fff;border-color:#BDC3C7}.ag-theme-balham-dark .boolSwitch__label{border-color:#424242}.ag-theme-balham-dark .boolSwitch__inner:before,.ag-theme-balham-dark .boolSwitch__inner:after{color:#2d3436}.ag-theme-balham-dark .boolSwitch__inner:before{background-color:#00B0FF;color:#cfd9db}.ag-theme-balham-dark .boolSwitch__inner:after{background-color:#212728;color:#424242}.ag-theme-balham-dark .boolSwitch__switch{background:#2d3436;border-color:#424242}.ag-theme-material .boolSwitch__label{border-color:#e2e2e2}.ag-theme-material .boolSwitch__inner:before,.ag-theme-material .boolSwitch__inner:after{color:#fff}.ag-theme-material .boolSwitch__inner:before{background-color:#ff4081;color:#fff}.ag-theme-material .boolSwitch__inner:after{background-color:#f2f2f2;color:#d5d5d5}.ag-theme-material .boolSwitch__switch{background:#fff;border-color:#e2e2e2}\n", ""]);
+exports.push([module.i, ".ag-cell-inline-editing .boolSwitch__wrapper{margin:auto 11px}.boolSwitch__wrapper{display:flex;width:100%;height:100%;align-items:center;outline:none;padding-left:6px;overflow:hidden;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.boolSwitch{position:relative;width:55px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}.boolSwitch__checkbox{display:none}.boolSwitch__label{display:block;overflow:hidden;cursor:pointer;border:2px solid var(--ag-input-border-color, var(--ag-border-color, #babfc7));border-radius:20px}.boolSwitch__inner{display:block;width:200%;margin-left:-100%;transition:margin 0.3s ease-in 0s}.boolSwitch__inner:before,.boolSwitch__inner:after{display:block;float:left;width:50%;height:15px;padding:0;line-height:15px;font-size:14px;color:white;font-family:'Segoe UI Symbol', Trebuchet, Arial, sans-serif;font-weight:bold;box-sizing:border-box}.boolSwitch__inner:before{content:'\\2714';padding-left:10px;background-color:var(--ag-checkbox-checked-color, var(--ag-alpine-active-color, #2196f3));color:#ffffff}.boolSwitch__inner:after{content:'\\2718';padding-right:10px;background-color:var(--ag-background-color);color:var(--ag-input-border-color, var(--ag-border-color, #babfc7));text-align:right}.boolSwitch__switch{display:block;width:18px;margin:1px;background:#ffffff;position:absolute;top:0;bottom:0;right:35px;border:2px solid var(--ag-input-border-color, var(--ag-border-color, #babfc7));border-radius:20px;transition:all 0.3s ease-in 0s}.boolSwitch__checkbox:checked+.boolSwitch__label .boolSwitch__inner{margin-left:0}.boolSwitch__checkbox:checked+.boolSwitch__label .boolSwitch__switch{right:0px}\n", ""]);
 
 // exports
 
@@ -3501,9 +3501,9 @@ var BooleanFilter = (_class = (_temp = /*#__PURE__*/function (_Component) {
     key: "init",
     value: function init(params) {
       var translate = params.api.gridOptionsWrapper.getLocaleTextFunc();
-      var isClearFilter = this.getOption('clearButton', params, false);
-      var isResetButton = this.getOption('resetButton', params, false);
-      var isApplyButton = this.getOption('applyButton', params, false);
+      var isClearFilter = this.getOption('clearButton', params, true);
+      var isResetButton = this.getOption('resetButton', params, true);
+      var isApplyButton = this.getOption('applyButton', params, true);
       this._trueValue = [].concat(this.getOption('booleanTrueValue', params, [true])).map(function (x) {
         return String(x);
       });
@@ -3526,9 +3526,9 @@ var BooleanFilter = (_class = (_temp = /*#__PURE__*/function (_Component) {
       body.style.padding = '5px 15px';
       body.innerHTML =
       /* html */
-      "\n        <div class=\"booleanFilter__body__labels\">\n          <label>\n            <input type=\"radio\" name=\"boolean\" value=\"true\">\n            ".concat(this._booleanFilterTranslation["true"], "\n          </label>\n\n          <label>\n            <input type=\"radio\" name=\"boolean\" value=\"false\">\n            ").concat(this._booleanFilterTranslation["false"], "\n          </label>     \n          \n          ").concat(!isResetButton ?
+      "\n      <div class=\"booleanFilter__body__labels\">\n\n        <label class=\"ag-input-field-label ag-label ag-radio-button-label\">       \n            <div class=\"ag-wrapper-true ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper\">\n              <input class=\"true-input ag-input-field-input ag-radio-button-input\" type=\"radio\" name=\"boolean\" value=\"true\"/>              \n          </div> \n          <span>".concat(this._booleanFilterTranslation["true"], "</span>\n        </label>\n\n\n        <label class=\"ag-input-field-label ag-label ag-radio-button-label\">       \n            <div class=\"ag-wrapper-false ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper\">\n              <input class=\"false-input ag-input-field-input ag-radio-button-input\" type=\"radio\" name=\"boolean\" value=\"false\"/>              \n          </div> \n          <span>").concat(this._booleanFilterTranslation["false"], "</span>\n        </label>\n          \n          ").concat(!isResetButton ?
       /* html */
-      "\n                <label>\n                  <input type=\"radio\" name=\"boolean\" value=\"\" checked>\n                  ".concat(this._booleanFilterTranslation.reset, "\n                </label>   \n              ") : '', "       \n        </div>\n    ");
+      "\n              <label class=\"ag-input-field-label ag-label ag-radio-button-label\">       \n                  <div class=\"ag-wrapper-reset ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper ag-checked\">\n                    <input class=\"reset-input ag-input-field-input ag-radio-button-input\" type=\"radio\" name=\"boolean\" value=\"\" checked/>              \n                </div> \n                <span>".concat(this._booleanFilterTranslation.reset, "</span>\n              </label>                \n              ") : '', "       \n        </div>\n    ");
       body.addEventListener('change', this._onRadioChange);
 
       this._gui.appendChild(body); // create apply filter panel
@@ -3538,7 +3538,7 @@ var BooleanFilter = (_class = (_temp = /*#__PURE__*/function (_Component) {
       applyFilterPanel.className = "booleanFilter__body__applyPanel ag-filter-apply-panel ag-hidden";
       applyFilterPanel.innerHTML =
       /* html */
-      "\n      <button class=\"clear ".concat(!isClearFilter && 'ag-hidden', "\" type=\"button\">").concat(translate('clearFilter', 'Clear Filter'), "</button>\n      <button class=\"reset ").concat(!isResetButton && 'ag-hidden', "\" type=\"button\">").concat(translate('resetFilter', 'Reset Filter'), "</button>\n      <button class=\"apply ").concat(!isApplyButton && 'ag-hidden', "\" type=\"button\">").concat(translate('applyFilter', 'Apply Filter'), "</button>\n    ");
+      "\n      <button class=\"ag-standard-button ag-filter-apply-panel-button clear ".concat(!isClearFilter && 'ag-hidden', "\" type=\"button\">").concat(translate('clearFilter', 'Clear Filter'), "</button>\n      <button class=\"ag-standard-button ag-filter-apply-panel-button reset ").concat(!isResetButton && 'ag-hidden', "\" type=\"button\">").concat(translate('resetFilter', 'Reset Filter'), "</button>\n      <button class=\"ag-standard-button ag-filter-apply-panel-button apply ").concat(!isApplyButton && 'ag-hidden', "\" type=\"button\">").concat(translate('applyFilter', 'Apply Filter'), "</button>\n    ");
 
       if (isClearFilter || isResetButton || isApplyButton) {
         applyFilterPanel.classList.remove('ag-hidden');
@@ -3657,6 +3657,15 @@ var BooleanFilter = (_class = (_temp = /*#__PURE__*/function (_Component) {
       body.querySelectorAll('input[type="radio"]').forEach(function (i) {
         i.checked = false;
       });
+      body.querySelector('.ag-wrapper-true').classList.remove('ag-checked');
+      body.querySelector('.ag-wrapper-false').classList.remove('ag-checked');
+
+      try {
+        body.querySelector('.ag-wrapper-reset').classList.remove('ag-checked');
+      } catch (e) {
+        /* pass */
+      }
+
       this._filterText = null;
     }
     /**
@@ -3668,7 +3677,41 @@ var BooleanFilter = (_class = (_temp = /*#__PURE__*/function (_Component) {
   }, {
     key: "_onRadioChange",
     value: function _onRadioChange(isApplyButton, e) {
-      this._filterText = e.target.value;
+      var target = e.target;
+      this._filterText = target.value;
+
+      var body = this._gui.querySelector('.booleanFilter__body');
+
+      if (body) {
+        if (target.classList.contains('true-input')) {
+          body.querySelector('.ag-wrapper-true').classList.add('ag-checked');
+          body.querySelector('.ag-wrapper-false').classList.remove('ag-checked');
+
+          try {
+            body.querySelector('.ag-wrapper-reset').classList.remove('ag-checked');
+          } catch (e) {
+            /* pass */
+          }
+        } else if (target.classList.contains('false-input')) {
+          body.querySelector('.ag-wrapper-true').classList.remove('ag-checked');
+          body.querySelector('.ag-wrapper-false').classList.add('ag-checked');
+
+          try {
+            body.querySelector('.ag-wrapper-reset').classList.remove('ag-checked');
+          } catch (e) {
+            /* pass */
+          }
+        } else {
+          body.querySelector('.ag-wrapper-true').classList.remove('ag-checked');
+          body.querySelector('.ag-wrapper-false').classList.remove('ag-checked');
+
+          try {
+            body.querySelector('.ag-wrapper-reset').classList.add('ag-checked');
+          } catch (e) {
+            /* pass */
+          }
+        }
+      }
 
       if (false === isApplyButton) {
         this._params.filterChangedCallback();
@@ -3721,7 +3764,7 @@ options.insertInto = function () {
   return window.parent.document.head;
 };
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(4)(content, options);
 
 if (content.locals) module.exports = content.locals;
 
@@ -3759,12 +3802,12 @@ if (false) {
 /* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".booleanFilter__body__labels label{display:block;padding:3px 0}\n", ""]);
+exports.push([module.i, ".booleanFilter__body__labels label{display:block;padding:6px}.booleanFilter__body__labels label{display:block;padding:6px 0}.booleanFilter__body__labels label span{padding-left:6px}\n", ""]);
 
 // exports
 
@@ -3892,8 +3935,11 @@ var NumberEditor = (_class = /*#__PURE__*/function (_Component) {
       this._params = params; // create the input wrapper
 
       this._gui = document.createElement('label');
-      this._gui.className = 'numberEditor ag-input-wrapper';
-      this._gui.tabIndex = '0'; // create the input
+      this._gui.className = 'numberEditor ag-cell-edit-wrapper';
+      this._gui.tabIndex = '0';
+      this._gui.innerHTML =
+      /* html */
+      "\n    <div class=\"ag-cell-editor ag-labeled ag-label-align-left ag-text-field ag-input-field\">\n      <div class=\"ag-wrapper ag-input-wrapper ag-text-field-input-wrapper\">\n      </div>\n    </div>\n    "; // create the input
 
       this._inputGeneratedId = Math.random().toString(16).slice(2, 10); // generate random id
 
@@ -3904,7 +3950,7 @@ var NumberEditor = (_class = /*#__PURE__*/function (_Component) {
       this._input.value = startValue;
       this._input.tabIndex = 0; // place the input inside the wrapper
 
-      this._gui.appendChild(this._input);
+      this._gui.querySelector('.ag-input-wrapper').appendChild(this._input);
 
       if (min !== null) {
         mask ? this._input.dataset.min = min : this._input.min = min;
@@ -4195,7 +4241,7 @@ options.insertInto = function () {
   return window.parent.document.head;
 };
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(4)(content, options);
 
 if (content.locals) module.exports = content.locals;
 
@@ -4233,12 +4279,12 @@ if (false) {
 /* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".numberEditor .numberInputMask__wrap{width:100%;height:100%}.numberEditor .bbj-mask-error{box-shadow:0 -2px 0 #e91e63 inset}.numberEditor .bbj-mask-success{box-shadow:0 -2px 0 #4caf50 inset}\n", ""]);
+exports.push([module.i, ".numberEditor{overflow:hidden}.numberEditor .numberInputMask__wrap{width:100%;height:100%;box-sizing:border-box;outline:none;display:block;padding:0;margin:0;display:flex;flex:1 1 auto;align-items:center;line-height:normal;position:relative;overflow:hidden}.numberEditor .bbj-mask-error{box-shadow:0 -2px 0 #e91e63 inset}.numberEditor .bbj-mask-success{box-shadow:0 -2px 0 #4caf50 inset}.numberEditor__input{padding-left:6px;border:thin solid var(--ag-input-focus-border-color, rgba(33,150,243,0.4));border-radius:3px;background-color:var(--ag-background-color);color:inherit}.ag-theme-alpine .numberEditor__input,.ag-theme-balham .numberEditor__input,.ag-theme-material .numberEditor__input{background-color:var(--ag-background-color, #fff)}.ag-theme-alpine-dark .numberEditor__input,.ag-theme-balham-dark .numberEditor__input{background-color:var(--ag-background-color, #2d3436)}\n", ""]);
 
 // exports
 
@@ -4360,19 +4406,22 @@ var TextEditor = (_class = /*#__PURE__*/function (_Component) {
       }
 
       this._params = params;
-      this._gui = document.createElement('label');
-      this._gui.className = 'textEditor ag-input-wrapper';
-      this._gui.tabIndex = '0'; // input
+      this._gui = document.createElement('div');
+      this._gui.className = 'textEditor ag-cell-edit-wrapper';
+      this._gui.tabIndex = '0';
+      this._gui.innerHTML =
+      /* html */
+      "\n    <div class=\"ag-cell-editor ag-labeled ag-label-align-left ag-text-field ag-input-field\">\n      <div class=\"ag-wrapper ag-input-wrapper ag-text-field-input-wrapper\">\n      </div>\n    </div>\n    "; // input
 
       this._input = document.createElement('input');
-      this._input.className = 'textEditor__input ag-cell-edit-input';
+      this._input.className = 'textEditor__input ag-cell-edit-input ag-input-field-input ag-text-field-input';
       this._input.id = "el-".concat(Math.random().toString(16).slice(2, 10)); // generate random id
 
       this._input.type = 'text';
       this._input.value = startValue;
       this._input.tabIndex = 0;
 
-      this._gui.appendChild(this._input);
+      this._gui.querySelector('.ag-input-wrapper').appendChild(this._input);
 
       if (pattern !== null) {
         this._input.setAttribute('pattern', pattern);
@@ -4644,7 +4693,7 @@ options.insertInto = function () {
   return window.parent.document.head;
 };
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(4)(content, options);
 
 if (content.locals) module.exports = content.locals;
 
@@ -4682,12 +4731,12 @@ if (false) {
 /* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".textEditor .textInputMask__wrap{width:100%;height:100%}.textEditor .bbj-mask-error{box-shadow:0 -2px 0 #e91e63 inset}.textEditor .bbj-mask-success{box-shadow:0 -2px 0 #4caf50 inset}\n", ""]);
+exports.push([module.i, ".textEditor{overflow:hidden}.textEditor .textInputMask__wrap{width:100%;height:100%;box-sizing:border-box;outline:none;display:block;padding:0;margin:0;display:flex;flex:1 1 auto;align-items:center;line-height:normal;position:relative;overflow:hidden}.textEditor .bbj-mask-error{box-shadow:0 -2px 0 #e91e63 inset}.textEditor .bbj-mask-success{box-shadow:0 -2px 0 #4caf50 inset}.textEditor__input{padding-left:6px;border:thin solid var(--ag-input-focus-border-color, rgba(33,150,243,0.4));border-radius:3px;background-color:var(--ag-background-color);color:inherit}.ag-theme-alpine .textEditor__input,.ag-theme-balham .textEditor__input,.ag-theme-material .textEditor__input{background-color:var(--ag-background-color, #fff)}.ag-theme-alpine-dark .textEditor__input,.ag-theme-balham-dark .textEditor__input{background-color:var(--ag-background-color, #2d3436)}\n", ""]);
 
 // exports
 
@@ -5726,7 +5775,7 @@ function baseTimes(n, iteratee) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseIsArguments_js__ = __webpack_require__(87);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isObjectLike_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isObjectLike_js__ = __webpack_require__(6);
 
 
 /** Used for built-in method references. */
@@ -5769,8 +5818,8 @@ var isArguments = Object(__WEBPACK_IMPORTED_MODULE_0__baseIsArguments_js__["a" /
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isObjectLike_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isObjectLike_js__ = __webpack_require__(6);
 
 
 /** `Object#toString` result references. */
@@ -5902,9 +5951,9 @@ var isTypedArray = nodeIsTypedArray ? Object(__WEBPACK_IMPORTED_MODULE_1__baseUn
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isLength_js__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(6);
 
 
 
@@ -6133,9 +6182,9 @@ var attempt = Object(__WEBPACK_IMPORTED_MODULE_1__baseRest_js__["a" /* default *
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getPrototype_js__ = __webpack_require__(98);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__isObjectLike_js__ = __webpack_require__(6);
 
 
 
@@ -6629,8 +6678,8 @@ function baseToString(value) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isObjectLike_js__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__baseGetTag_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__isObjectLike_js__ = __webpack_require__(6);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 
@@ -6822,6 +6871,8 @@ var ImageRenderer = /*#__PURE__*/function (_TemplateRenderer) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__EventsMixin__ = __webpack_require__(40);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DateTimeInput__ = __webpack_require__(41);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Component__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__style_scss__ = __webpack_require__(127);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__style_scss___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__style_scss__);
 var _class, _class2, _init, _descriptor, _class3, _temp, _class4, _class5, _init2, _descriptor2, _class6, _temp2, _class7, _temp3;
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -6857,6 +6908,7 @@ function _applyDecoratedDescriptor(target, property, decorators, descriptor, con
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 
 
 
@@ -6915,10 +6967,10 @@ var ConditionPanel = Object(__WEBPACK_IMPORTED_MODULE_4__EventsMixin__["a" /* wi
       this.state.type = this._defaultOption;
       var optionsTranslations = (_optionsTranslations = {}, _defineProperty(_optionsTranslations, TOKENS.TOKEN_EQUAL, translate(TOKENS.TOKEN_EQUAL, 'Equals')), _defineProperty(_optionsTranslations, TOKENS.TOKEN_NOT_EQUAL, translate(TOKENS.TOKEN_EQUAL, 'Not equal')), _defineProperty(_optionsTranslations, TOKENS.TOKEN_LESS, translate(TOKENS.TOKEN_LESS, 'Less than')), _defineProperty(_optionsTranslations, TOKENS.TOKEN_GREATER, translate(TOKENS.TOKEN_GREATER, 'Greater than')), _defineProperty(_optionsTranslations, TOKENS.TOKEN_RANGE, translate(TOKENS.TOKEN_RANGE, 'In range')), _optionsTranslations);
       this._gui = document.createElement('div');
-      this._gui.className = 'ag-filter-body-wrapper';
+      this._gui.className = 'dateTimeFilter ag-filter-body-wrapper';
       this._gui.innerHTML =
       /* html */
-      "\n      <select class=\"ag-filter-select\"  ".concat(this._filterOptions.length === 1 ? 'disabled' : '', ">\n        ").concat(this._filterOptions.map(function (option) {
+      "\n      <select class=\"ag-filter-select dateTimeFilter__select\"  ".concat(this._filterOptions.length === 1 ? 'disabled' : '', ">\n        ").concat(this._filterOptions.map(function (option) {
         return (
           /* html */
           "\n          <option \n            value=\"".concat(option, "\" \n            ").concat(option === _this2._defaultOption ? 'selected' : '', "\n          >\n              ").concat(optionsTranslations[option], "\n          </option>")
@@ -7108,15 +7160,18 @@ var JoinConditionPanel = Object(__WEBPACK_IMPORTED_MODULE_4__EventsMixin__["a" /
       this._secondConditionPanel.getGui().classList.add('ag-hidden');
 
       this._gui = document.createElement('div');
-      this._gui.className = 'ag-filter-body-wrapper';
+      this._gui.className = 'ag-filter-body-wrapper ag-simple-filter-body-wrapper';
 
-      this._gui.appendChild(this._firstConditionPanel.getGui());
+      this._gui.appendChild(this._firstConditionPanel.getGui()); //prettier-ignore
 
+
+      var idOne = '_' + Math.random().toString(36).substr(2, 9),
+          idTwo = '_' + Math.random().toString(36).substr(2, 9);
       this._operatorPanel = document.createElement('div');
       this._operatorPanel.className = 'ag-filter-condition ag-hidden';
       this._operatorPanel.innerHTML =
       /* html */
-      "\n      <label>\n        <input class=\"AND\" type=\"radio\" name=\"orAndRadio\" value=\"".concat(TOKENS.TOKEN_AND, "\"/>\n        ").concat(translate('andCondition', 'AND'), "\n      </label> \n      <label>\n        <input class=\"OR\" type=\"radio\" name=\"orAndRadio\" value=\"").concat(TOKENS.TOKEN_OR, "\" checked />\n        ").concat(translate('orCondition', 'OR'), "\n      </label>\n    ");
+      "\n    <div class=\"ag-filter-condition-operator ag-filter-condition-operator-and ag-labeled ag-label-align-right ag-radio-button ag-input-field\">\n        <label class=\"ag-input-field-label ag-label ag-radio-button-label\" for=\"".concat(idOne, "\">       \n          ").concat(translate('andCondition', 'AND'), "\n        </label>\n        <div class=\"ag-wrapper-and ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper ag-checked\">\n          <input id=\"").concat(idOne, "\" class=\"AND ag-input-field-input ag-radio-button-input\" type=\"radio\" name=\"orAndRadio\" value=\"").concat(TOKENS.TOKEN_AND, "\"/>              \n        </div> \n    </div>   \n    \n    <div class=\"ag-filter-condition-operator ag-filter-condition-operator-and ag-labeled ag-label-align-right ag-radio-button ag-input-field\">\n        <label class=\"ag-input-field-label ag-label ag-radio-button-label\" for=\"").concat(idTwo, "\">       \n          ").concat(translate('orCondition', 'OR'), "\n        </label>\n        <div class=\"ag-wrapper-or ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper\">\n          <input id=\"").concat(idTwo, "\" class=\"OR ag-input-field-input ag-radio-button-input\" type=\"radio\" name=\"orAndRadio\" value=\"").concat(TOKENS.TOKEN_OR, "\"/>              \n        </div>         \n    </div>   \n    ");
 
       this._gui.appendChild(this._operatorPanel);
 
@@ -7192,7 +7247,19 @@ var JoinConditionPanel = Object(__WEBPACK_IMPORTED_MODULE_4__EventsMixin__["a" /
   }, {
     key: "_onOperatorChanged",
     value: function _onOperatorChanged(e) {
-      this.state.operator = e.target.value;
+      var target = e.target;
+      this.state.operator = target.value;
+
+      if (target.classList.contains('OR')) {
+        this._operatorPanel.querySelector('.ag-wrapper-or').classList.add('ag-checked');
+
+        this._operatorPanel.querySelector('.ag-wrapper-and').classList.remove('ag-checked');
+      } else {
+        this._operatorPanel.querySelector('.ag-wrapper-or').classList.remove('ag-checked');
+
+        this._operatorPanel.querySelector('.ag-wrapper-and').classList.add('ag-checked');
+      }
+
       this.notify(JoinConditionPanel.ON_JOIN_CONDITION_CHANGED, this.state);
     }
     /**
@@ -7342,7 +7409,7 @@ var DateTimeFilter = (_class7 = (_temp3 = /*#__PURE__*/function (_Component3) {
       applyFilterPanel.className = "ag-filter-apply-panel ag-hidden";
       applyFilterPanel.innerHTML =
       /* html */
-      "\n      <button class=\"clear ".concat(!isClearFilter && 'ag-hidden', "\" type=\"button\">").concat(translate('clearFilter', 'Clear Filter'), "</button>\n      <button class=\"reset ").concat(!isResetButton && 'ag-hidden', "\" type=\"button\">").concat(translate('resetFilter', 'Reset Filter'), "</button>\n      <button class=\"apply ").concat(!isApplyButton && 'ag-hidden', "\" type=\"button\">").concat(translate('applyFilter', 'Apply Filter'), "</button>\n    ");
+      "\n      <button class=\"ag-standard-button ag-filter-apply-panel-button clear ".concat(!isClearFilter && 'ag-hidden', "\" type=\"button\">").concat(translate('clearFilter', 'Clear Filter'), "</button>\n      <button class=\"ag-standard-button ag-filter-apply-panel-button reset ").concat(!isResetButton && 'ag-hidden', "\" type=\"button\">").concat(translate('resetFilter', 'Reset Filter'), "</button>\n      <button class=\"ag-standard-button ag-filter-apply-panel-button apply ").concat(!isApplyButton && 'ag-hidden', "\" type=\"button\">").concat(translate('applyFilter', 'Apply Filter'), "</button>\n    ");
 
       if (isClearFilter || isResetButton || isApplyButton) {
         applyFilterPanel.classList.remove('ag-hidden');
@@ -8577,9 +8644,13 @@ var DateTimeInput = Object(__WEBPACK_IMPORTED_MODULE_3__EventsMixin__["a" /* wit
 
   /**
    * Construct new DateTimeInput
+   *
+   * @param {Boolean} isEditor when true , the input will styled to fit as a cell editor
    */
   function DateTimeInput() {
     var _this;
+
+    var isEditor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
     _classCallCheck(this, DateTimeInput);
 
@@ -8588,10 +8659,10 @@ var DateTimeInput = Object(__WEBPACK_IMPORTED_MODULE_3__EventsMixin__["a" /* wit
     _this.selectedDate = null;
     _this._params = {};
     _this._gui = document.createElement('div');
-    _this._gui.className = 'ag-input-wrapper';
+    _this._gui.className = 'ag-cell-edit-wrapper';
     _this._gui.innerHTML =
     /* html */
-    "\n    <div class=\"datetime__input\">\n        <input class=\"datetime__input__input\" type=\"text\" data-input>\n        <a class=\"datetime__input__clear\" data-clear>\n          <i class=\"datetime__input__clear__icon ag-icon ag-icon-cross\"></i>\n        </a>\n    </div>\n    ";
+    "\n    <div class=\"ag-cell-editor ag-labeled ag-label-align-left ag-text-field ag-input-field\">\n      <div class=\"datetime__input ".concat(isEditor ? 'datetime__input--editor ' : '', " ag-wrapper ag-input-wrapper ag-text-field-input-wrapper\">\n          <input class=\"datetime__input__input ").concat(isEditor ? 'ag-cell-edit-input ' : '', " ag-input-field-input ag-text-field-input\" type=\"text\" data-input>\n          <a class=\"datetime__input__clear\" data-clear>\n            <i class=\"datetime__input__clear__icon ag-icon ag-icon-cross\"></i>\n          </a>    \n      </div>\n    </div>\n    ");
     return _this;
   }
   /**
@@ -8851,7 +8922,7 @@ options.insertInto = function () {
   return window.parent.document.head;
 };
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(4)(content, options);
 
 if (content.locals) module.exports = content.locals;
 
@@ -8889,22 +8960,88 @@ if (false) {
 /* 126 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 
 // module
-exports.push([module.i, ".datetime__input{display:flex;align-items:center;width:100%;margin:auto 4px;border:thin solid #000}.datetime__input__input{flex:1;outline:none !important;border:none !important}.datetime__input__clear{margin-left:1px;margin-top:1px;text-align:center;outline:none}.ag-theme-balham .datetime__input{border-color:#95A5A6}.ag-theme-balham-dark .datetime__input{border-color:#ecf0f1}.ag-theme-material .datetime__input{margin:auto 8px}\n", ""]);
+exports.push([module.i, ".datetime__input{display:flex;align-items:center;width:100%;height:100%;overflow:hidden;border:1px solid var(--ag-input-border-color, var(--ag-border-color, #babfc7));border-radius:3px}.datetime__input:focus,.datetime__input:active,.datetime__input:hover{border-color:var(--ag-input-focus-border-color, rgba(33,150,243,0.4))}.datetime__input__input{flex:1;padding:6px;border:none;outline:none;background-color:var(--ag-background-color);color:inherit}.ag-theme-alpine .datetime__input__input,.ag-theme-balham .datetime__input__input,.ag-theme-material .datetime__input__input{background-color:var(--ag-background-color, #fff)}.ag-theme-alpine-dark .datetime__input__input,.ag-theme-balham-dark .datetime__input__input{background-color:var(--ag-background-color, #2d3436)}.datetime__input__clear{margin-left:1px;margin-top:1px;padding:6px;text-align:center;border:none;outline:none;cursor:pointer;color:inherit}.datetime__input--editor{border-color:var(--ag-input-focus-border-color, rgba(33,150,243,0.4))}.datetime__input--editor .datetime__input__input{padding:0;padding-left:6px}\n", ""]);
 
 // exports
 
 
 /***/ }),
 /* 127 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var content = __webpack_require__(128);
+
+if (typeof content === 'string') content = [[module.i, content, '']];
+var transform;
+var insertInto;
+var options = {
+  "hmr": true
+};
+options.transform = transform;
+
+options.insertInto = function () {
+  return window.parent.document.head;
+};
+
+var update = __webpack_require__(4)(content, options);
+
+if (content.locals) module.exports = content.locals;
+
+if (false) {
+  module.hot.accept("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/dist/cjs.js!./style.scss", function () {
+    var newContent = require("!!../../node_modules/css-loader/index.js!../../node_modules/sass-loader/dist/cjs.js!./style.scss");
+
+    if (typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+
+    var locals = function (a, b) {
+      var key,
+          idx = 0;
+
+      for (key in a) {
+        if (!b || a[key] !== b[key]) return false;
+        idx++;
+      }
+
+      for (key in b) {
+        idx--;
+      }
+
+      return idx === 0;
+    }(content.locals, newContent.locals);
+
+    if (!locals) throw new Error('Aborting CSS HMR due to changed css-modules locals.');
+    update(newContent);
+  });
+  module.hot.dispose(function () {
+    update();
+  });
+}
+
+/***/ }),
+/* 128 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(3)(false);
+// imports
+
+
+// module
+exports.push([module.i, ".dateTimeFilter select{margin-bottom:9px;padding:6px;border-radius:3px;border:1px solid var(--ag-input-border-color, var(--ag-border-color, #babfc7));color:inherit}.dateTimeFilter select:focus,.dateTimeFilter select:active{border-color:var(--ag-input-focus-border-color, rgba(33,150,243,0.4))}.dateTimeFilter select option{text-indent:6px}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 129 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__DateTimeEditor__ = __webpack_require__(128);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__DateTimeEditor__ = __webpack_require__(130);
 /*
  * This file is part of basis-aggrid-components lib.
  * (c) Basis Europe <eu@basis.com>
@@ -8916,7 +9053,7 @@ exports.push([module.i, ".datetime__input{display:flex;align-items:center;width:
 /* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0__DateTimeEditor__["a" /* default */]);
 
 /***/ }),
-/* 128 */
+/* 130 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -9000,7 +9137,7 @@ var DateTimeEditor = (_class = (_temp = /*#__PURE__*/function (_Component) {
     }
 
     _this = _possibleConstructorReturn(this, (_getPrototypeOf2 = _getPrototypeOf(DateTimeEditor)).call.apply(_getPrototypeOf2, [this].concat(args)));
-    _this._input = new __WEBPACK_IMPORTED_MODULE_3__DateTimeInput__["a" /* default */]();
+    _this._input = new __WEBPACK_IMPORTED_MODULE_3__DateTimeInput__["a" /* default */](true);
     _this._value = null;
     _this._params = null;
     return _this;
@@ -9139,7 +9276,7 @@ var DateTimeEditor = (_class = (_temp = /*#__PURE__*/function (_Component) {
 /* harmony default export */ __webpack_exports__["a"] = (DateTimeEditor);
 
 /***/ }),
-/* 129 */
+/* 131 */
 /***/ (function(module, exports) {
 
 module.exports = function (module) {
@@ -9168,12 +9305,12 @@ module.exports = function (module) {
 };
 
 /***/ }),
-/* 130 */
+/* 132 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__StringMask__ = __webpack_require__(137);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__StringMask__ = __webpack_require__(139);
 /*
  * This file is part of bbj-masks lib.
  * (c) Basis Europe <eu@basis.com>
@@ -9185,12 +9322,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__StringMask__["a" /* default */]);
 
 /***/ }),
-/* 131 */
+/* 133 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__NumberMask__ = __webpack_require__(138);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__NumberMask__ = __webpack_require__(140);
 /*
  * This file is part of bbj-masks lib.
  * (c) Basis Europe <eu@basis.com>
@@ -9202,18 +9339,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony default export */ __webpack_exports__["default"] = (__WEBPACK_IMPORTED_MODULE_0__NumberMask__["a" /* default */]);
 
 /***/ }),
-/* 132 */
+/* 134 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_expose_loader_BBj_Masks_bbj_masks_dist_bbj_masks_js__ = __webpack_require__(133);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_expose_loader_BBj_Masks_bbj_masks_dist_bbj_masks_js__ = __webpack_require__(135);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_expose_loader_BBj_Masks_bbj_masks_dist_bbj_masks_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_expose_loader_BBj_Masks_bbj_masks_dist_bbj_masks_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_expose_loader_Basis_InputMasking_basis_input_masking_dist_basis_input_masking_js__ = __webpack_require__(135);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_expose_loader_Basis_InputMasking_basis_input_masking_dist_basis_input_masking_js__ = __webpack_require__(137);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_expose_loader_Basis_InputMasking_basis_input_masking_dist_basis_input_masking_js___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_expose_loader_Basis_InputMasking_basis_input_masking_dist_basis_input_masking_js__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_flatpickr__ = __webpack_require__(139);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_flatpickr__ = __webpack_require__(141);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_flatpickr___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_flatpickr__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_flatpickr_dist_flatpickr_css__ = __webpack_require__(140);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_flatpickr_dist_flatpickr_css__ = __webpack_require__(142);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_flatpickr_dist_flatpickr_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_flatpickr_dist_flatpickr_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__index__ = __webpack_require__(42);
 /* harmony namespace reexport (by provided) */ __webpack_require__.d(__webpack_exports__, "BooleanEditor", function() { return __WEBPACK_IMPORTED_MODULE_4__index__["BooleanEditor"]; });
@@ -9239,15 +9376,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 133 */
+/* 135 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {if(!global["BBj"]) global["BBj"] = {};
-module.exports = global["BBj"]["Masks"] = __webpack_require__(134);
+module.exports = global["BBj"]["Masks"] = __webpack_require__(136);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
 
 /***/ }),
-/* 134 */
+/* 136 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -12196,24 +12333,24 @@ module.exports = global["BBj"]["Masks"] = __webpack_require__(134);
     ])
   );
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(129)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(131)(module)))
 
 /***/ }),
-/* 135 */
+/* 137 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(global) {if(!global["Basis"]) global["Basis"] = {};
-module.exports = global["Basis"]["InputMasking"] = __webpack_require__(136);
+module.exports = global["Basis"]["InputMasking"] = __webpack_require__(138);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(21)))
 
 /***/ }),
-/* 136 */
+/* 138 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(module) {var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 (function webpackUniversalModuleDefinition(root, factory) {
-  if (( false ? "undefined" : _typeof(exports)) === 'object' && ( false ? "undefined" : _typeof(module)) === 'object') module.exports = factory(__webpack_require__(130), __webpack_require__(131));else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(130), __webpack_require__(131)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+  if (( false ? "undefined" : _typeof(exports)) === 'object' && ( false ? "undefined" : _typeof(module)) === 'object') module.exports = factory(__webpack_require__(132), __webpack_require__(133));else if (true) !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(132), __webpack_require__(133)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
 				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
 				(__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));else if ((typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object') exports["InputMasking"] = factory(require("bbj-masks/src/StringMask"), require("bbj-masks/src/NumberMask"));else root["Basis"] = root["Basis"] || {}, root["Basis"]["InputMasking"] = factory(root["BBj"]["Masks"]["StringMask"], root["BBj"]["Masks"]["NumberMask"]);
@@ -13840,10 +13977,10 @@ module.exports = global["Basis"]["InputMasking"] = __webpack_require__(136);
     ])
   );
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(129)(module)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(131)(module)))
 
 /***/ }),
-/* 137 */
+/* 139 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14049,7 +14186,7 @@ var StringMask = /*#__PURE__*/function () {
 /* harmony default export */ __webpack_exports__["a"] = (StringMask);
 
 /***/ }),
-/* 138 */
+/* 140 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -14440,7 +14577,7 @@ var NumberMask = /*#__PURE__*/function () {
 /* harmony default export */ __webpack_exports__["a"] = (NumberMask);
 
 /***/ }),
-/* 139 */
+/* 141 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -17021,10 +17158,10 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;function _type
 });
 
 /***/ }),
-/* 140 */
+/* 142 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var content = __webpack_require__(141);
+var content = __webpack_require__(143);
 
 if (typeof content === 'string') content = [[module.i, content, '']];
 var transform;
@@ -17038,7 +17175,7 @@ options.insertInto = function () {
   return window.parent.document.head;
 };
 
-var update = __webpack_require__(6)(content, options);
+var update = __webpack_require__(4)(content, options);
 
 if (content.locals) module.exports = content.locals;
 
@@ -17073,10 +17210,10 @@ if (false) {
 }
 
 /***/ }),
-/* 141 */
+/* 143 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)(false);
+exports = module.exports = __webpack_require__(3)(false);
 // imports
 
 

@@ -1,7 +1,20 @@
 .textEditor {
+  overflow: hidden;
+  
   .textInputMask__wrap {
     width: 100%;
     height: 100%;
+    box-sizing: border-box;
+    outline: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    line-height: normal;
+    position: relative;    
+    overflow: hidden;
   }
   
   .bbj-mask-error {
@@ -11,4 +24,23 @@
   .bbj-mask-success {
     box-shadow: 0 -2px 0 #4caf50 inset;
   }
+}
+
+.textEditor__input {
+  padding-left: 6px;
+  border: thin solid var(--ag-input-focus-border-color,rgba(33,150,243,.4));
+  border-radius: 3px;
+  background-color: var(--ag-background-color);
+  color: inherit;
+}
+
+.ag-theme-alpine .textEditor__input,
+.ag-theme-balham .textEditor__input,
+.ag-theme-material .textEditor__input {
+  background-color: var(--ag-background-color , #fff);
+}
+
+.ag-theme-alpine-dark .textEditor__input,
+.ag-theme-balham-dark .textEditor__input{
+  background-color: var(--ag-background-color, #2d3436)
 }

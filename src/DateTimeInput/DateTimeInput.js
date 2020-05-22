@@ -52,18 +52,26 @@ class DateTimeInput extends Component {
 
   /**
    * Construct new DateTimeInput
+   *
+   * @param {Boolean} isEditor when true , the input will styled to fit as a cell editor
    */
-  constructor() {
+  constructor(isEditor = false) {
     super()
 
     this._gui = document.createElement('div')
-    this._gui.className = 'ag-input-wrapper'
+    this._gui.className = 'ag-cell-edit-wrapper'
     this._gui.innerHTML = /* html */ `
-    <div class="datetime__input">
-        <input class="datetime__input__input" type="text" data-input>
-        <a class="datetime__input__clear" data-clear>
-          <i class="datetime__input__clear__icon ag-icon ag-icon-cross"></i>
-        </a>
+    <div class="ag-cell-editor ag-labeled ag-label-align-left ag-text-field ag-input-field">
+      <div class="datetime__input ${
+        isEditor ? 'datetime__input--editor ' : ''
+      } ag-wrapper ag-input-wrapper ag-text-field-input-wrapper">
+          <input class="datetime__input__input ${
+            isEditor ? 'ag-cell-edit-input ' : ''
+          } ag-input-field-input ag-text-field-input" type="text" data-input>
+          <a class="datetime__input__clear" data-clear>
+            <i class="datetime__input__clear__icon ag-icon ag-icon-cross"></i>
+          </a>    
+      </div>
     </div>
     `
   }

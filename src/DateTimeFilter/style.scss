@@ -1,0 +1,18 @@
+.dateTimeFilter {
+  select {
+    margin-bottom: 9px;
+    padding: 6px;
+    border-radius: 3px;
+    border: 1px solid var(--ag-input-border-color, var(--ag-border-color, #babfc7));
+    color: inherit;
+  }
+
+  select:focus,
+  select:active {
+    border-color:var(--ag-input-focus-border-color,rgba(33,150,243,.4));
+  }
+
+  select option {
+    text-indent: 6px;
+  }
+}

@@ -67,9 +67,9 @@ class BooleanFilter extends Component {
   @override
   init(params) {
     const translate = params.api.gridOptionsWrapper.getLocaleTextFunc()
-    const isClearFilter = this.getOption('clearButton', params, false)
-    const isResetButton = this.getOption('resetButton', params, false)
-    const isApplyButton = this.getOption('applyButton', params, false)
+    const isClearFilter = this.getOption('clearButton', params, true)
+    const isResetButton = this.getOption('resetButton', params, true)
+    const isApplyButton = this.getOption('applyButton', params, true)
 
     this._trueValue = []
       .concat(this.getOption('booleanTrueValue', params, [true]))
@@ -116,24 +116,32 @@ class BooleanFilter extends Component {
     body.className = 'booleanFilter__body ag-filter-body'
     body.style.padding = '5px 15px'
     body.innerHTML = /* html */ `
-        <div class="booleanFilter__body__labels">
-          <label>
-            <input type="radio" name="boolean" value="true">
-            ${this._booleanFilterTranslation.true}
-          </label>
+      <div class="booleanFilter__body__labels">
 
-          <label>
-            <input type="radio" name="boolean" value="false">
-            ${this._booleanFilterTranslation.false}
-          </label>     
+        <label class="ag-input-field-label ag-label ag-radio-button-label">       
+            <div class="ag-wrapper-true ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper">
+              <input class="true-input ag-input-field-input ag-radio-button-input" type="radio" name="boolean" value="true"/>              
+          </div> 
+          <span>${this._booleanFilterTranslation.true}</span>
+        </label>
+
+
+        <label class="ag-input-field-label ag-label ag-radio-button-label">       
+            <div class="ag-wrapper-false ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper">
+              <input class="false-input ag-input-field-input ag-radio-button-input" type="radio" name="boolean" value="false"/>              
+          </div> 
+          <span>${this._booleanFilterTranslation.false}</span>
+        </label>
           
           ${
             !isResetButton
               ? /* html */ `
-                <label>
-                  <input type="radio" name="boolean" value="" checked>
-                  ${this._booleanFilterTranslation.reset}
-                </label>   
+              <label class="ag-input-field-label ag-label ag-radio-button-label">       
+                  <div class="ag-wrapper-reset ag-wrapper ag-input-wrapper ag-radio-button-input-wrapper ag-checked">
+                    <input class="reset-input ag-input-field-input ag-radio-button-input" type="radio" name="boolean" value="" checked/>              
+                </div> 
+                <span>${this._booleanFilterTranslation.reset}</span>
+              </label>                
               `
               : ''
           }       
@@ -148,17 +156,17 @@ class BooleanFilter extends Component {
     const applyFilterPanel = document.createElement('div')
     applyFilterPanel.className = `booleanFilter__body__applyPanel ag-filter-apply-panel ag-hidden`
     applyFilterPanel.innerHTML = /* html */ `
-      <button class="clear ${!isClearFilter &&
+      <button class="ag-standard-button ag-filter-apply-panel-button clear ${!isClearFilter &&
         'ag-hidden'}" type="button">${translate(
       'clearFilter',
       'Clear Filter'
     )}</button>
-      <button class="reset ${!isResetButton &&
+      <button class="ag-standard-button ag-filter-apply-panel-button reset ${!isResetButton &&
         'ag-hidden'}" type="button">${translate(
       'resetFilter',
       'Reset Filter'
     )}</button>
-      <button class="apply ${!isApplyButton &&
+      <button class="ag-standard-button ag-filter-apply-panel-button apply ${!isApplyButton &&
         'ag-hidden'}" type="button">${translate(
       'applyFilter',
       'Apply Filter'
@@ -287,6 +295,14 @@ class BooleanFilter extends Component {
       i.checked = false
     })
 
+    body.querySelector('.ag-wrapper-true').classList.remove('ag-checked')
+    body.querySelector('.ag-wrapper-false').classList.remove('ag-checked')
+    try {
+      body.querySelector('.ag-wrapper-reset').classList.remove('ag-checked')
+    } catch (e) {
+      /* pass */
+    }
+
     this._filterText = null
   }
 
@@ -296,7 +312,39 @@ class BooleanFilter extends Component {
    * @param {Event} e
    */
   _onRadioChange(isApplyButton, e) {
-    this._filterText = e.target.value
+    const target = e.target
+    this._filterText = target.value
+
+    const body = this._gui.querySelector('.booleanFilter__body')
+
+    if (body) {
+      if (target.classList.contains('true-input')) {
+        body.querySelector('.ag-wrapper-true').classList.add('ag-checked')
+        body.querySelector('.ag-wrapper-false').classList.remove('ag-checked')
+        try {
+          body.querySelector('.ag-wrapper-reset').classList.remove('ag-checked')
+        } catch (e) {
+          /* pass */
+        }
+      } else if (target.classList.contains('false-input')) {
+        body.querySelector('.ag-wrapper-true').classList.remove('ag-checked')
+        body.querySelector('.ag-wrapper-false').classList.add('ag-checked')
+        try {
+          body.querySelector('.ag-wrapper-reset').classList.remove('ag-checked')
+        } catch (e) {
+          /* pass */
+        }
+      } else {
+        body.querySelector('.ag-wrapper-true').classList.remove('ag-checked')
+        body.querySelector('.ag-wrapper-false').classList.remove('ag-checked')
+        try {
+          body.querySelector('.ag-wrapper-reset').classList.add('ag-checked')
+        } catch (e) {
+          /* pass */
+        }
+      }
+    }
+
     if (false === isApplyButton) {
       this._params.filterChangedCallback()
     }
