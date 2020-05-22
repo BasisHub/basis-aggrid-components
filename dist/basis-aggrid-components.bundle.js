@@ -3501,9 +3501,9 @@ var BooleanFilter = (_class = (_temp = /*#__PURE__*/function (_Component) {
     key: "init",
     value: function init(params) {
       var translate = params.api.gridOptionsWrapper.getLocaleTextFunc();
-      var isClearFilter = this.getOption('clearButton', params, true);
-      var isResetButton = this.getOption('resetButton', params, true);
-      var isApplyButton = this.getOption('applyButton', params, true);
+      var isClearFilter = this.getOption('clearButton', params, false);
+      var isResetButton = this.getOption('resetButton', params, false);
+      var isApplyButton = this.getOption('applyButton', params, false);
       this._trueValue = [].concat(this.getOption('booleanTrueValue', params, [true])).map(function (x) {
         return String(x);
       });

@@ -67,9 +67,9 @@ class BooleanFilter extends Component {
   @override
   init(params) {
     const translate = params.api.gridOptionsWrapper.getLocaleTextFunc()
-    const isClearFilter = this.getOption('clearButton', params, true)
-    const isResetButton = this.getOption('resetButton', params, true)
-    const isApplyButton = this.getOption('applyButton', params, true)
+    const isClearFilter = this.getOption('clearButton', params, false)
+    const isResetButton = this.getOption('resetButton', params, false)
+    const isApplyButton = this.getOption('applyButton', params, false)
 
     this._trueValue = []
       .concat(this.getOption('booleanTrueValue', params, [true]))
