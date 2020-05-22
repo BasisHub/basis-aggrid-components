@@ -6,7 +6,7 @@ dist: trusty # needs Ubuntu Trusty
 # See https://github.com/travis-ci/travis-ci/issues/8836
 sudo: required  
 addons:
-  chrome: stable # have Travis install Chrome stable.
+  chrome: beta # have Travis install Chrome stable.
   firefox: "71.0"  
 cache:
   yarn: true
