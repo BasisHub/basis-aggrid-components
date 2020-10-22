@@ -73,13 +73,14 @@ class Component {
   getOption(name, params, fallback = null) {
     let option
 
-    if (params && params.hasOwnProperty(name)) {
+    if (params && params.hasOwnProperty(name) && params[name] !== null) {
       option = params[name]
     } else {
       // try to fetch from the column def first
       if (
         params.hasOwnProperty('colDef') &&
-        params.colDef.hasOwnProperty(name)
+        params.colDef.hasOwnProperty(name) &&
+        params.colDef[name] !== null
       ) {
         option = params.colDef[name]
       } else {
@@ -93,18 +94,24 @@ class Component {
         if (
           AGridComponentsMetaConfig &&
           AGridComponentsMetaConfig.hasOwnProperty(params.column.colId) &&
-          AGridComponentsMetaConfig[params.column.colId].hasOwnProperty(name)
+          AGridComponentsMetaConfig[params.column.colId].hasOwnProperty(name) &&
+          AGridComponentsMetaConfig[params.column.colId][name] !== null
         ) {
           option = AGridComponentsMetaConfig[params.column.colId][name]
         } else if (
           AGridComponentsMetaConfig &&
-          AGridComponentsMetaConfig.hasOwnProperty(name)
+          AGridComponentsMetaConfig.hasOwnProperty(name) &&
+          AGridComponentsMetaConfig[name] !== null
         ) {
           option = AGridComponentsMetaConfig[name]
         } else {
           // try to fetch from the context object itself
           const context = params.context
-          if (context && context.hasOwnProperty(name)) {
+          if (
+            context &&
+            context.hasOwnProperty(name) &&
+            context[name] !== null
+          ) {
             option = context[name]
           } else {
             // try to check params itself or fallback to default
