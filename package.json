@@ -1,7 +1,7 @@
 {
   "name": "basis-aggrid-components",
   "description": "A set of ag-grid components to handle filtering , rendering & editing with focus on scalar types.",
-  "version": "v1.2.0",
+  "version": "v1.2.1",
   "main": "src/index.js",
   "private": false,
   "scripts": {
