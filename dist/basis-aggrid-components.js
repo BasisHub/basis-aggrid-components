@@ -9252,7 +9252,7 @@ var DateTimeEditor = (_class = (_temp = /*#__PURE__*/function (_Component) {
         this._value = params.value;
       }
 
-      this._value = DateTimeEditor.fixShortISO(this._value);
+      this._value = this._value ? DateTimeEditor.fixShortISO(this._value) : this._value;
 
       this._input.init(params);
 

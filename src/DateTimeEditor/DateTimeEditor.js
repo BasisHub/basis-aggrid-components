@@ -91,7 +91,9 @@ class DateTimeEditor extends Component {
       this._value = params.value
     }
 
-    this._value = DateTimeEditor.fixShortISO(this._value)
+    this._value = this._value
+      ? DateTimeEditor.fixShortISO(this._value)
+      : this._value
     this._input.init(params)
     this._input.on(DateTimeInput.ON_DATE_CHANGED, this._onDateChange)
 
