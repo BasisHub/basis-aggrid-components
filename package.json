@@ -50,7 +50,7 @@
     "style-loader": "^0.20.2",
     "uglifyjs-webpack-plugin": "^1.1.8",
     "webpack": "^3.11.0",
-    "webpack-bundle-analyzer": "^3.6.0",
+    "webpack-bundle-analyzer": "^4.6.1",
     "webpack-concat-plugin": "^2.4.2",
     "webpack-merge-and-include-globally": "^1.0.1"
   },
